@@ -1,5 +1,4 @@
 ---
-sidebar: auto
 ---
 # pc端 rem布局 非chrome浏览器字号小于12px的解决方案
 

@@ -1,6 +1,3 @@
----
-sidebar: auto
----
 # 使用IntersectionObserver实现图片懒加载
 
 ## IntersectionObserver介绍
