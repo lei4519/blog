@@ -1,5 +1,4 @@
 let commitMsg = process.argv[2];
-const stdin = process.stdin;
 
 if (!commitMsg) {
   console.log("请输入git提交信息：");
@@ -28,7 +27,7 @@ function sh() {
   git push`);
   subProcess.stdin.end();
 }
-stdin.on("data", (data) => {
+process.stdin.on("data", (data) => {
   data = data.toString();
   if (!data.toString().trim()) {
     console.log("请输入git提交信息：");
