@@ -9,10 +9,10 @@
     "release": "node release.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "lei4519",
   "license": "ISC",
   "dependencies": {
-    "commander": "^5.1.0",
-    "vuepress": "^1.5.0"
+    "vuepress": "^1.5.0",
+    "@vuepress/plugin-back-to-top": "^1.5.0"
   }
 }
