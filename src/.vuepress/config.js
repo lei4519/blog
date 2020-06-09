@@ -9,7 +9,14 @@ module.exports = {
     '**/*.vue',
     '**/*.js'
   ],
+  plugins: ['@vuepress/back-to-top'],
   themeConfig: {
-    sidebar: utils.genSliderBar()
+    sidebar: utils.genSliderBar(),
+    smoothScroll: true,
+    repo: 'https://github.com/lei4519/blog',
+    docsDir: 'src',
+    editLinks: true,
+    editLinkText: '在 GitHub 上编辑此页',
+    lastUpdated: true
   }
 }
