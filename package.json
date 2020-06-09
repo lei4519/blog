@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev src",
-    "build": "vuepress build src"
+    "build": "vuepress build src",
+    "release": "node release.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "commander": "^5.1.0",
     "vuepress": "^1.5.0"
   }
 }

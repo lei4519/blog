@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vscode debug | Lay</title>
+    <meta name="generator" content="VuePress 1.5.0">
+    
+    <meta name="description" content="lay的博客">
+    <link rel="preload" href="/blog/assets/css/0.styles.56a09861.css" as="style"><link rel="preload" href="/blog/assets/js/app.a9abee35.js" as="script"><link rel="preload" href="/blog/assets/js/2.447c44cd.js" as="script"><link rel="preload" href="/blog/assets/js/7.f132b6d0.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.85ca61c3.js"><link rel="prefetch" href="/blog/assets/js/11.348126e9.js"><link rel="prefetch" href="/blog/assets/js/3.39ffa65b.js"><link rel="prefetch" href="/blog/assets/js/4.2b7fc900.js"><link rel="prefetch" href="/blog/assets/js/5.634c536e.js"><link rel="prefetch" href="/blog/assets/js/6.207b2050.js"><link rel="prefetch" href="/blog/assets/js/8.60603d47.js"><link rel="prefetch" href="/blog/assets/js/9.858559f6.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.56a09861.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">Lay</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>blog</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>vscode</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/vscode/vscode-node-debugger.html" aria-current="page" class="active sidebar-link">vscode debug</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/vscode/vscode-node-debugger.html#当前文件debug" class="sidebar-link">当前文件debug</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>web</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vscode-debug"><a href="#vscode-debug" class="header-anchor">#</a> vscode debug</h1> <h2 id="当前文件debug"><a href="#当前文件debug" class="header-anchor">#</a> 当前文件debug</h2> <p>正常的配置，需要指定运行的文件路径，为了防止麻烦，我们可以配置为debug当前文件
+核心代码：</p> <div class="language-json extra-class"><pre class="language-json"><code><span class="token property">&quot;args&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+  <span class="token string">&quot;${relativeFile}&quot;</span>
+<span class="token punctuation">]</span>
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0.2.0&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;configurations&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;request&quot;</span><span class="token operator">:</span> <span class="token string">&quot;launch&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;启动程序&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;skipFiles&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">&quot;&lt;node_internals&gt;/**&quot;</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;args&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">&quot;${relativeFile}&quot;</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;runtimeExecutable&quot;</span><span class="token operator">:</span> <span class="token string">&quot;nodemon&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blog/blog/vue-press.html" class="prev">
+        博客配置
+      </a></span> <span class="next"><a href="/blog/web/adaptive-fontsize.html">
+        pc端 rem布局 非chrome浏览器字号小于12px的解决方案
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/blog/assets/js/app.a9abee35.js" defer></script><script src="/blog/assets/js/2.447c44cd.js" defer></script><script src="/blog/assets/js/7.f132b6d0.js" defer></script>
+  </body>
+</html>
