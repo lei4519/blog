@@ -20,6 +20,7 @@ function sh() {
   subProcess.stderr.on("data", onData);
   subProcess.on("close", (code) => {
     console.log(`打包完成：${code}`);
+    process.exit(code)
   });
   subProcess.stdin.write(`yarn build
   git add .
