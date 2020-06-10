@@ -1,11 +1,4 @@
-let commitMsg = process.argv[2];
-
-if (!commitMsg) {
-  console.log("请输入git提交信息：");
-} else {
-  sh()
-}
-function sh() {
+function sh(commitMsg) {
   const spawn = require("child_process").spawn;
   const subProcess = spawn("bash");
   function onData(data) {
@@ -21,18 +14,23 @@ function sh() {
     console.log(`打包完成：${code}`);
     process.exit(code)
   });
-  subProcess.stdin.write(`yarn build
+  subProcess.stdin.write(`vuepress build src
   git add .
   git commit -m ${commitMsg}
   git push`);
   subProcess.stdin.end();
 }
-process.stdin.on("data", (data) => {
-  data = data.toString();
-  if (!data.toString().trim()) {
-    console.log("请输入git提交信息：");
-  } else {
-    commitMsg = data;
-    sh()
-  }
-});
+
+if (!process.argv[2]) {
+  process.stdin.on("data", (data) => {
+    data = data.toString();
+    if (!data.toString().trim()) {
+      console.log("请输入git提交信息：");
+    } else {
+      sh(data)
+    }
+  });
+  console.log("请输入git提交信息：");
+} else {
+  sh(process.argv[2])
+}
