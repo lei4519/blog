@@ -4,12 +4,20 @@ module.exports = {
   dest: './docs',
   title: 'Lay',
   description: 'lay的博客',
-  extraWatchFiles: [
-    '**/*.md',
-    '**/*.vue',
-    '**/*.js'
+  plugins: [
+    '@vuepress/back-to-top',
+    [
+      '@vuepress/last-updated',
+      {
+        transformer: (timestamp, lang) => {
+          // 不要忘了安装 moment
+          const moment = require('moment')
+          moment.locale('zh-cn')
+          return moment(timestamp).fromNow()
+        }
+      }
+    ]
   ],
-  plugins: ['@vuepress/back-to-top'],
   themeConfig: {
     sidebar: utils.genSliderBar(),
     smoothScroll: true,
@@ -17,6 +25,6 @@ module.exports = {
     docsDir: 'src',
     editLinks: true,
     editLinkText: '在 GitHub 上编辑此页',
-    lastUpdated: true
+    lastUpdated: '最后更新时间'
   }
 }

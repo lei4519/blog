@@ -2,7 +2,7 @@
 
 ## IntersectionObserver介绍
 
-mdn：[Intersection Observer](https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver)
+- mdn：[Intersection Observer](https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver)
 
 Intersection Observer可以异步的监听元素是否进入了可视区域内，当元素进入可视区域后，会触发相应的回调函数。
 
