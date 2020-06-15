@@ -4,12 +4,12 @@ heroImage: /gvdc1.jpg
 heroText: Lay 博客
 tagline: 前端技术分享
 actionText: 开始阅读 →
-actionLink: /blog/vue-press
+actionLink: /technology/Web/React/react-diff
 features:
-- title: 阅读笔记
-  details: 文章精髓提炼，记录笔记
-- title: 项目实战
+- title: 技术钻研
+  details: 前端技术
+- title: 个人实战
   details: 前端技术个人实践
-- title: 踩坑分享
-  details: 工作踩坑记录
+- title: 烂笔头
+  details: 好记性不如烂笔头
 ---
