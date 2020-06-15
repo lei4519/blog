@@ -1,16 +1,16 @@
-const utils = require('./utils')
+const {genNavAndSideBar} = require('./utils')
 module.exports = {
   base: '/blog/',
   dest: './docs',
   title: 'Lay',
   description: 'lay的博客',
   plugins: [
+    'flowchart',
     '@vuepress/back-to-top',
     [
       '@vuepress/last-updated',
       {
         transformer: (timestamp, lang) => {
-          // 不要忘了安装 moment
           const moment = require('moment')
           moment.locale('zh-cn')
           return moment(timestamp).fromNow()
@@ -19,7 +19,12 @@ module.exports = {
     ]
   ],
   themeConfig: {
-    sidebar: utils.genSliderBar(),
+    ...genNavAndSideBar([
+      { text: 'Home', link: '/' },
+      { text: '技术分享', link: '/technology/', genSidebar: true },
+      { text: '实战分享', link: '/practice/', genSidebar: true },
+      { text: '烂笔头', link: '/notes/', genSidebar: true }
+    ]),
     smoothScroll: true,
     repo: 'https://github.com/lei4519/blog',
     docsDir: 'src',
