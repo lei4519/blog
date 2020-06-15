@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev src",
-    "build": "vuepress build src",
     "release": "node release.js"
   },
   "keywords": [],
@@ -15,5 +14,8 @@
     "@vuepress/plugin-back-to-top": "^1.5.0",
     "moment": "^2.26.0",
     "vuepress": "^1.5.1"
+  },
+  "devDependencies": {
+    "vuepress-plugin-flowchart": "^1.4.3"
   }
 }

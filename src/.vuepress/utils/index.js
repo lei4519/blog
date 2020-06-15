@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-function genSliderBar() {
+function genSliderBar(dirname = '/') {
   const basePath = path.resolve(__dirname, '..', '..')
   const noParse = ['README.md', 'img']
   const _readdir = (path, arr, depth) => {
@@ -10,15 +10,10 @@ function genSliderBar() {
       if (noParse.includes(name)) return
       const stat = fs.statSync(basePath + path + name)
       if (stat.isDirectory()) {
-        const rawChildren = _readdir(path + name + '/', [], depth + 1)
-        const sortChildren = mergeSort(rawChildren, (a, b) => {
-          if (!b.mtime) return true
-          return a.mtime < b.mtime
-        })
         const group = {
           title: name,
           sidebarDepth: depth,
-          children: sortChildren.map(item => item.path ? item.path : item)
+          children: _readdir(path + name + '/', [], depth + 1)
         }
         arr.push(group)
       } else {
@@ -28,9 +23,13 @@ function genSliderBar() {
         })
       }
     })
-    return arr
+    return mergeSort(arr, (a, b) => {
+      if (!a.mtime && !b.mtime) return false
+      if (!b.mtime) return true
+      return a.mtime < b.mtime
+    }).map(item => item.path ? item.path : item)
   }
-  return _readdir('/', [], 1)
+  return _readdir(dirname, [], 1)
 }
 function mergeSort (array, fn) {
   if (!fn || typeof fn !== 'function') fn = (a, b) => a > b
@@ -54,7 +53,20 @@ function mergeSort (array, fn) {
   }
   return divide(array)
 }
+function findFirstPath([first]) {
+  return typeof first === 'string' ? first : findFirstPath(first.children)
+}
+function genNavAndSideBar(nav) {
+  const sidebar = nav.reduce((sidebar, item) => {
+    if (item.genSidebar) {
+      sidebar[item.link] = genSliderBar(item.link)
+      item.link = findFirstPath(sidebar[item.link])
+    }
+    return sidebar
+  }, {})
 
+  return {nav, sidebar}
+}
 module.exports = {
-  genSliderBar
+  genNavAndSideBar
 }
