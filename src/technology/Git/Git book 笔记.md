@@ -350,6 +350,7 @@ $ git checkout testing
 
 ```
 type(scope):subject
+feat(表格): 增加表格下载功能
 ```
 
 - type：用于说明commit的类别，规定为如下几种
@@ -388,7 +389,7 @@ cnpm install commitizen cz-conventional-changelog -g
 
 ```
 echo '{
-    "path": "./node_modules/cz-conventional-changelog",
+    "path": "cz-conventional-changelog",
     "types": {
       "feat": {
         "title": "新功能",
@@ -460,24 +461,24 @@ echo '{
   
      ```
      echo 'module.exports = {
-       extends: ['@commitlint/config-conventional'],
+       extends: ["@commitlint/config-conventional"],
        rules: {
-         'type-enum': [
+         "type-enum": [
            2,
-           'always',
+           "always",
            [
-             'feat',
-             'fix',
-             'docs',
-             'refactor',
-             'build',
-             'style',
-             'perf',
-             'chore',
-             'deps',
-             'test',
-             'ci',
-             'revert'
+             "feat",
+             "fix",
+             "docs",
+             "refactor",
+             "build",
+             "style",
+             "perf",
+             "chore",
+             "deps",
+             "test",
+             "ci",
+             "revert"
            ]
          ]
        }
@@ -491,6 +492,8 @@ echo '{
 
 ## 为项目增加提交时Eslint检查和修复
 
+​	⚠️只会校验和修复暂存区中的文件，如果想修复本地，可以执行`npx eslint --fix --ext .js,.jsx,.ts,.tsx,.vue src`
+
 1. 安装依赖
 
   ```shell
@@ -502,7 +505,7 @@ echo '{
   ```shell
   echo '{
     "src/**/*.{js,jsx,txs,ts,vue}": "eslint --fix"
-}' > .lintstagedrc
+  }' > .lintstagedrc
   ```
 
 3. 配置`.huskyrc`，增加预提交钩子
