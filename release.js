@@ -16,7 +16,7 @@ function sh(commitMsg) {
   });
   subProcess.stdin.write(`vuepress build src
   git add .
-  git commit -m ${commitMsg}
+  git commit -m "${commitMsg}"
   git push`);
   subProcess.stdin.end();
 }
