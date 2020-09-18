@@ -183,34 +183,34 @@ $ git checkout testing
 
       - `hotfix` 分支所做的修改，并没有合并到开发分支上
 1. 使用 `git merge master` 命令将 `master` 分支合并入 开发分支（推荐）
-  
+
 2. 等到 开发分支开发完成，再将其合并回 `master` 分支
-        
+
 - 以上两种操作，在 git 的使用上没有区别，都是合并操作。
-      
+
 
 ![继续在 `iss53` 分支上的工作。](https://git-scm.com/book/en/v2/images/basic-branching-6.png)
-      
+
 6. 2.0开发测试完成，将开发分支的代码合并到主分支上，部署上线
-  
+
     ```console
       $ git checkout master
       $ git merge iss53
       Merge made by the 'recursive' strategy. 通过“递归”策略进行合并。
     ```
       - `master` 分支所在提交对象并不是 `iss53` 分支所在提交对象的直接祖先，Git 会使用两个分支的末端所指的快照（`C4` 和 `C5`）以及这两个分支的公共祖先（`C2`），做一个三方合并
-    
+
       ![一次典型合并中所用到的三个快照。](https://git-scm.com/book/en/v2/images/basic-merging-1.png)
-    
+
       - Git 会将合并的结果做了一个新的快照并且自动创建一个新的提交指向它。
-      
+
       - 这种提交被称为合并提交，因为他不止有一个父提交对象。
-      
+
         ![一个合并提交。](https://git-scm.com/book/en/v2/images/basic-merging-2.png)
 
 #### 合并冲突
 
-- 如果我们在两个不同的分支中，对同一个文件的同一个部分进行了不同的修改，Git 就没法干净的合并它们。 
+- 如果我们在两个不同的分支中，对同一个文件的同一个部分进行了不同的修改，Git 就没法干净的合并它们。
 
 - 此时 Git 做了合并，但是没有自动地创建一个新的合并提交。 Git 会暂停下来，等待你去解决合并产生的冲突。
 
@@ -218,7 +218,7 @@ $ git checkout testing
 
   ```console
   Merge branch 'iss53'
-  
+
   Conflicts:
       index.html
   #
@@ -226,8 +226,8 @@ $ git checkout testing
   # If this is not correct, please remove the file
   #	.git/MERGE_HEAD
   # and try again.
-  
-  
+
+
   # Please enter the commit message for your changes. Lines starting
   # with '#' will be ignored, and an empty message aborts the commit.
   # On branch master
@@ -247,7 +247,7 @@ $ git checkout testing
   ```console
   $ git merge --abort
   ```
-  
+
   - `git merge --abort` 选项会尝试恢复到运行合并前的状态。
   - 合并前确保工作目录中的修改都被提交或暂存。不然此命令会导致那些未被保存的修改也被恢复到修改之前的状态。
 
@@ -301,8 +301,8 @@ $ git checkout testing
 - 临时、修复、功能分支：本地分支，各功能开发，开发完成合并入开发分支。
 
   - 三个线上分支总是在合并代码，不要直接在这三个分支上进行代码开发。
-  
-  ![趋于稳定分支的工作流（“silo”）视图。](https://git-scm.com/book/en/v2/images/lr-branches-2.png)  
+
+  ![趋于稳定分支的工作流（“silo”）视图。](https://git-scm.com/book/en/v2/images/lr-branches-2.png)
 
 
 
@@ -382,65 +382,13 @@ feat(表格): 增加表格下载功能
 首先，全局安装工具：
 
 ```
-cnpm install commitizen cz-conventional-changelog -g
+cnpm install commitizen cz-conventional-changelog-chinese -g
 ```
 
 生成配置文件：
 
 ```
-echo '{
-    "path": "cz-conventional-changelog",
-    "types": {
-      "feat": {
-        "title": "新功能",
-        "description": "新增一个功能"
-      },
-      "fix": {
-        "title": "修复BUG",
-        "description": "修复BUG"
-      },
-      "docs": {
-        "title": "文档",
-        "description": "修改文档"
-      },
-      "refactor": {
-        "title": "重构",
-        "description": "代码重构，未新增任何功能和修复任何bug"
-      },
-      "build": {
-        "title": "构建",
-        "description": "改变构建流程，新增依赖库、工具、修改webpack配置等"
-      },
-      "style": {
-        "title": "代码样式",
-        "description": "代码格式化类，仅仅修改了空格、缩进等，不改变代码逻辑"
-      },
-      "perf": {
-        "title": "性能优化",
-        "description": "改善性能和体现的修改"
-      },
-      "chore": {
-        "title": "杂项",
-        "description": "非源代码和测试文件的修改，（包括但不限于文档、代码生成等, 比如修改了README等等）"
-      },
-      "deps": {
-        "title": "升级依赖",
-        "description": "升级项目依赖版本"
-      },
-      "test": {
-        "title": "测试",
-        "description": "用于测试的修改"
-      },
-      "ci": {
-        "title": "自动化",
-        "description": "自动化流程配置修改"
-      },
-      "revert": {
-        "title": "回滚",
-        "description": "回滚到上一个版本"
-      }
-    }
-  }' > ~/.czrc
+echo '{ "path": "cz-conventional-changelog-chinese" }' > ~/.czrc
 ```
 
 提交时使用`git cz`代替`git commit`
@@ -458,7 +406,7 @@ echo '{
     ```
 
   2. 在项目根目录执行，生成配置文件
-  
+
      ```
      echo 'module.exports = {
        extends: ["@commitlint/config-conventional"],
