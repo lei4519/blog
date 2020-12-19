@@ -1,6 +1,11 @@
-# chrome 扩展开发总结
+# 使用 umi 开发 chrome 扩展
 
-## 核心概念
+## 使用umi初始化项目
+
+> [参考官方文档](https://umijs.org/zh-CN/docs)
+
+
+## chrome扩展 核心概念
 
 ### manifest.json
 
