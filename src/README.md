@@ -4,7 +4,7 @@ heroImage: /gvdc1.jpg
 heroText: Lay 博客
 tagline: 前端技术分享
 actionText: 开始阅读 →
-actionLink: /technology/Web/React/react-diff
+actionLink: /technology/Chrome/chrome-ext
 features:
 - title: 技术钻研
   details: 前端技术
