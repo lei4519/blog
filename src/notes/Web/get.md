@@ -1,5 +1,6 @@
 # 安全的对象属性获取 - get
 
+```js
 const get = (obj, propStr, defaultValue) => {
   try {
     const props = propStr.split('.')
@@ -12,3 +13,4 @@ const get = (obj, propStr, defaultValue) => {
     return defaultValue
   }
 }
+```

@@ -13,6 +13,7 @@
   "dependencies": {
     "@vuepress/plugin-back-to-top": "^1.5.0",
     "moment": "^2.26.0",
+    "shelljs": "^0.8.4",
     "vuepress": "^1.5.1"
   },
   "devDependencies": {
