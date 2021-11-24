@@ -1,6 +1,8 @@
-const { genNavAndSideBar } = require('./utils')
+import { genNavAndSideBar } from './utils'
+import { defineUserConfig } from 'vuepress'
+import type { DefaultThemeOptions } from 'vuepress'
 
-module.exports = {
+export default defineUserConfig<DefaultThemeOptions>({
   base: '/blog/',
   dest: './docs',
   lang: 'zh-CN',
@@ -22,9 +24,5 @@ module.exports = {
     editLinks: true,
     editLinkText: '在 GitHub 上编辑此页',
     lastUpdatedText: '最近更新时间'
-  },
-  themePlugins: {
-    activeHeaderLinks: true,
-    backToTop: true
   }
-}
+})
