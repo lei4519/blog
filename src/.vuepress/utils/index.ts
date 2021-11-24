@@ -1,5 +1,32 @@
-const path = require('path')
-const fs = require('fs')
+import path from 'path'
+import fs from 'fs'
+
+function mergeSort(array, sortFn = (a, b) => a > b) {
+  // 分
+  const divide = (arr) => {
+    const len = arr.length
+    if (len < 2) return arr
+    const mid = len / 2 | 0
+    return merge(divide(arr.slice(0, mid)), divide(arr.slice(mid)))
+  }
+  // 合
+  const merge = (a1, a2) => {
+    const a = []
+    while (a1.length && a2.length) {
+      a.push(sortFn(a1[0], a2[0])
+        ? a2.shift()
+        : a1.shift()
+      )
+    }
+    return a.concat(a1, a2)
+  }
+  return divide(array)
+}
+
+function findFirstPath([first]) {
+  return typeof first === 'string' ? first : findFirstPath(first.children)
+}
+
 function genSliderBar(dirname = '/') {
   const basePath = path.resolve(__dirname, '..', '..')
   const noParse = ['README.md', 'img']
@@ -31,32 +58,8 @@ function genSliderBar(dirname = '/') {
   }
   return _readdir(dirname, [], 1)
 }
-function mergeSort (array, fn) {
-  if (!fn || typeof fn !== 'function') fn = (a, b) => a > b
-  // 分
-  const divide = (arr) => {
-    const len = arr.length
-    if (len < 2) return arr
-    const mid = len / 2 | 0
-    return merge(divide(arr.slice(0, mid)), divide(arr.slice(mid)))
-  }
-  // 合
-  const merge = (a1, a2) => {
-    const a = []
-    while (a1.length && a2.length) {
-      a.push(fn(a1[0], a2[0])
-        ? a2.shift()
-        : a1.shift()
-        )
-    }
-    return a.concat(a1, a2)
-  }
-  return divide(array)
-}
-function findFirstPath([first]) {
-  return typeof first === 'string' ? first : findFirstPath(first.children)
-}
-function genNavAndSideBar(navbar) {
+
+export function genNavAndSideBar(navbar) {
   const sidebar = navbar.reduce((sidebar, item) => {
     if (item.genSidebar) {
       sidebar[item.link] = genSliderBar(item.link)
@@ -65,7 +68,4 @@ function genNavAndSideBar(navbar) {
     return sidebar
   }, {})
   return { navbar, sidebar }
-}
-module.exports = {
-  genNavAndSideBar
 }
