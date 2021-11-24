@@ -1,3 +1,5 @@
+# Java
+
 ![image-20210510191024159](https://gitee.com/lei451927/picture/raw/master/images/image-20210510191024159.png)
 
 ## 基础概念
@@ -2381,7 +2383,7 @@ try {
       ```java
       public InputStreamReader(InputStream in)
       public InputSreamReader(InputStream in,String charsetName)
-    
+
       Reader isr = new InputStreamReader(System.in,”gbk”);
       ```
 
@@ -2842,7 +2844,7 @@ raf.close();
   public void close()
   // 从此套接字发送数据报包。DatagramPacket 包含的信息指示：将要发送的数据、其长度、远程主机的 IP 地址和远程主机的端口号。
   public void send(DatagramPacket p)
-  
+
   // 从此套接字接收数据报包。当此方法返回时，DatagramPacket的缓冲区填充了接收的数据。数据报包也包含发送方的 IP 地址和发送方机器上的端口号。此方法在接收到数据报前一直阻塞。数据报包对象的 length 字段包含所接收信息的长度。如果信息比包的长度长，该信息将被截短。
   public void receive(DatagramPacket p)
   // 获取套接字绑定的本地地址。
@@ -3050,9 +3052,9 @@ Class c11 = b.getClass();
   - 准备：正式为类变量(static)分配内存并设置类变量默认初始值的阶段，这些内存都将在方法区中进行分配。
   - 解析：虚拟机常量池内的符号引用(常量名)替换为直接引用(地址)的过程
 - 初始化：
-  - 执行类构造器<clinit>()方法的过程。类构造器<clinit>()方法是由编译期自动收集类中所有类变量的赋值动作和静态代码块中的语句合并产生的。(类构造器是构造类信息的，不是构造该类对象的构造器)。
+  - 执行类构造器`<clinit>()`方法的过程。类构造器`<clinit>()`方法是由编译期自动收集类中所有类变量的赋值动作和静态代码块中的语句合并产生的。(类构造器是构造类信息的，不是构造该类对象的构造器)。
   - 当初始化一个类的时候，如果发现其父类还没有进行初始化，则需要先触发其父类的初始化。
-  - 虚拟机会保证一个类的<clinit>()方法在多线程环境中被正确加锁和同步。
+  - 虚拟机会保证一个类的`<clinit>()`方法在多线程环境中被正确加锁和同步。
 
 #### 什么时候会发生类初始化?
 
@@ -3455,7 +3457,7 @@ public static<T> Stream<T> generate(Supplier<T> s)
 | min(Comparator c)                | 返回流中最小值                                                                                              |
 | forEach(Consumer c)              | 内部迭代(使用 Collection 接口需要用户去做迭代称为外部迭代。相反，Stream API 使用内部迭代——它帮你把迭代做了) |
 | reduce(T iden, BinaryOperator b) | 可以将流中元素反复结合起来，得到一个值。返回 T                                                              |
-| reduce(BinaryOperator b)         | 可以将流中元素反复结合起来，得到一个值。返回 Optional<T>                                                    |
+| reduce(BinaryOperator b)         | 可以将流中元素反复结合起来，得到一个值。返回 `Optional<T>`                                                    |
 | collect(Collector c)             | 将流转换为其他形式。接收一个 Collector 接口的实现，用于给 Stream 中元素做汇总的方法                         |
 
 #### Collectors
@@ -3467,7 +3469,7 @@ public static<T> Stream<T> generate(Supplier<T> s)
 ### Optional 类
 
 - 到目前为止，臭名昭著的空指针异常是导致 Java 应用程序失败的最常见原因
-- Optional<T> 类(java.util.Optional) 是一个容器类，它可以保存类型 T 的值，代表这个值存在。或者仅仅保存 null，表示这个值不存在。原来用 null 表示一个值不存在，现在 Optional 可以更好的表达这个概念。并且可以避免空指针异常
+- `Optional<T>` 类(java.util.Optional) 是一个容器类，它可以保存类型 T 的值，代表这个值存在。或者仅仅保存 null，表示这个值不存在。原来用 null 表示一个值不存在，现在 Optional 可以更好的表达这个概念。并且可以避免空指针异常
 - Optional 类的 Javadoc 描述如下：这是一个可以为 null 的容器对象。如果值存在则 isPresent()方法会返回 true，调用 get()方法会返回该对象
 
 ```java

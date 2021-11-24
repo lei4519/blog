@@ -1,12 +1,14 @@
-const shell = require('shelljs')
+const { spawnSync } = require('child_process')
 function sh(commitMsg) {
-  shell.exec('vuepress build src')
-  shell.exec('git add .')
-  shell.exec(`git commit -m "${commitMsg}"`)
-  shell.exec('git push')
-
-  shell.echo('打包完成')
-  shell.exit(0)
+  spawnSync(`yarn build
+git add .
+ls
+git commit -m "${commitMsg}"
+git push
+  `, {
+    shell: true,
+    stdio: 'inherit'
+  })
 }
 
 if (!process.argv[2]) {

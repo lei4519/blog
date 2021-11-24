@@ -1,0 +1,52 @@
+Arguments: 
+  /Users/lay/.nvm/versions/node/v16.0.0/bin/node /Users/lay/.nvm/versions/node/v16.0.0/bin/yarn
+
+PATH: 
+  /Users/lay/.nvm/versions/node/v16.0.0/bin:/Users/lay/.nvm/versions/node/v16.0.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/lay/.nvm/versions/node/v16.0.0/bin:/usr/local/sbin:/Users/lay/.cargo/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  16.0.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/lay/Desktop/Lay/blog/package.json: Unexpected token } in JSON at position 365
+      at JSON.parse (<anonymous>)
+      at /Users/lay/.nvm/versions/node/v16.0.0/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/lay/.nvm/versions/node/v16.0.0/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /Users/lay/.nvm/versions/node/v16.0.0/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "blog",
+    "version": "1.0.0",
+    "description": "博客",
+    "main": "index.js",
+    "scripts": {
+      "dev": "vuepress dev src",
+      "release": "node release.js"
+    },
+    "keywords": [
+      "blog",
+      "web",
+      "node",
+      "lei4519"
+    ],
+    "author": "lei4519",
+    "license": "ISC",
+    "dependencies": {},
+    "devDependencies": {
+      "vuepress": "^2.0.0-beta.27",
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
