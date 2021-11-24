@@ -11,7 +11,7 @@ function genSliderBar(dirname = '/') {
       const stat = fs.statSync(basePath + path + name)
       if (stat.isDirectory()) {
         const group = {
-          title: name,
+          text: name,
           sidebarDepth: depth,
           children: _readdir(path + name + '/', [], depth + 1)
         }
@@ -56,16 +56,15 @@ function mergeSort (array, fn) {
 function findFirstPath([first]) {
   return typeof first === 'string' ? first : findFirstPath(first.children)
 }
-function genNavAndSideBar(nav) {
-  const sidebar = nav.reduce((sidebar, item) => {
+function genNavAndSideBar(navbar) {
+  const sidebar = navbar.reduce((sidebar, item) => {
     if (item.genSidebar) {
       sidebar[item.link] = genSliderBar(item.link)
       item.link = findFirstPath(sidebar[item.link])
     }
     return sidebar
   }, {})
-
-  return {nav, sidebar}
+  return { navbar, sidebar }
 }
 module.exports = {
   genNavAndSideBar

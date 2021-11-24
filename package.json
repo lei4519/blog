@@ -1,22 +1,22 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "博客",
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev src",
+    "build": "vuepress build src",
     "release": "node release.js"
   },
-  "keywords": [],
+  "keywords": [
+    "blog",
+    "web",
+    "node",
+    "lei4519"
+  ],
   "author": "lei4519",
   "license": "ISC",
-  "dependencies": {
-    "@vuepress/plugin-back-to-top": "^1.5.0",
-    "moment": "^2.26.0",
-    "shelljs": "^0.8.4",
-    "vuepress": "^1.5.1"
-  },
   "devDependencies": {
-    "vuepress-plugin-flowchart": "^1.4.3"
+    "vuepress": "^2.0.0-beta.27"
   }
 }
