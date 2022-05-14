@@ -1,4 +1,4 @@
-# Vim 相关配置
+# Vim
 
 ## Vundle 插件管理工具
 用来管理vim插件的安装、删除、升级，安装方式参考 [官方github](https://github.com/VundleVim/Vundle.vim)
