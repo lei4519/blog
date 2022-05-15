@@ -4,7 +4,7 @@
 
 ## React 渲染流程图解
 
-![image](gitee.com/lei451927/picture/raw/master/images/1619879843033-image.png)
+![image](https://github.com/lei4519/picture-bed/raw/main/images/1619879843033-image.png)
 
 对于首次渲染，`React` 的主要工作就是将 `React.render` 接收到的 `VNode` 转化 `Fiber` 树，并根据 `Fiber` 树的层级关系，构建生成出 `DOM` 树并渲染至屏幕中。
 
