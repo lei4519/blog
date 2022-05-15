@@ -29,7 +29,7 @@
 
 在实际点说就是，当你用着 `4G` 内存的 `iPhone 13`看电影时，并不需要担心视频文件数据把你的手机搞爆掉。
 
-![Intro to File I/O](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/io-ins.gif)
+![Intro to File I/O](https://github.com/lei4519/picture-bed/raw/main/images/io-ins.gif)
 
 ## 服务器流式响应
 
@@ -98,11 +98,11 @@ fetch('/api/download')
 
 第一类请求的响应数据直接由**下载线程**接管，可以进行流式下载，一边接收数据**一边往本地写文件**。
 
-<img src="http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/C26743DD-25DF-4DF4-B08F-50B7A5B7032C.png" alt="C26743DD-25DF-4DF4-B08F-50B7A5B7032C" style="zoom:50%;" />
+<img src="https://github.com/lei4519/picture-bed/raw/main/images/C26743DD-25DF-4DF4-B08F-50B7A5B7032C.png" alt="C26743DD-25DF-4DF4-B08F-50B7A5B7032C" style="zoom:50%;" />
 
 第二类由 `JS` 线程接管响应数据，使用 API 将文件数据创建成  `url` 触发下载。
 
-<img src="http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/ADA43638-39F1-49D9-9204-BD2E688631C8.png" alt="ADA43638-39F1-49D9-9204-BD2E688631C8" style="zoom: 50%;" />
+<img src="https://github.com/lei4519/picture-bed/raw/main/images/ADA43638-39F1-49D9-9204-BD2E688631C8.png" alt="ADA43638-39F1-49D9-9204-BD2E688631C8" style="zoom: 50%;" />
 
 但是相应的 API `createObjectURL`、`readAsDataURL`**必须传入整个文件数据**才能进行下载，是不支持流的。也就是说一旦文件数据到了 `JS` 手中，想要下载，就必须把数据堆在内存中，直到拿到完整数据才能开始下载。
 
@@ -129,7 +129,7 @@ fetch('/api/download')
    - 如服务端返回多个文件，前端打包下载
    - （推荐）去找后端 ~~聊一聊~~
 
-<img src="http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20211121124612362.png" alt="image-20211121124612362" style="zoom: 25%;" />
+<img src="https://github.com/lei4519/picture-bed/raw/main/images/image-20211121124612362.png" alt="image-20211121124612362" style="zoom: 25%;" />
 
 可以看到第一种情况是必须用 `JS` 处理的，我们来看一下如果不使用流式处理的话，会有什么问题。
 
@@ -167,19 +167,19 @@ onMounted(() => {
 
 我们来直接试一下，上传一个 `1G+` 的文件会怎么样？
 
-<img src="http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/5B71C962-1262-4AF0-B340-832938A43117.png" alt="5B71C962-1262-4AF0-B340-832938A43117" style="zoom:50%;" />
+<img src="https://github.com/lei4519/picture-bed/raw/main/images/5B71C962-1262-4AF0-B340-832938A43117.png" alt="5B71C962-1262-4AF0-B340-832938A43117" style="zoom:50%;" />
 
 通过 `Chrome` 的任务管理器可以看到，当前的页面内存直接跳到了 `1G+`。
 
 当然不排除有人的电脑内存比我们硬盘的都大的情况，豪不在乎内存消耗。
 
-<img src="http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/2C213F14-9283-4F33-9C1F-8A3648716248.png" alt="2C213F14-9283-4F33-9C1F-8A3648716248" style="zoom:33%;" />
+<img src="https://github.com/lei4519/picture-bed/raw/main/images/2C213F14-9283-4F33-9C1F-8A3648716248.png" alt="2C213F14-9283-4F33-9C1F-8A3648716248" style="zoom:33%;" />
 
 OK，即使你的电脑足以支撑在内存中进行随意的数据转换，但浏览器对 `Blob` 对象是有大小限制的。
 
 下面是 `file-saver` 的 `github`：
 
-<img src="http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/7E828BBD-7D85-4821-AD12-42509F41869E.png" alt="7E828BBD-7D85-4821-AD12-42509F41869E" style="zoom: 40%;" />
+<img src="https://github.com/lei4519/picture-bed/raw/main/images/7E828BBD-7D85-4821-AD12-42509F41869E.png" alt="7E828BBD-7D85-4821-AD12-42509F41869E" style="zoom: 40%;" />
 
 官网的第一句话就是
 
@@ -197,13 +197,13 @@ OK，即使你的电脑足以支撑在内存中进行随意的数据转换，但
 
 下面是源码：
 
-<img src="http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/35B1B723-5F36-4344-B708-5FFBEF4B0E96.png" alt="35B1B723-5F36-4344-B708-5FFBEF4B0E96" style="zoom:50%;" />
+<img src="https://github.com/lei4519/picture-bed/raw/main/images/35B1B723-5F36-4344-B708-5FFBEF4B0E96.png" alt="35B1B723-5F36-4344-B708-5FFBEF4B0E96" style="zoom:50%;" />
 
 ## 浏览器流式 `API`
 
 [Streams API](https://developer.mozilla.org/zh-CN/docs/Web/API/Streams_API) 是浏览器提供给 `JS` 的流式操作数据的接口。
 
-<img src="http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20211123110312433.png" alt="image-20211123110312433"  />、
+<img src="https://github.com/lei4519/picture-bed/raw/main/images/image-20211123110312433.png" alt="image-20211123110312433"  />、
 
 其中包含有两个主要的接口：可读流、可写流
 
@@ -453,7 +453,7 @@ interface ResponseInit {
 
 ### 流程图
 
-![image-20211123143409710](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20211123143409710.png)
+![image-20211123143409710](https://github.com/lei4519/picture-bed/raw/main/images/image-20211123143409710.png)
 
 ### 关键点代码分析
 
