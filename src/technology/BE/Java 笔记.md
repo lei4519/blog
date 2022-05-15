@@ -1,6 +1,6 @@
 # Java
 
-![image-20210510191024159](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210510191024159.png)
+![image-20210510191024159](https://github.com/lei4519/picture-bed/raw/main/images/image-20210510191024159.png)
 
 ## 基础概念
 
@@ -106,7 +106,7 @@ Java 程序中变量通常声明为 `int` 型，除非不足以表示较大的�
 
 容量小的类型自动转换为容量大的数据类型，类型按容量大小排序：
 
-![image-20210510182155035](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210510182155035.png)
+![image-20210510182155035](https://github.com/lei4519/picture-bed/raw/main/images/image-20210510182155035.png)
 
 - 有多种类型的数据混合运算时，系统首先自动将所有数据转换成容量最大的那种数据类型，然后再进行计算。
 
@@ -328,7 +328,7 @@ public class Test {
   String str = 5 + ""
 ```
 
-![image-20210512141648930](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210512141648930.png)
+![image-20210512141648930](https://github.com/lei4519/picture-bed/raw/main/images/image-20210512141648930.png)
 
 ### static
 
@@ -366,7 +366,7 @@ public class Test {
 4. 若有多个非静态的代码块，那么按照从上到下的顺序依次执行。
 5. 每次创建对象的时候，都会执行一次，且先于构造器执行。
 
-![image-20210512194836832](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210512194836832.png)
+![image-20210512194836832](https://github.com/lei4519/picture-bed/raw/main/images/image-20210512194836832.png)
 
 ### final
 
@@ -714,7 +714,7 @@ JDK 中用 `Thread.State` 类定义了线程的几种状态
 - 阻塞：在某种特殊情况下，被人为挂起或执行输入输出操作时，让出 CPU 并临时中止自己的执行，进入阻塞状态
 - 死亡：线程完成了它的全部工作或线程被提前强制性地中止或出现异常导致结束
 
-![image-20210513135256985](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210513135256985.png)
+![image-20210513135256985](https://github.com/lei4519/picture-bed/raw/main/images/image-20210513135256985.png)
 
 ### 线程的同步
 
@@ -1078,7 +1078,7 @@ public void setCharAt(int n ,char ch)
   - `format`：格式化时间对象
   - `parse`：解析文本，生成一个日期
 
-  ![image-20210517200052786](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210517200052786.png)
+  ![image-20210517200052786](https://github.com/lei4519/picture-bed/raw/main/images/image-20210517200052786.png)
 
 ##### java.util.Calendar
 
@@ -1265,11 +1265,11 @@ System 类代表系统，系统级的很多属性和控制方法都放置在该�
 
 - `String getProperty(String key)`：该方法的作用是获得系统中属性名为 key 的属性对应的值。系统中常见的属性名以及属性的作用如下表所示：
 
-  ![image-20210519210155125](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210519210155125.png)
+  ![image-20210519210155125](https://github.com/lei4519/picture-bed/raw/main/images/image-20210519210155125.png)
 
 ### Math
 
-![image-20210519210602946](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210519210602946.png)
+![image-20210519210602946](https://github.com/lei4519/picture-bed/raw/main/images/image-20210519210602946.png)
 
 ### BigInteger
 
@@ -1383,7 +1383,7 @@ public enum SeasonEnum {
 
 ##### 主要方法
 
-![image-20210520193233881](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210520193233881.png)
+![image-20210520193233881](https://github.com/lei4519/picture-bed/raw/main/images/image-20210520193233881.png)
 
 ### 注解（Annotation）
 
@@ -1438,7 +1438,7 @@ Annotation 可以像修饰符一样被使用，可用于修饰包、类、构造
 
 指定 Annotation 可以用来修饰哪些程序元素
 
-![image-20210520202719469](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210520202719469.png)
+![image-20210520202719469](https://github.com/lei4519/picture-bed/raw/main/images/image-20210520202719469.png)
 
 ##### @Documented
 
@@ -1458,13 +1458,13 @@ JDK 5.0 在 `java.lang.reflect` 包下新增了 `AnnotatedElement` 接口, 该�
 
 程序可以调用 `AnnotatedElement` 对象的如下方法来访问 Annotation 信息
 
-![image-20210520204357216](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210520204357216.png)
+![image-20210520204357216](https://github.com/lei4519/picture-bed/raw/main/images/image-20210520204357216.png)
 
 #### JDK8 中注解的新特性
 
 ##### 可重复的注解
 
-![image-20210520204637614](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210520204637614.png)
+![image-20210520204637614](https://github.com/lei4519/picture-bed/raw/main/images/image-20210520204637614.png)
 
 ##### 类型注解
 
@@ -1476,7 +1476,7 @@ JDK 5.0 在 `java.lang.reflect` 包下新增了 `AnnotatedElement` 接口, 该�
 
 - `ElementType.TYPE_USE` 表示该注解能写在使用类型的任何语句中
 
-![image-20210520205011336](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210520205011336.png)
+![image-20210520205011336](https://github.com/lei4519/picture-bed/raw/main/images/image-20210520205011336.png)
 
 ## 集合
 
@@ -1491,7 +1491,7 @@ Java 集合类可以用于存储数量不等的多个对象，还可用于保存
 
 #### 接口继承树
 
-![image-20210521131756872](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210521131756872.png)
+![image-20210521131756872](https://github.com/lei4519/picture-bed/raw/main/images/image-20210521131756872.png)
 
 #### 接口方法
 
@@ -1541,7 +1541,7 @@ iterator()
 
 ### Iterator 接口
 
-![image-20210531194104593](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210531194104593.png)
+![image-20210531194104593](https://github.com/lei4519/picture-bed/raw/main/images/image-20210531194104593.png)
 
 - 在调用`it.next()`方法之前必须要调用`it.hasNext()`进行检测。若不调用，且下一条记录无效，直接调用 it.next()会抛出`NoSuchElementException`异常
 
@@ -1552,7 +1552,7 @@ iterator()
 
 - foreach 还可以用来遍历数组
 
-![image-20210531194336929](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210531194336929.png)
+![image-20210531194336929](https://github.com/lei4519/picture-bed/raw/main/images/image-20210531194336929.png)
 
 ### List 接口
 
@@ -1711,7 +1711,7 @@ List subList(int fromIndex, int toIndex)
 
 #### 接口继承树
 
-![image-20210521131829094](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210521131829094.png)
+![image-20210521131829094](https://github.com/lei4519/picture-bed/raw/main/images/image-20210521131829094.png)
 
 #### 常用方法
 
@@ -1864,7 +1864,7 @@ HashMap 的内部存储结构其实是**数组+链表+树**的结合。当实例
 
 Collections 类中提供了多个 `synchronizedXxx()` 方法，该方法可使将指定集合包装成线程同步的集合，从而可以解决多线程并发访问集合时的线程安全问题
 
-![image-20210601200719776](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210601200719776.png)
+![image-20210601200719776](https://github.com/lei4519/picture-bed/raw/main/images/image-20210601200719776.png)
 
 ## 泛型
 
@@ -2112,9 +2112,9 @@ new File("d:" + File.separator + "atguigu" + File.separator + "info.txt");
 1. Java 的 IO 流共涉及 40 多个类，实际上非常规则，都是从如下 4 个抽象基类派生的。
 2. 由这四个类派生出来的子类名称都是以其父类名作为子类名后缀
 
-![image-20210602205529551](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210602205529551.png)
+![image-20210602205529551](https://github.com/lei4519/picture-bed/raw/main/images/image-20210602205529551.png)
 
-![image-20210602205608988](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210602205608988.png)
+![image-20210602205608988](https://github.com/lei4519/picture-bed/raw/main/images/image-20210602205608988.png)
 
 ### InputStream & Reader
 
@@ -2787,7 +2787,7 @@ raf.close();
 
 ### TCP
 
-![image-20210608195711187](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210608195711187.png)
+![image-20210608195711187](https://github.com/lei4519/picture-bed/raw/main/images/image-20210608195711187.png)
 
 #### 客户端
 
@@ -2827,7 +2827,7 @@ raf.close();
    ss.close();
    ```
 
-![image-20210608200423808](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210608200423808.png)
+![image-20210608200423808](https://github.com/lei4519/picture-bed/raw/main/images/image-20210608200423808.png)
 
 ### UDP
 
@@ -2961,7 +2961,7 @@ public String getQuery()
 - Reflection(反射)是被视为动态语言的关键，反射机制允许程序在执行期借助于 Reflection API 取得任何类的内部信息，并能直接操作任意对象的内部属性及方法
 - 加载完类之后，在堆内存的方法区中就产生了一个 Class 类型的对象(一个类只有一个 Class 对象)，这个对象就包含了完整的类的结构信息。我们可以通过这个对象看到类的结构。这个对象就像一面镜子，透过这个镜子看到类的结构，所以，我们形象的称之为：反射
 
-![image-20210608202017358](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210608202017358.png)
+![image-20210608202017358](https://github.com/lei4519/picture-bed/raw/main/images/image-20210608202017358.png)
 
 - Java 反射机制提供的功能
   - 在运行时判断任意一个对象所属的类
@@ -3044,7 +3044,7 @@ Class c11 = b.getClass();
 当程序主动使用某个类时，如果该类还未被加载到内存中，则系统会通过
 如下三个步骤来对该类进行初始化
 
-![image-20210608203529056](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210608203529056.png)
+![image-20210608203529056](https://github.com/lei4519/picture-bed/raw/main/images/image-20210608203529056.png)
 
 - 加载：将 class 文件字节码内容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构，然后生成一个代表这个类的 java.lang.Class 对象，作为方法区中类数据的访问入口(即引用地址)。所有需要访问和使用类数据只能通过这个 Class 对象。这个加载的过程需要类加载器参与
 - 链接：将 Java 类的二进制代码合并到 JVM 的运行状态之中的过程
@@ -3075,7 +3075,7 @@ Class c11 = b.getClass();
 - 类加载的作用：将 class 文件字节码内容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构，然后在堆中生成一个代表这个类的 java.lang.Class 对象，作为方法区中类数据的访问入口。
 - 类缓存：标准的 JavaSE 类加载器可以按要求查找类，但一旦某个类被加载到类加载器中，它将维持加载(缓存)一段时间。不过 JVM 垃圾回收机制可以回收这些 Class 对象。
 
-![image-20210608203954746](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210608203954746.png)
+![image-20210608203954746](https://github.com/lei4519/picture-bed/raw/main/images/image-20210608203954746.png)
 
 ```java
 //1.获取一个系统类加载器
@@ -3203,7 +3203,7 @@ Package getPackage()
 1. 通过 Class 类的 getMethod(String name,Class...parameterTypes)方法取得一个 Method 对象，并设置此方法操作时所需要的参数类型
 2. 之后使用 Object invoke(Object obj, Object[] args)进行调用，并向方法中传递要设置的 obj 对象的参数信息
 
-![image-20210608210008126](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210608210008126.png)
+![image-20210608210008126](https://github.com/lei4519/picture-bed/raw/main/images/image-20210608210008126.png)
 
 ```java
 Object invoke(Object obj, Object ... args)
@@ -3315,16 +3315,16 @@ Java 8 中将并行进行了优化，我们可以很容易的对数据进行并�
 
 Lambda 是一个匿名函数，我们可以把 Lambda 表达式理解为是一段可以传递的代码(将代码像数据一样进行传递)。使用它可以写出更简洁、更灵活的代码。作为一种更紧凑的代码风格，使 Java 的语言表达能力得到了提升。
 
-<img src="http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609102513450.png" alt="image-20210609102513450" style="zoom: 50%;" />
+<img src="https://github.com/lei4519/picture-bed/raw/main/images/image-20210609102513450.png" alt="image-20210609102513450" style="zoom: 50%;" />
 
 Lambda 表达式：在 Java 8 语言中引入的一种新的语法元素和操作符。这个操作符为 「->」， 该操作符被称为 Lambda 操作符或箭头操作符。它将 Lambda 分为两个部分：
 
 - 左侧：指定了 Lambda 表达式需要的参数列表
 - 右侧：指定了 Lambda 体，是抽象方法的实现逻辑，也即 Lambda 表达式要执行的功能
 
-![image-20210609102618652](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609102618652.png)
+![image-20210609102618652](https://github.com/lei4519/picture-bed/raw/main/images/image-20210609102618652.png)
 
-![image-20210609102627187](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609102627187.png)
+![image-20210609102627187](https://github.com/lei4519/picture-bed/raw/main/images/image-20210609102627187.png)
 
 Lambda 表达式中无需指定类型，程序依然可以编译，这是因为 javac 根据程序的上下文，在后台推断出了参数的类型。Lambda 表达式的类型依赖于上下文环境，是由编译器推断出来的。这就是所谓的 「类型推断」
 
@@ -3338,9 +3338,9 @@ Lambda 表达式中无需指定类型，程序依然可以编译，这是因为 
 - 在 Java8 中，Lambda 表达式就是一个函数式接口的实例。这就是 Lambda 表达式和函数式接口的关系。也就是说，只要一个对象是函数式接口的实例，那么该对象就可以用 Lambda 表达式来表示。
 - 所以以前用匿名实现类表示的现在都可以用 Lambda 表达式来写
 
-![image-20210609102954583](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609102954583.png)
+![image-20210609102954583](https://github.com/lei4519/picture-bed/raw/main/images/image-20210609102954583.png)
 
-![image-20210609103003644](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609103003644.png)
+![image-20210609103003644](https://github.com/lei4519/picture-bed/raw/main/images/image-20210609103003644.png)
 
 ### 方法引用与构造器引用
 
@@ -3355,9 +3355,9 @@ Lambda 表达式中无需指定类型，程序依然可以编译，这是因为 
   - 类：:静态方法名
   - 类：:实例方法名
 
-![image-20210609103159862](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609103159862.png)
+![image-20210609103159862](https://github.com/lei4519/picture-bed/raw/main/images/image-20210609103159862.png)
 
-![image-20210609103208944](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609103208944.png)
+![image-20210609103208944](https://github.com/lei4519/picture-bed/raw/main/images/image-20210609103208944.png)
 
 #### 构造器引用
 
@@ -3365,9 +3365,9 @@ Lambda 表达式中无需指定类型，程序依然可以编译，这是因为 
 
 与函数式接口相结合，自动与函数式接口中方法兼容。可以把构造器引用赋值给定义的方法，要求构造器参数列表要与接口中抽象方法的参数列表一致!且方法的返回值即为构造器对应类的对象
 
-![image-20210609103256175](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609103256175.png)
+![image-20210609103256175](https://github.com/lei4519/picture-bed/raw/main/images/image-20210609103256175.png)
 
-![image-20210609103303668](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609103303668.png)
+![image-20210609103303668](https://github.com/lei4519/picture-bed/raw/main/images/image-20210609103303668.png)
 
 ### Stream API
 
@@ -3388,7 +3388,7 @@ Lambda 表达式中无需指定类型，程序依然可以编译，这是因为 
 2. 中间操作：一个中间操作链，对数据源的数据进行处理
 3. 终止操作(终端操作)
 
-![image-20210609103621748](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609103621748.png)
+![image-20210609103621748](https://github.com/lei4519/picture-bed/raw/main/images/image-20210609103621748.png)
 
 #### 创建 Stream
 
@@ -3462,9 +3462,9 @@ public static<T> Stream<T> generate(Supplier<T> s)
 
 #### Collectors
 
-![image-20210609104438656](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609104438656.png)
+![image-20210609104438656](https://github.com/lei4519/picture-bed/raw/main/images/image-20210609104438656.png)
 
-![image-20210609104449026](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/image-20210609104449026.png)
+![image-20210609104449026](https://github.com/lei4519/picture-bed/raw/main/images/image-20210609104449026.png)
 
 ### Optional 类
 
