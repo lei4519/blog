@@ -26,7 +26,7 @@
 #### browserAction、pageAction
 
 浏览器右上角（工具栏）展示的小图标，每一个图标就代表一个扩展程序。
-![action](https://gitee.com/lei451927/picture/raw/master/2020-12-20/1608434897668-image.png)
+![action](gitee.com/lei451927/picture/raw/master/images/1608434897668-image.png)
 
 `action`有三种操作方式：
 
@@ -36,7 +36,7 @@
 
 其中弹出窗口是`action`的主要交互区域。
 
-![dark reader](https://gitee.com/lei451927/picture/raw/master/2020-12-20/1608435161113-image.png)
+![dark reader](gitee.com/lei451927/picture/raw/master/images/1608435161113-image.png)
 
 #### Commands（键盘快捷键）
 
@@ -50,7 +50,7 @@
 
 向右键菜单中加入自定义项。
 
-![image](https://gitee.com/lei451927/picture/raw/master/2020-12-20/1608436354861-image.png)
+![image](gitee.com/lei451927/picture/raw/master/images/1608436354861-image.png)
 
 #### override
 
@@ -65,7 +65,7 @@
 一个扩展只能替代一个页面，不能替代无痕模式窗口的新标签页。
 
 新标签页扩展：`掘金`、`Infinity`
-![image](https://gitee.com/lei451927/picture/raw/master/2020-12-20/1608436527513-image.png)
+![image](gitee.com/lei451927/picture/raw/master/images/1608436527513-image.png)
 
 #### omnibox（多功能框）
 
@@ -73,7 +73,7 @@
 
 百度、必应、Github 等网站在 Chrome 中都有对应的关键字搜索功能，相信不少人都用过。在地址栏中输入`github.com`或者`baidu.com`，然后按下`tab`键，地址栏就会变成下面的样子。在这种状态下我们输入的内容都会在相应网站中进行搜索执行。
 
-![github](https://gitee.com/lei451927/picture/raw/master/2020-12-20/1608448620624-image.png)
+![github](gitee.com/lei451927/picture/raw/master/images/1608448620624-image.png)
 
 #### devtools(开发者工具)
 
@@ -83,11 +83,11 @@
 
 对着`action`图标右键，菜单中就会显示`选项`菜单，如果菜单是亮起的，说明此扩展开启了选项功能。
 
-![image](https://gitee.com/lei451927/picture/raw/master/2020-12-20/1608448821517-image.png)
+![image](gitee.com/lei451927/picture/raw/master/images/1608448821517-image.png)
 
 选项页一般情况下，都会作为扩展的配置页面，如下
 
-![FeHelper Options](https://gitee.com/lei451927/picture/raw/master/2020-12-20/1608448890182-image.png)
+![FeHelper Options](gitee.com/lei451927/picture/raw/master/images/1608448890182-image.png)
 
 当然，所谓的选项页其实就是加载了一个指定的HTML，至于HTML中是展示扩展的配置还是别的东西，这个完全取决于你自己。
 
@@ -271,7 +271,7 @@ document.body.append(script)
 
 其中的`runtime`中的前四个 API 提供了与扩展的其他部分进行通信的能力。
 
-![image](https://gitee.com/lei451927/picture/raw/master/2020-12-24/1608786751478-image.png)
+![image](gitee.com/lei451927/picture/raw/master/images/1608786751478-image.png)
 
 #### browserAction、pageAction
 
@@ -303,7 +303,7 @@ document.body.append(script)
 - `browserAction`的图标是常亮的，它的功能在任何网页中都可以使用。
 - `pageAction`只会在指定的网站中亮起，它的功能也只限于这些指定网站使用。
   - `octotree` 扩展只会在 `github` 的项目页面亮起。
-    ![octotree](https://gitee.com/lei451927/picture/raw/master/2020-12-20/1608435579256-image.png)
+    ![octotree](gitee.com/lei451927/picture/raw/master/images/1608435579256-image.png)
 
 在 `background.js` 中使用 `declarativeContent` 对页面的变化进行匹配，然后来决定 `pageAction` 的点亮和置灰。
 

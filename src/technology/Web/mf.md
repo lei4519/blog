@@ -2,7 +2,7 @@
 
 ## 前置 - 模块联邦实现思路
 
-![](https://gitee.com/lei451927/picture/raw/master/images/20211231151855.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211231151855.png)
 
 ### 如何复用？
 
@@ -30,7 +30,7 @@ React
 
 ---
 
-![](https://gitee.com/lei451927/picture/raw/master/images/20211231152347.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211231152347.png)
 
 模块联邦
  - 高级的模块加载方式，可以跨项目进行模块复用，通过运行时的语义化版本管理实现生产依赖共享复用。
@@ -49,7 +49,7 @@ React
 - 模块：微前端中的各个子模块（应用）
 
 ## [https://micro-frontends.org/](https://micro-frontends.org/)
-![](https://gitee.com/lei451927/picture/raw/master/images/20211230103907.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211230103907.png)
 
 ## [qiankun(微前端)快问快答](https://zhuanlan.zhihu.com/p/451425684)
 
@@ -77,12 +77,12 @@ React
 
 
  - 依赖版本冲突风险示例
-![](https://gitee.com/lei451927/picture/raw/master/images/20211231143651.png)
-![](https://gitee.com/lei451927/picture/raw/master/images/20211229163038.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211231143651.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211229163038.png)
 
  - 远程模块冲突风险示例
 
-![](https://gitee.com/lei451927/picture/raw/master/images/20211231163958.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211231163958.png)
 
 模块提供方，不能假设使用方是完全按照规矩去使用模块的。
 
@@ -108,7 +108,7 @@ React
 - 独立运行环境
 - 资源本地存储
 
-![server](https://gitee.com/lei451927/picture/raw/master/images/20211228142826.png)
+![server](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211228142826.png)
 
 ## 浏览器
 
@@ -116,7 +116,7 @@ React
 
 - 共用执行环境
 - 资源加载
-![client](https://gitee.com/lei451927/picture/raw/master/images/20211228143200.png)
+![client](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211228143200.png)
 
 ## 共用执行环境
 
@@ -125,7 +125,7 @@ React
 - 全局 API 冲突
 - 依赖库版本冲突
 
-![global api](https://gitee.com/lei451927/picture/raw/master/images/20211228144955.png)
+![global api](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211228144955.png)
 
 ### CSS 冲突
 
@@ -170,10 +170,10 @@ React
 
 ## 资源加载
 
-![](https://gitee.com/lei451927/picture/raw/master/images/20211228162116.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211228162116.png)
 
 ## 生产依赖
-<!-- ![](https://gitee.com/lei451927/picture/raw/master/images/20211229153807.png) -->
+<!-- ![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211229153807.png) -->
 
 ## 依赖复用
 
@@ -197,7 +197,7 @@ React
 
 ### 如何保证所有的依赖都遵循了版本语义化？
 
-![](https://gitee.com/lei451927/picture/raw/master/images/20211229104000.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211229104000.png)
 
 ### 双刃剑 - 独立部署
 
@@ -218,15 +218,15 @@ new ModuleFederationPlugin({
 })
 ```
 
-<!-- ![](https://gitee.com/lei451927/picture/raw/master/images/20211228171614.png) -->
+<!-- ![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211228171614.png) -->
 
-![](https://gitee.com/lei451927/picture/raw/master/images/20211229165522.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211229165522.png)
 
 
 ### 非法 Hook 调用
 
-![](https://gitee.com/lei451927/picture/raw/master/images/20211228163936.png)
-![](https://gitee.com/lei451927/picture/raw/master/images/20211228164209.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211228163936.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211228164209.png)
 
 - React 中 ReactCurrentDispatcher.current 指向 hooks 上下文，区分 mount、update
 - ReactDOM.render 执行时，会改变 ReactCurrentDispatcher.current 的指向
@@ -262,7 +262,7 @@ module.exports = {
 };
 ```
 
-![](https://gitee.com/lei451927/picture/raw/master/images/20211229154632.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211229154632.png)
 
 ---
 
@@ -327,9 +327,9 @@ module.exports = {
 <!-- ### MicroApp
 ![](https://zeroing.jd.com/home/assets/react-code.png)
 
-![](https://gitee.com/lei451927/picture/raw/master/images/20211228180026.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211228180026.png)
 
-![](https://gitee.com/lei451927/picture/raw/master/images/20211228175415.png)
+![](http://rbx663sxs.hb-bkt.clouddn.com/picture-bed/20211228175415.png)
  -->
 
 
