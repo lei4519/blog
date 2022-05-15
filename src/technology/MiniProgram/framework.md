@@ -45,7 +45,7 @@ Epage({
 
 流程图先走一波
 
-![image](https://gitee.com/lei451927/picture/raw/master/2020-12-28/1609148257431-image.png)
+![image](gitee.com/lei451927/picture/raw/master/images/1609148257431-image.png)
 
 1. Epage函数会对传入的`options`对象属性进行遍历，对所有的生命周期方法进行装饰，将生命周期改造成数组结构，并提供相关的hooks方式以调用注册。
 2. 在onLoad/created中检查并执行`setup`函数，拿到其返回值`setupData`。
