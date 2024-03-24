@@ -1,0 +1,50 @@
+name: auto-update-readme-by-issue
+on:
+  issues:
+    types:
+      [
+        opened,
+        edited,
+        milestoned,
+        deleted,
+        pinned,
+        unpinned,
+        closed,
+        reopened,
+        labeled,
+        unlabeled,
+      ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: install dependencies
+        run: |
+          pip3 install setuptools --user
+          pip3 install PyGithub --user
+          pip3 install wordcloud --user
+          pip3 install matplotlib --user
+      - name: run python script
+        env:
+          GITHUB_LOGIN: lei4519
+          GITHUB_TOKEN: ${{ secrets.BLOG_SECRET }}
+        run: python3 main.py
+      - name: config git info
+        run: |
+          git config --global user.email "lei4519@126.com"
+          git config --global user.name "lei4519"
+      - name: commit change
+        run: |
+          git checkout master
+          git add .
+          git commit -m "Update from Github Action"
+      - name: push change
+        env:
+          GITHUB_LOGIN: lei4519
+          GITHUB_TOKEN: ${{ secrets.BLOG_SECRET }}
+        run: |
+          git push https://$GITHUB_LOGIN:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
+      - name: done
+        run: echo 'done'
