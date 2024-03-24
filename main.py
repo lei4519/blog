@@ -19,8 +19,8 @@ def login():
     global user, username, blogname, blogrepo
     github_repo_env = os.environ.get('GITHUB_REPOSITORY')
 
-    username = 'lei4519'
-    blogname = 'Blog'
+    username = github_repo_env[0:github_repo_env.index('/')]
+    blogname = github_repo_env[github_repo_env.index('/'):]
     password = os.environ.get('GITHUB_TOKEN')
     user = Github(username, password)
     blogrepo = user.get_repo(os.environ.get('GITHUB_REPOSITORY'))
@@ -69,13 +69,14 @@ def bundle_list_by_labels_section():
 
 
     # word cloud
-    wordcloud_image_url = WordCloudGenerator(blogrepo).generate()
+    # wordcloud_image_url = WordCloudGenerator(blogrepo).generate()
+    list_by_labels_section = ''
 
-    list_by_labels_section = """
-<summary>
-    <img src="%s" title="词云" alt="词云" href="https://%s.github.io/%s/">
-</summary>  
-""" % (wordcloud_image_url,username,blogname)
+#     list_by_labels_section = """
+# <summary>
+#     <img src="%s" title="词云" alt="词云" href="https://%s.github.io/%s/">
+# </summary>  
+# """ % (wordcloud_image_url,username,blogname)
 
     all_labels = blogrepo.get_labels()
     for label in all_labels:
