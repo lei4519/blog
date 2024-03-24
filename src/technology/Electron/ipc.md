@@ -17,14 +17,14 @@
 
 - 主进程发送
   ```js
-  const { BrowserWindow } = require('electron')
-  const win = new BrowserWindow()
-  win.webContents.send('eventType', 'message')
+  const { BrowserWindow } = require("electron");
+  const win = new BrowserWindow();
+  win.webContents.send("eventType", "message");
   ```
 - 渲染进程接收
   ```js
-  const { ipcRenderer } = require('electron')
-  ipcRenderer.on('eventType', (IpcRendererEvent, msg) => {})
+  const { ipcRenderer } = require("electron");
+  ipcRenderer.on("eventType", (IpcRendererEvent, msg) => {});
   ```
 
 ### 渲染进程 主动发送消息至 主进程
@@ -33,30 +33,29 @@
 
 使用[ipcRenderer.sendSync](https://www.electronjs.org/docs/api/ipc-renderer#ipcrenderersendsyncchannel-args)发送同步消息
 
-
 - 渲染进程发送
+
   ```js
-  ipcRenderer.send('eventType', 'msg')
+  ipcRenderer.send("eventType", "msg");
   ```
 
 - 主进程接收
   ```js
-  ipcMain.on('eventType', (IpcMainEvent, msg) => {})
+  ipcMain.on("eventType", (IpcMainEvent, msg) => {});
   ```
 
 ### 回复消息的统一方式
 
 上面两个例子的on方法，接受的回调函数都有一个event对象，可以使用这个event对象进行消息回复
 
-
 先看一下这两个event对象有什么属性
 
 - [IpcMainEvent](https://www.electronjs.org/docs/api/structures/ipc-main-event)
+
   - frameId: Integer -> 发送消息的渲染进程框架的ID（可能是iframe）
   - sender: WebContents -> 发送消息的渲染进程的webContents引用，所以我们也可以使用sender.send来回复消息
   - returnValue: any -> 同步回复消息（赋值）
   - reply: Function -> 异步回复消息（函数调用）
-
 
 - [IpcRendererEvent](https://www.electronjs.org/docs/api/structures/ipc-renderer-event)
   - sender: IpcRenderer -> electron.IpcRender的引用
@@ -65,18 +64,19 @@
 ## 渲染进程之间通信
 
 ### 通过全局属性 实现数据共享
+
 - 主进程中定义全局对象
   ```js
   global.share = {
-    id: 1
-  }
+    id: 1,
+  };
   ```
 - 渲染进程中通过remote模块控制全局对象
 
   ```js
-  const share = remote.getGlobal('share')
-  console.log(share.id) // get
-  share.id = 2 // set
+  const share = remote.getGlobal("share");
+  console.log(share.id); // get
+  share.id = 2; // set
   ```
 
 > 只能实现数据共享，并非真正的通信
@@ -88,6 +88,7 @@
 ### 通过进程ID 直接获取目标进程 进行ipc通信
 
 - 如何获取进程ID
+
   - 通过全局对象共享
   - 主进程通过webContents.send发送消息
 
