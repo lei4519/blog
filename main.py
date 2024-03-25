@@ -52,8 +52,8 @@ def bundle_summary_section():
 
 
 def format_issue(issue: Issue):
-    return "- %s [%s](%s) \n" % (
-        issue.created_at.strftime("%Y-%m-%d"),
+    return "- [%s](%s) \n" % (
+        # issue.created_at.strftime("%Y-%m-%d"),
         issue.title,
         issue.html_url,
     )
