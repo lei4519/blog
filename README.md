@@ -3,7 +3,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/Blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-03-25 06:46:43"/>
+    <img src="https://badgen.net/badge/last-commit/2024-03-25 06:47:20"/>
 </p>
     
 <summary>
@@ -47,6 +47,16 @@
 <summary>[1篇]</summary>
 
 - 2024-03-25 [HTTP 2](https://github.com/lei4519/Blog/issues/41) 
+
+
+</details>
+            
+## Mini Program
+
+<details open>
+<summary>[1篇]</summary>
+
+- 2024-03-25 [给原生小程序安排上 Composition API](https://github.com/lei4519/Blog/issues/42) 
 
 
 </details>
