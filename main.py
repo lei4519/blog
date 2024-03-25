@@ -87,6 +87,7 @@ def bundle_list_by_labels_section():
             count += 1
         if count > 0:
             list_by_labels_section += """
+
 ## %s
 
 <details open>
@@ -95,6 +96,7 @@ def bundle_list_by_labels_section():
 %s
 
 </details>
+
             """ % (label.name, count, temp)
 
     return list_by_labels_section
