@@ -3,7 +3,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/Blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-03-25 06:41:12"/>
+    <img src="https://badgen.net/badge/last-commit/2024-03-25 06:46:10"/>
 </p>
     
 <summary>
