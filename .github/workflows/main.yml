@@ -7,8 +7,6 @@ on:
         edited,
         closed,
         reopened,
-        labeled,
-        unlabeled,
       ]
 
 jobs:
