@@ -75,11 +75,7 @@ def bundle_list_by_labels_section():
     # word cloud
     wordcloud_image_url = WordCloudGenerator(blogrepo).generate()
 
-    list_by_labels_section = """
-<summary>
-    <img src="%s" title="词云" alt="词云">
-</summary>
-""" % (wordcloud_image_url)
+    list_by_labels_section = """<img src="%s" title="词云" alt="词云">""" % (wordcloud_image_url)
 
     all_labels = blogrepo.get_labels()
     for label in all_labels:
