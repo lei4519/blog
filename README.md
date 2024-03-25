@@ -3,7 +3,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/Blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-03-25 14:41:24"/>
+    <img src="https://badgen.net/badge/last-commit/2024-03-25 14:42:36"/>
 </p>
     
 <summary>
@@ -108,8 +108,9 @@
 ## React
 
 <details open>
-<summary>[3篇]</summary>
+<summary>[4篇]</summary>
 
+- [Server State Management](https://github.com/lei4519/Blog/issues/59) 
 - [React Hooks](https://github.com/lei4519/Blog/issues/58) 
 - [React Server Component](https://github.com/lei4519/Blog/issues/55) 
 - [React 渲染流程](https://github.com/lei4519/Blog/issues/50) 
@@ -120,8 +121,9 @@
 ## TODO
 
 <details open>
-<summary>[4篇]</summary>
+<summary>[5篇]</summary>
 
+- [Server State Management](https://github.com/lei4519/Blog/issues/59) 
 - [React Hooks](https://github.com/lei4519/Blog/issues/58) 
 - [JS Engine](https://github.com/lei4519/Blog/issues/57) 
 - [漫谈 GraphQL](https://github.com/lei4519/Blog/issues/56) 
