@@ -1,8 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from functools import reduce
+from typing import Tuple
 from github import Github
 from github.Issue import Issue
+from github.Label import Label
+from github.PaginatedList import PaginatedList
 from github.Repository import Repository
 import os
 import time
@@ -25,7 +29,6 @@ def login():
     password = os.environ.get("GITHUB_TOKEN")
     user = Github(username, password)
     blogrepo = user.get_repo(os.environ.get("GITHUB_REPOSITORY"))
-    print(blogrepo)
 
 
 def bundle_summary_section():
@@ -35,14 +38,21 @@ def bundle_summary_section():
     global username
     global blogname
 
-    summary_section = """
-# Blog
+    # word cloud
+    wordcloud_image_url = WordCloudGenerator(blogrepo).generate()
 
+    list_by_labels_section = """<img src="%s" title="词云" alt="词云">""" % (
+        wordcloud_image_url
+    )
+
+    summary_section = """
 <p align='center'>
     <img src="https://badgen.net/github/issues/{0}{1}"/>
     <img src="https://badgen.net/badge/last-commit/{2}"/>
 </p>
-    """.format(username, blogname, cur_time)
+
+{3}
+    """.format(username, blogname, cur_time, list_by_labels_section)
 
     # <img src="https://badgen.net/github/forks/{0}/{1}"/>
     # <img src="https://badgen.net/github/stars/{0}/{1}"/>
@@ -52,10 +62,10 @@ def bundle_summary_section():
 
 
 def format_issue(issue: Issue):
-    return "- [%s](%s) \n" % (
+    return "<li><a href='%s'>%s</a></li>\n" % (
         # issue.created_at.strftime("%Y-%m-%d"),
-        issue.title,
         issue.html_url,
+        issue.title,
     )
 
 
@@ -72,34 +82,42 @@ def bundle_list_by_labels_section():
     global username
     global blogname
 
-    # word cloud
-    wordcloud_image_url = WordCloudGenerator(blogrepo).generate()
+    label_with_issues = sorted(
+        map(
+            lambda label: (label, blogrepo.get_issues(labels=[label], state="open")),
+            blogrepo.get_labels(),
+        ),
+        key=lambda x: x[1].totalCount,
+        reverse=True,
+    )
 
-    list_by_labels_section = """<img src="%s" title="词云" alt="词云">""" % (wordcloud_image_url)
+    def get_content(string: str, item: Tuple[Label, PaginatedList[Issue]]):
+        (label, issues) = item
+        count = issues.totalCount
 
-    all_labels = blogrepo.get_labels()
-    for label in all_labels:
-        temp = ""
-        count = 0
-        issues_in_label = blogrepo.get_issues(labels=[label], state="open")
-        for issue in issues_in_label:
-            temp += format_issue(issue)
-            count += 1
-        if count > 0:
-            list_by_labels_section += """
+        if count == 0:
+            return string
+
+        content = reduce(
+            lambda s, issue: "{0}{1}".format(s, format_issue(issue)), issues, ""
+        )
+
+        return """
+%s
 
 ## %s
 
 <details open>
-<summary>[%s篇]</summary>
 
+<summary>[%s 篇]</summary>
+
+<ul>
 %s
+</ul>
 
-</details>
+</details>""" % (string, label.name, count, content)
 
-            """ % (label.name, count, temp)
-
-    return list_by_labels_section
+    return reduce(get_content, label_with_issues, "")
 
 
 def execute():
