@@ -1,7 +1,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-03-28 14:28:53"/>
+    <img src="https://badgen.net/badge/last-commit/2024-03-28 14:29:50"/>
 </p>
 
 <img src="assets/wordcloud.png" title="词云" alt="词云">
@@ -26,9 +26,10 @@
 
 <details open>
 
-<summary>[8 篇]</summary>
+<summary>[9 篇]</summary>
 
 <ul>
+<li><a href='https://github.com/lei4519/blog/issues/64'>训练：骑行和跑步的差异</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/63'>为什么要多骑二区？</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/62'>Vim FE 工作流</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/61'>System UI</a></li>
@@ -86,6 +87,20 @@
 <li><a href='https://github.com/lei4519/blog/issues/58'>React Hooks</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/55'>React Server Component</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/50'>React 渲染流程</a></li>
+
+</ul>
+
+</details>
+
+## Cycling
+
+<details open>
+
+<summary>[2 篇]</summary>
+
+<ul>
+<li><a href='https://github.com/lei4519/blog/issues/64'>训练：骑行和跑步的差异</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/63'>为什么要多骑二区？</a></li>
 
 </ul>
 
@@ -168,19 +183,6 @@
 
 <ul>
 <li><a href='https://github.com/lei4519/blog/issues/37'>使用 Umi 开发 Chrome 扩展</a></li>
-
-</ul>
-
-</details>
-
-## Cycling
-
-<details open>
-
-<summary>[1 篇]</summary>
-
-<ul>
-<li><a href='https://github.com/lei4519/blog/issues/63'>为什么要多骑二区？</a></li>
 
 </ul>
 
