@@ -1,7 +1,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-03-28 05:40:18"/>
+    <img src="https://badgen.net/badge/last-commit/2024-03-28 14:28:53"/>
 </p>
 
 <img src="assets/wordcloud.png" title="词云" alt="词云">
@@ -21,13 +21,15 @@
 
 
 
+
 ## TODO
 
 <details open>
 
-<summary>[7 篇]</summary>
+<summary>[8 篇]</summary>
 
 <ul>
+<li><a href='https://github.com/lei4519/blog/issues/63'>为什么要多骑二区？</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/62'>Vim FE 工作流</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/61'>System UI</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/59'>Server State Management</a></li>
@@ -166,6 +168,19 @@
 
 <ul>
 <li><a href='https://github.com/lei4519/blog/issues/37'>使用 Umi 开发 Chrome 扩展</a></li>
+
+</ul>
+
+</details>
+
+## Cycling
+
+<details open>
+
+<summary>[1 篇]</summary>
+
+<ul>
+<li><a href='https://github.com/lei4519/blog/issues/63'>为什么要多骑二区？</a></li>
 
 </ul>
 
