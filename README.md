@@ -1,7 +1,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-03-29 05:38:22"/>
+    <img src="https://badgen.net/badge/last-commit/2024-04-08 14:35:56"/>
 </p>
 
 <img src="assets/wordcloud.png" title="词云" alt="词云">
@@ -26,11 +26,10 @@
 
 <details open>
 
-<summary>[7 篇]</summary>
+<summary>[6 篇]</summary>
 
 <ul>
 <li><a href='https://github.com/lei4519/blog/issues/64'>训练：骑行和跑步的差异</a></li>
-<li><a href='https://github.com/lei4519/blog/issues/62'>Vim FE 工作流</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/61'>System UI</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/59'>Server State Management</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/57'>JS Engine</a></li>
@@ -153,7 +152,7 @@
 <summary>[2 篇]</summary>
 
 <ul>
-<li><a href='https://github.com/lei4519/blog/issues/62'>Vim FE 工作流</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/62'>Vim 工作流</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/54'>Vim ESC 键的解决方案</a></li>
 
 </ul>
