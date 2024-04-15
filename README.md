@@ -1,7 +1,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-04-10 05:16:02"/>
+    <img src="https://badgen.net/badge/last-commit/2024-04-15 11:26:47"/>
 </p>
 
 <img src="assets/wordcloud.png" title="词云" alt="词云">
@@ -27,14 +27,13 @@
 
 <details open>
 
-<summary>[6 篇]</summary>
+<summary>[5 篇]</summary>
 
 <ul>
 <li><a href='https://github.com/lei4519/blog/issues/64'>训练：骑行和跑步的差异</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/61'>System UI</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/59'>Server State Management</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/57'>JS Engine</a></li>
-<li><a href='https://github.com/lei4519/blog/issues/56'>漫谈 GraphQL</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/55'>React Server Component</a></li>
 
 </ul>
