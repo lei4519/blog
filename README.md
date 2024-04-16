@@ -1,7 +1,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-04-16 06:24:43"/>
+    <img src="https://badgen.net/badge/last-commit/2024-04-16 06:27:50"/>
 </p>
 
 <img src="assets/wordcloud.png" title="词云" alt="词云">
@@ -23,32 +23,16 @@
 
 
 
-## Web
+## FE
 
 <details open>
 
 <summary>[5 篇]</summary>
 
 <ul>
-<li><a href='https://github.com/lei4519/blog/issues/61'>System UI</a></li>
-<li><a href='https://github.com/lei4519/blog/issues/53'>JS 实现流式打包下载</a></li>
-<li><a href='https://github.com/lei4519/blog/issues/49'>模块联邦 微前端思考</a></li>
-<li><a href='https://github.com/lei4519/blog/issues/48'>使用 IntersectionObserver 实现图片懒加载</a></li>
-<li><a href='https://github.com/lei4519/blog/issues/45'>PC 端 REM 布局非 Chrome 浏览器字号小于 12px 的解决方案</a></li>
-
-</ul>
-
-</details>
-
-## FE
-
-<details open>
-
-<summary>[4 篇]</summary>
-
-<ul>
 <li><a href='https://github.com/lei4519/blog/issues/66'>大前端？终端？Omni-FrontEnd？</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/65'>FMP，但中后台</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/61'>Tokenize UI</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/37'>使用 Umi 开发 Chrome 扩展</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/36'>使用 Electron + Vue3 + TS 实现定时提醒休息软件</a></li>
 
@@ -88,16 +72,17 @@
 
 </details>
 
-## TODO
+## Web
 
 <details open>
 
-<summary>[3 篇]</summary>
+<summary>[4 篇]</summary>
 
 <ul>
-<li><a href='https://github.com/lei4519/blog/issues/64'>训练：骑行和跑步的差异</a></li>
-<li><a href='https://github.com/lei4519/blog/issues/61'>System UI</a></li>
-<li><a href='https://github.com/lei4519/blog/issues/57'>JS Engine</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/53'>JS 实现流式打包下载</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/49'>模块联邦 微前端思考</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/48'>使用 IntersectionObserver 实现图片懒加载</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/45'>PC 端 REM 布局非 Chrome 浏览器字号小于 12px 的解决方案</a></li>
 
 </ul>
 
@@ -140,6 +125,20 @@
 <ul>
 <li><a href='https://github.com/lei4519/blog/issues/43'>小程序框架原理总结</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/42'>给原生小程序安排上 Composition API</a></li>
+
+</ul>
+
+</details>
+
+## TODO
+
+<details open>
+
+<summary>[2 篇]</summary>
+
+<ul>
+<li><a href='https://github.com/lei4519/blog/issues/64'>训练：骑行和跑步的差异</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/57'>JS Engine</a></li>
 
 </ul>
 
