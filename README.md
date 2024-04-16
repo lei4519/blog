@@ -1,7 +1,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-04-15 15:08:54"/>
+    <img src="https://badgen.net/badge/last-commit/2024-04-16 06:02:16"/>
 </p>
 
 <img src="assets/wordcloud.png" title="词云" alt="词云">
@@ -63,7 +63,7 @@
 <summary>[4 篇]</summary>
 
 <ul>
-<li><a href='https://github.com/lei4519/blog/issues/59'>Server State Management</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/59'>终端的异步状态管理</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/58'>对 React Hooks 的理解</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/55'>React Server Component</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/50'>React 渲染流程</a></li>
