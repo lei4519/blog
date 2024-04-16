@@ -1,7 +1,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-04-16 06:23:26"/>
+    <img src="https://badgen.net/badge/last-commit/2024-04-16 06:24:43"/>
 </p>
 
 <img src="assets/wordcloud.png" title="词云" alt="词云">
@@ -40,6 +40,22 @@
 
 </details>
 
+## FE
+
+<details open>
+
+<summary>[4 篇]</summary>
+
+<ul>
+<li><a href='https://github.com/lei4519/blog/issues/66'>大前端？终端？Omni-FrontEnd？</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/65'>FMP，但中后台</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/37'>使用 Umi 开发 Chrome 扩展</a></li>
+<li><a href='https://github.com/lei4519/blog/issues/36'>使用 Electron + Vue3 + TS 实现定时提醒休息软件</a></li>
+
+</ul>
+
+</details>
+
 ## JavaScript
 
 <details open>
@@ -67,21 +83,6 @@
 <li><a href='https://github.com/lei4519/blog/issues/58'>对 React Hooks 的理解</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/55'>React Server Component</a></li>
 <li><a href='https://github.com/lei4519/blog/issues/50'>React 渲染流程</a></li>
-
-</ul>
-
-</details>
-
-## FE
-
-<details open>
-
-<summary>[3 篇]</summary>
-
-<ul>
-<li><a href='https://github.com/lei4519/blog/issues/66'>大前端？终端？Omni-FrontEnd？</a></li>
-<li><a href='https://github.com/lei4519/blog/issues/65'>FMP，但中后台</a></li>
-<li><a href='https://github.com/lei4519/blog/issues/37'>使用 Umi 开发 Chrome 扩展</a></li>
 
 </ul>
 
