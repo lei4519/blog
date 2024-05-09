@@ -1,44 +1,60 @@
-name: auto-update-readme-by-issue
+name: PR Check And Publish Issue Blog
+
 on:
-  issues:
-    types:
-      [
-        opened,
-        edited,
-        closed,
-        reopened,
-      ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
+  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: install dependencies
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: build css
         run: |
-          pip3 install setuptools --user
-          pip3 install PyGithub --user
-          pip3 install wordcloud --user
-          pip3 install matplotlib --user
-      - name: run python script
+          pnpm install
+          pnpm run build:css
+
+      - name: convert content
         env:
           GITHUB_LOGIN: lei4519
           GITHUB_TOKEN: ${{ secrets.BLOG_SECRET }}
-        run: python3 main.py
-      - name: config git info
+        run: cargo run
+
+      - name: commit change
         run: |
           git config --global user.email "lei4519@126.com"
           git config --global user.name "lei4519"
-      - name: commit change
-        run: |
-          git checkout master
           git add .
-          git commit -m "Update from Github Action"
+          git commit -m "Update Content from PR Github Action"
+
       - name: push change
         env:
           GITHUB_LOGIN: lei4519
           GITHUB_TOKEN: ${{ secrets.BLOG_SECRET }}
         run: |
           git push https://$GITHUB_LOGIN:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
+          git push origin ${{ github.event.pull_request.head.ref }}
+
       - name: done
         run: echo 'done'

@@ -1,0 +1,23 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "分享、记录",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev:css": "npx tailwindcss -i ./style/tailwind.css -o ./assets/css/main.css --watch",
+    "build:css": "npx tailwindcss -i ./style/tailwind.css -o ./assets/main.css",
+    "dev": "bundle exec jekyll serve -l & yarn dev:css"
+  },
+  "keywords": [
+    "blog",
+    "fe",
+    "rust",
+    "cycling"
+  ],
+  "author": "lei4519",
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  }
+}
