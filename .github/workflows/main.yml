@@ -53,8 +53,7 @@ jobs:
           GITHUB_LOGIN: lei4519
           GITHUB_TOKEN: ${{ secrets.BLOG_SECRET }}
         run: |
-          git push https://$GITHUB_LOGIN:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
-          git push origin ${{ github.event.pull_request.head.ref }}
+          git push https://$GITHUB_LOGIN:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git HEAD ${{ github.event.pull_request.head.ref }}
 
       - name: done
         run: echo 'done'
