@@ -30,11 +30,6 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: build css
-        run: |
-          pnpm install
-          pnpm run build:css
-
       - name: convert content
         env:
           GITHUB_LOGIN: lei4519
