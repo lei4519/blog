@@ -1,37 +1,27 @@
 mod convert;
 mod utils;
 use anyhow::Result;
+use octocrab::Octocrab;
 
 use crate::convert::convert;
-use crate::utils::exec;
 use chrono::prelude::*;
 use serde_json::{json, Value};
-use std::path::Path;
-use std::{env, fs, io::BufRead};
-use utils::spawn;
+use std::{env, fs};
 use wcloud::{WordCloud, WordCloudSize};
 
-fn get_change_files() -> Result<Vec<String>> {
+async fn get_change_files(oct: &Octocrab, pr_number: u64) -> Result<Vec<String>> {
+    let files = oct.pulls("lei4519", "blog").list_files(pr_number).await?;
+    let filenames: Vec<String> = files.items.iter().map(|f| f.filename.clone()).collect();
+
     let mut files = vec![];
 
-    // 中文文件名转码问题
-    exec("git", ["config", "core.quotepath", "false"])?;
-    let output = spawn("git", ["diff", "--name-only", "HEAD", "main"])?.wait_with_output()?;
-
-    output.stdout.lines().for_each(|line| {
-        if let Ok(line) = line {
-            let path = Path::new(&line);
-
-            // 转换为 &str
-            let path_string = path.to_str().unwrap();
-
-            if path_string.starts_with("docs/") && path_string.ends_with(".md") {
-                files.push(format!("./{}", path_string));
-            }
+    filenames.iter().for_each(|path| {
+        if path.starts_with("docs/") && path.ends_with(".md") {
+            files.push(format!("./{}", path));
         }
     });
 
-    println!("Change Files:\n{:?}", files);
+    println!("Change Md Files:\n{:?}", files);
 
     Ok(files)
 }
@@ -127,11 +117,15 @@ async fn main() -> anyhow::Result<()> {
         .get(1)
         .is_some_and(|x| x == "--dry");
 
-    // 上次编译的元信息
-    let mut doc_meta_data: Value = serde_json::from_str(
-        &fs::read_to_string(META_DATA_PATH).unwrap_or_else(|_| "{}".to_string()),
-    )
-    .unwrap_or_default();
+    let is_merge = env::args()
+        .collect::<Vec<String>>()
+        .get(1)
+        .is_some_and(|x| x == "--merge");
+
+    let pr_number: u64 = env::var("PR_NUMBER")
+        .expect("cannot found PR_NUMBER")
+        .parse()
+        .unwrap();
 
     let oct = octocrab::OctocrabBuilder::default()
         .personal_token(
@@ -139,13 +133,24 @@ async fn main() -> anyhow::Result<()> {
         )
         .build()?;
 
+    if is_merge {
+        oct.pulls("lei4519", "blog").merge(pr_number).send().await?;
+        return Ok(());
+    }
+
     // 操作 issue
     let repo_issue = oct.issues("lei4519", "blog");
+
+    // 上次编译的元信息
+    let mut doc_meta_data: Value = serde_json::from_str(
+        &fs::read_to_string(META_DATA_PATH).unwrap_or_else(|_| "{}".to_string()),
+    )
+    .unwrap_or_default();
 
     // 收集所有内容，后面统一提交修改
     let mut contents: Vec<(String, u64, Vec<String>, String, String, String)> = vec![];
 
-    for path in get_change_files()? {
+    for path in get_change_files(&oct, pr_number).await? {
         println!("convert file: {:#?}", path);
 
         let content = fs::read_to_string(&path)?;
