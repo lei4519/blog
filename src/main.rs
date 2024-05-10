@@ -16,7 +16,7 @@ fn get_change_files() -> Result<Vec<String>> {
 
     // 中文文件名转码问题
     exec("git", ["config", "core.quotepath", "false"])?;
-    let output = spawn("git", ["diff", "--name-only", "HEAD", "HEAD^^"])?.wait_with_output()?;
+    let output = spawn("git", ["diff", "--name-only", "HEAD", "main"])?.wait_with_output()?;
 
     output.stdout.lines().for_each(|line| {
         if let Ok(line) = line {
@@ -30,6 +30,8 @@ fn get_change_files() -> Result<Vec<String>> {
             }
         }
     });
+
+    println!("Change Files:\n{:?}", files);
 
     Ok(files)
 }
