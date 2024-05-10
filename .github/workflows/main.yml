@@ -32,6 +32,7 @@ jobs:
 
       - name: convert content
         env:
+          PR_NUMBER: ${{ github.event.number }}
           GITHUB_LOGIN: lei4519
           GITHUB_TOKEN: ${{ secrets.BLOG_SECRET }}
         run: cargo run
@@ -49,6 +50,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BLOG_SECRET }}
         run: |
           git push https://$GITHUB_LOGIN:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git HEAD ${{ github.event.pull_request.head.ref }}
+
+      - name: auto merge
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          GITHUB_LOGIN: lei4519
+          GITHUB_TOKEN: ${{ secrets.BLOG_SECRET }}
+        run: cargo run -- --merge
 
       - name: done
         run: echo 'done'
