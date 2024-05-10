@@ -29,6 +29,12 @@
 
     const query = new URLSearchParams(window.location.search);
 
+    if (window.location.pathname === "/blog/") {
+      const el = document.getElementById("main_content");
+      el.style.width = "960px";
+      el.style.margin = "0 auto";
+    }
+
     if (window.issue_id) {
       const tagName = query.get("tag");
       const list = tagName
