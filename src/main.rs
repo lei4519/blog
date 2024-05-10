@@ -1,5 +1,4 @@
 mod convert;
-mod utils;
 use anyhow::Result;
 use octocrab::Octocrab;
 
@@ -117,11 +116,6 @@ async fn main() -> anyhow::Result<()> {
         .get(1)
         .is_some_and(|x| x == "--dry");
 
-    let is_merge = env::args()
-        .collect::<Vec<String>>()
-        .get(1)
-        .is_some_and(|x| x == "--merge");
-
     let pr_number: u64 = env::var("PR_NUMBER")
         .expect("cannot found PR_NUMBER")
         .parse()
@@ -132,11 +126,6 @@ async fn main() -> anyhow::Result<()> {
             env::var("GITHUB_TOKEN").expect("cannot found GITHUB_PERSONAL_ACCESS_TOKEN"),
         )
         .build()?;
-
-    if is_merge {
-        oct.pulls("lei4519", "blog").merge(pr_number).send().await?;
-        return Ok(());
-    }
 
     // 操作 issue
     let repo_issue = oct.issues("lei4519", "blog");
