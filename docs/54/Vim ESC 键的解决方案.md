@@ -57,7 +57,7 @@ created: 2024-03-25T20:12
   
 ## Linux  
   
-参考 [Arch Linux 系统配置篇 > 按键映射](../../Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md)，或者使用 [xcape](https://github.com/alols/xcape)  
+参考 [Arch Linux 系统配置篇 > 按键映射](../75/Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md)，或者使用 [xcape](https://github.com/alols/xcape)  
   
 ## Windows  
   
