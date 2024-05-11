@@ -102,6 +102,12 @@ fn gen_word_cloud(doc_meta_data: &Value) {
         height: 400,
     };
 
+    let exclude_tags = ["Explanation", "HowTo", "Tutorials", "Reference"];
+
+    exclude_tags.iter().for_each(|tag| {
+        text = text.replace(tag, "");
+    });
+
     let wordcloud_image = wordcloud.generate_from_text(&text, size, 1.0);
 
     wordcloud_image
