@@ -3,9 +3,12 @@ tags:
   - NodeJS  
   - Explanation  
 share: "true"  
-issue: "44"  
-created: 2020-12-08T20:16  
+issue: 44
+created: 2020-12-08
 updated: 2024-05-02T22:35  
+title: child_process spawn 模块详解
+description: child_process spawn 模块详解
+permalink: "44"
 ---  
   
 [官方文档](http://nodejs.cn/api/child_process.html#child_process_child_process_spawn_command_args_options)  

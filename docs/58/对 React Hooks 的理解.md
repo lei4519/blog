@@ -4,8 +4,11 @@ tags:
   - Explanation  
   - FE  
 share: "true"  
-issue: "58"  
-created: 2021-10-21T20:17  
+issue: 58
+created: 2021-10-21
+title: 对 React Hooks 的理解
+description: 对 React Hooks 的理解
+permalink: "58"
 ---  
   
 ## 三个角度  
@@ -514,4 +517,4 @@ const usePostTask = () => useMutation("/api/xxx", fetchXXX)
   
 实际上工作中我们可以直接使用 `react-query` 来帮助我们管理服务端状态  
   
-而对于服务端状态管理的话题，[终端的异步状态管理](../59/%E7%BB%88%E7%AB%AF%E7%9A%84%E5%BC%82%E6%AD%A5%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86.md) 中有更深入的探讨，感兴趣可以继续阅读  
+而对于服务端状态管理的话题，[终端的异步状态管理](./59) 中有更深入的探讨，感兴趣可以继续阅读  
