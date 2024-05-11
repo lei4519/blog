@@ -462,7 +462,7 @@ type StrArrOrNumArr = ToArray<string | number> // string[] | number[] 而非是 
   
 TS 中参数位置是逆变的，返回值是协变的  
   
-![逆变协变.excalidraw](../%E9%80%86%E5%8F%98%E5%8D%8F%E5%8F%98.svg)  
+![逆变协变.excalidraw](../Excalidraw/%E9%80%86%E5%8F%98%E5%8D%8F%E5%8F%98.svg)  
   
 ![Kanban--2024-04-14_16.41.24-6.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images/Kanban--2024-04-14_16.41.24-6.png)  
   
