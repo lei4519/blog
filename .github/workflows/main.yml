@@ -2,7 +2,7 @@ name: PR Check And Publish Issue Blog
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, synchronize, reopened]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -11,11 +11,9 @@ on:
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
 permissions: write-all
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: "obsidian-publisher"
+  cancel-in-progress: true
 
 jobs:
   # Build job
@@ -28,7 +26,17 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
 
+      # 上面的 cancel-in-progress 再每次有新的提交时都会被 cancel 掉重新执行
+      # 所以下面内容处理完成之后的 git push 也会导致 cancel，但是此时不需要再进行内容处理了
+      # 所以要进行条件判断
+      - name: Get Last Commit Author
+        id: last_commit_author
+        run: |
+          LAST_COMMIT_AUTHOR=$(git log -1 --pretty=format:'%an')
+          echo "::set-output name=last_commit_author::$LAST_COMMIT_AUTHOR"
+
       - name: convert content
+        if: ${{ steps.last_commit_author.outputs.last_commit_author != 'pr_commit' }}
         env:
           PR_NUMBER: ${{ github.event.number }}
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
@@ -36,16 +44,19 @@ jobs:
         run: cargo run
 
       - name: commit change
+        if: ${{ steps.last_commit_author.outputs.last_commit_author != 'pr_commit' }}
         run: |
           git config --global user.email "lei4519@126.com"
-          git config --global user.name "lei4519"
+          git config --global user.name "pr_commit"
           git add .
           git commit -m "Update Content from PR Github Action"
 
       - name: push change
+        if: ${{ steps.last_commit_author.outputs.last_commit_author != 'pr_commit' }}
         run: git push
 
       - name: Checkout Change
+        if: ${{ steps.last_commit_author.outputs.last_commit_author != 'pr_commit' }}
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
