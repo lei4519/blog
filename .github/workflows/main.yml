@@ -16,24 +16,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main branch
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          ref: "main"
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
 
-      - name: Checkout PR branch
-        uses: actions/checkout@v4
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-
-      - name: List changed files
-        run: |
-          git config core.quotepath true
-          git diff --name-only main...${{ github.event.pull_request.head.sha }} > changed_files.txt
+          fetch_depth: 0
+          quotepath: "false"
+          separator: "\n"
 
       - name: convert content
         env:
-          # GIT_COMMIT_REF: ${{ github.event.pull_request.head.ref }}
+          CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: cargo run
