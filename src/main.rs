@@ -1,32 +1,26 @@
 mod convert;
-mod utils;
 use anyhow::Result;
 
-use crate::{
-    convert::convert,
-    utils::{exec, spawn},
-};
+use crate::convert::convert;
 use chrono::prelude::*;
 use serde_json::{json, Value};
-use std::{env, fs, io::BufRead};
+use std::{env, fs};
 use wcloud::{WordCloud, WordCloudSize};
 
 fn get_change_files() -> Result<Vec<String>> {
     let mut files = vec![];
 
-    // 中文文件名转码问题
-    exec("git", ["config", "core.quotepath", "false"])?;
-    let output = spawn("git", ["diff", "--name-only", "HEAD", "main"])?.wait_with_output()?;
+    let content = fs::read_to_string("changed_files.txt")?;
 
-    output.stdout.lines().for_each(|line| {
-        if let Ok(line) = line {
-            if line.starts_with("docs/") && line.ends_with(".md") {
-                files.push(format!("./{}", line));
-            }
+    content.lines().for_each(|line| {
+        if line.starts_with("docs/") && line.ends_with(".md") {
+            files.push(format!("./{}", line));
         }
     });
 
     println!("Change Files:\n{:?}", files);
+
+    fs::remove_file("changed_files.txt")?;
 
     Ok(files)
 }
