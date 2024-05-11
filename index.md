@@ -1,16 +1,22 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-05-11 07:39:27"/>
+    <img src="https://badgen.net/badge/last-commit/2024-05-11 14:45:20"/>
 </p>
 
 <img src="assets/wordcloud.png" title="词云" alt="词云">
 
+- [Arch Linux 系统配置篇](./75) -- 2024-04-23
+- [乳酸穿梭能力](./72) -- 2024-04-21
+- [Arch Linux 系统安装篇](./74) -- 2024-04-16
+- [Obsidian Blog 工作流](./77) -- 2024-04-16
 - [FMP，但中后台](./65) -- 2024-04-10
+- [卡片笔记法](./73) -- 2024-04-07
 - [骑行和跑步训练的差异性](./64) -- 2024-03-28
 - [Vim ESC 键的解决方案](./54) -- 2024-03-25
 - [终端的异步状态管理](./59) -- 2024-03-25
 - [dotfiles](./62) -- 2024-03-25
+- [大前端？终端？Omni-FrontEnd？](./66) -- 2024-03-25
 - [Tokenize UI](./61) -- 2024-03-05
 - [React Server Component](./55) -- 2024-01-03
 - [JS Engine](./57) -- 2024-01-03
