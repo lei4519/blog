@@ -16,7 +16,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: "main"
+
+      - name: Checkout PR branch
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
@@ -24,6 +29,7 @@ jobs:
 
       - name: convert content
         env:
+          # GIT_COMMIT_REF: ${{ github.event.pull_request.head.ref }}
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: cargo run

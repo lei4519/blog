@@ -14,10 +14,13 @@ use wcloud::{WordCloud, WordCloudSize};
 fn get_change_files() -> Result<Vec<String>> {
     let mut files = vec![];
 
+    // let cref = env::var("GIT_COMMIT_REF").expect("cannot found GIT_COMMIT_REF");
+
     // 中文文件名转码问题
     exec("git", ["config", "core.quotepath", "false"])?;
     let output =
-        spawn("git", ["diff", "--name-only", "HEAD", "origin/main"])?.wait_with_output()?;
+        // spawn("git", ["diff", "--name-only", &format!("{}..main", &cref)])?.wait_with_output()?;
+        spawn("git", ["diff", "--name-only", "HEAD..main"])?.wait_with_output()?;
 
     output.stdout.lines().for_each(|line| {
         if let Ok(line) = line {
