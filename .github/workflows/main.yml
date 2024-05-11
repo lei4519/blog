@@ -16,9 +16,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Delay for 1 minutes
-        run: sleep 60
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -27,7 +24,6 @@ jobs:
 
       - name: convert content
         env:
-          PR_NUMBER: ${{ github.event.number }}
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: cargo run
