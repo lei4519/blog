@@ -3,9 +3,12 @@ tags:
   - Linux  
   - Hyprland  
   - HowTo  
-created: 2024-04-16T22:44  
+created: 2024-04-16
 share: "true"  
-issue: "74"  
+issue: 74
+title: Arch Linux 系统安装篇
+description: Arch Linux 系统安装篇
+permalink: "74"
 ---  
   
 ## TL;DR  
@@ -35,12 +38,14 @@ diskutil unmountDisk /dev/diskXA
 dd if=$path/$archlinux.iso of=/dev/rdiskX bs=1m  
 ```  
   
-> [!CAUTION]    
+> **CAUTION**  
+>  
 > 这种方式会将 U 盘格式化，注意提前备份    
   
 ### 进入 U 盘系统  
   
-> [!NOTE]    
+> **NOTE**  
+>  
 > 会 vim 的话体验会好很多（hahahah）    
   
 先通过 BIOS 进入 U 盘系统中  
@@ -82,7 +87,8 @@ cat /sys/firmware/efi/fw_platform_size
   
 ### 分区  
   
-> [!TIP]    
+> **TIP**  
+>  
 > 注意！这里如果你的硬盘可以直接无脑格式化的话，就不需要在此操作    
 >  
 > 等下进到 `archinstall` 中直接使用推荐的分区方式即可    
@@ -110,7 +116,8 @@ fdisk -l
   
 先通过如下命令更改一下主系统分区的文件系统的格式  
   
-> [!TIP]    
+> **TIP**  
+>  
 > 我想要用 `btrfs`，但是 DG 中没有 `btrfs` 的选项，只能先选了 `ext4`    
 > 如果你想用的系统可以在 DG 中制作，就可以跳过这步    
   
@@ -147,7 +154,8 @@ mkswap $dev
 swapon $dev  
 ```  
   
-> [!TIP]    
+> **TIP**  
+>  
 > linux 可以使用 `fdisk｜cfdisk` 分区    
   
 ### 镜像  
@@ -173,7 +181,8 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
   
 下面根据需要配置的选项顺序一个一个说  
   
-> [!TIP]    
+> **TIP**  
+>  
 > 搜索统一是键入 `/` 后直接输入字符    
   
 ### Mirrors  
@@ -184,7 +193,8 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
   
 ### Disk Configuration  
   
-> [!TIP]    
+> **TIP**  
+>  
 > 如果你的硬盘可以格式化，就选择推荐的方式    
   
 如果像我一样已经分好区了并挂载到 U 盘系统中了，这里就选择 `Pre-mounted configuration`，然后输入 `/mnt` 回车  
@@ -217,7 +227,8 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
   
 我选的是 `Desktop -> Hyprland`  
   
-> [!NOTE]    
+> **NOTE**  
+>  
 > 为什么选 Hyprland 呢？    
 >  
 > 因为本来我也是想用 i3wm 之类的窗口管理器的（现在 Mac 中就是用的 yabai）    
@@ -228,7 +239,8 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
 >  
 > -- [为什么使用 Wayland 而不是 X11？](https://www.cbtnuggets.com/blog/technology/networking/why-use-wayland-versus-x11)    
   
-> [!TIP]    
+> **TIP**  
+>  
 > Hyprland 需要访问您的硬件设备，例如键盘、鼠标和显卡，请选择访问方式？    
 > - polkit    
 > - seatd    
@@ -259,7 +271,8 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
   
 我需要如下包：`man git zsh neovim openssl btrfs-progs os-prober grub linux-headers`  
   
-> [!TIP]    
+> **TIP**  
+>  
 > `os-prober` 是双系统引导要使用的    
   
 ### Network Configuration  
@@ -289,7 +302,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
   
 之后通过 `arch-chroot /mnt` 进入系统  
   
-> [!NOTE]    
+> **NOTE**  
+>  
 > 有些命令 archinstall 已经帮我们做了，具体的可以自己再 check 一下    
 > - `nvim /etc/locale.conf` 添加 `LANG=en_US.UTF-8`    
 > - `systemctl enable NetworkManager`    
@@ -359,7 +373,8 @@ sudo os-prober
 sudo grub-mkconfig -o /boot/grub/grub.cfg  
 ```  
   
-> [!TIP]    
+> **TIP**  
+>  
 > 如果这一步的 os-prober 没有成功也没关系，等下进入到系统中再做也一样    
   
 ### 重启  
@@ -372,4 +387,4 @@ reboot #重启
   
 配置完后重启电脑并拔掉 U 盘  
   
-之后就可以进入 arch 系统了，后面的继续参考 [Arch Linux 系统配置篇](../75/Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md)  
+之后就可以进入 arch 系统了，后面的继续参考 [Arch Linux 系统配置篇](./75)  

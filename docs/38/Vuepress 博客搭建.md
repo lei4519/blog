@@ -3,8 +3,11 @@ tags:
   - Blog  
   - Tutorials  
 share: "true"  
-issue: "38"  
-created: 2020-06-07T20:21  
+issue: 38
+created: 2020-06-07
+title: Vuepress 博客搭建
+description: Vuepress 博客搭建
+permalink: "38"
 ---  
   
 技术的沉淀免不了分享和记录，用本文记录了一下自己搭建博客的过程。  
@@ -17,7 +20,8 @@ created: 2020-06-07T20:21
   
 让赶快我们开始吧～  
   
-> [!Warning]    
+> **Warning**  
+>  
 > ⚠️ 注意事项  
 >  
 > `vuepress v1.5.0` 存在热更新不生效的问题，请注意升级版本  
