@@ -11,17 +11,14 @@ on:
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
 permissions: write-all
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Delay for 1 minutes
+        run: sleep 60
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
