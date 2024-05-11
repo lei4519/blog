@@ -8,19 +8,19 @@ use std::{env, fs};
 use wcloud::{WordCloud, WordCloudSize};
 
 fn get_change_files() -> Result<Vec<String>> {
+    let content = env::var("CHANGED_FILES")
+        .expect("cannot found CHANGED_FILES")
+        .replace('\\', "");
+
     let mut files = vec![];
 
-    let content = fs::read_to_string("changed_files.txt")?;
-
-    content.lines().for_each(|line| {
+    content.split('\n').for_each(|line| {
         if line.starts_with("docs/") && line.ends_with(".md") {
             files.push(format!("./{}", line));
         }
     });
 
-    println!("Change Files:\n{:?}", files);
-
-    fs::remove_file("changed_files.txt")?;
+    println!("Change Files:\n{:#?}", files);
 
     Ok(files)
 }
