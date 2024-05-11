@@ -372,4 +372,4 @@ reboot #重启
   
 配置完后重启电脑并拔掉 U 盘  
   
-之后就可以进入 arch 系统了，后面的继续参考 [Arch Linux 系统配置篇](../../Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md)  
+之后就可以进入 arch 系统了，后面的继续参考 [Arch Linux 系统配置篇](../75/Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md)  
