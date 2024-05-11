@@ -4,11 +4,8 @@ tags:
   - JavaScript  
   - HowTo  
 share: "true"  
-issue: 48
-created: 2020-01-31
-title: 使用IntersectionObserver实现图片懒加载
-description: 使用IntersectionObserver实现图片懒加载
-permalink: "48"
+issue: "48"  
+created: 2020-01-31T20:12  
 ---  
   
 ## IntersectionObserver 介绍  
