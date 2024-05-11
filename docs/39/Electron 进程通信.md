@@ -3,8 +3,11 @@ tags:
   - Electron  
   - Explanation  
 share: "true"  
-issue: "39"  
-created: 2020-12-10T20:16  
+issue: 39
+created: 2020-12-10
+title: Electron 进程通信
+description: Electron 进程通信
+permalink: "39"
 ---  
   
 进程间的通信主要涉及一下四个模块  
