@@ -4,8 +4,11 @@ tags:
   - Explanation  
   - FE  
 share: "true"  
-issue: "50"  
-created: 2021-05-06T20:12  
+issue: 50
+created: 2021-05-06
+title: React渲染流程
+description: React渲染流程
+permalink: "50"
 ---  
   
 想要知道 `React` 的内部运行机制，实际上就是要探索 `React` 如何将组件映射屏幕，以及组件中的状态发生了变化之后 `React` 如何将这些「变化」更新到屏幕上。  

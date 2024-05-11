@@ -3,8 +3,11 @@ tags:
   - HTTP  
   - Explanation  
 share: "true"  
-issue: "41"  
-created: 2020-06-28T20:12  
+issue: 41
+created: 2020-06-28
+title: HTTP 2
+description: HTTP 2
+permalink: "41"
 ---  
   
 > http2.0 是一种安全高效的下一代 http 传输协议。安全是因为 http2.0 建立在 https 协议的基础上，高效是因为它是通过二进制分帧来进行数据传输。  
