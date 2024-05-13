@@ -3,11 +3,8 @@ tags:
   - FE  
   - Explanation  
 share: "true"  
-issue: 61
-created: 2024-03-05
-title: Tokenize UI
-description: Tokenize UI
-permalink: "61"
+issue: "61"  
+created: 2024-03-05T20:12  
 ---  
   
 ## 背景  
