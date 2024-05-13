@@ -5,11 +5,8 @@ tags:
   - Webpack  
   - HowTo  
 share: "true"  
-issue: 45
-created: 2020-03-01
-title: PC 端 REM 布局 - 非 Chrome 浏览器字号小于 12px 的解决方案
-description: PC 端 REM 布局 - 非 Chrome 浏览器字号小于 12px 的解决方案
-permalink: "45"
+issue: "45"  
+created: 2020-03-01T20:12  
 ---  
   
 ## 所遇到的问题  
