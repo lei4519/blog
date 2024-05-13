@@ -1,11 +1,12 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-05-13 04:50:21"/>
+    <img src="https://badgen.net/badge/last-commit/2024-05-13 07:12:19"/>
 </p>
 
 <img src="assets/wordcloud.png" title="词云" alt="词云">
 
+- [完善 Rime Vim Mode：支持 Linux & 自动切换回中文模式](https://github.com/lei4519/blog/issues/85) -- 2024-05-13
 - [Arch Linux 系统配置篇](https://github.com/lei4519/blog/issues/75) -- 2024-04-23
 - [乳酸穿梭能力](https://github.com/lei4519/blog/issues/72) -- 2024-04-21
 - [Arch Linux 系统安装篇](https://github.com/lei4519/blog/issues/74) -- 2024-04-16
