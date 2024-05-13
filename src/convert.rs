@@ -131,8 +131,11 @@ pub fn convert(title: String, content: String) -> (HashMap<String, String>, Stri
 
         // 处理 > [!TIP]
         if let Some(caps) = BLOCK_QUOTE_REG.captures(line) {
+            let s = caps.get(1).unwrap().start();
+            let e = caps.get(1).unwrap().end();
+
             add_blog_line(&format!("> **{}**  \n>  ", &caps[1].trim()));
-            add_issue_line(line);
+            add_issue_line(&format!("{}{}{}", &line[0..s], &caps[1].trim(), &line[e..]));
             continue;
         }
 
