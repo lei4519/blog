@@ -3,11 +3,8 @@ tags:
   - ChromeExtension  
   - Tutorials  
 share: "true"  
-issue: 37
-created: 2021-01-05
-title: 使用 Umi 开发 Chrome 扩展
-description: 使用 Umi 开发 Chrome 扩展
-permalink: "37"
+issue: "37"  
+created: 2021-01-05T20:12  
 ---  
   
 ## 源起  
