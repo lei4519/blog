@@ -4,16 +4,14 @@ tags:
   - Obsidian  
   - HowTo  
 description: 利用 obsidian 发布文章到 github issue、jekyll blog、知乎等  
-created: 2024-04-16
-issue: 77
+created: 2024-04-16T20:00  
+issue: "77"  
 share: "true"  
-title: Obsidian Blog 工作流
-permalink: "77"
 ---  
   
 ## 前言  
   
-在 [卡片笔记法](./73) 中提到我是如何开始、进行个人知识管理，与自己对话  
+在 [卡片笔记法](../73/%E5%8D%A1%E7%89%87%E7%AC%94%E8%AE%B0%E6%B3%95.md) 中提到我是如何开始、进行个人知识管理，与自己对话  
   
 其中的知识体（永久笔记）是可以分享出来，所以就有了这篇文章，记录下自己是如何使用 Obsidian 来方便的将文章进行发布、分享  
   
@@ -39,8 +37,7 @@ github actions 内容处理完成，进行发布动作（issue/Blog/知乎/公�
   
 ## 插件配置  
   
-> **tip**  
->  
+> [!tip]    
 > 踩坑：publisher 的链接转换必须是 `[[]]` 风格的才行    
 > 所以要先关闭 ob 本身的链接格式转换，避免自转换成 `[]()` 格式  
   
@@ -162,8 +159,7 @@ issue 不需要 metadata，所以直接丢弃掉即可
   
 由于我不熟悉 ruby 的语法，以及 github-pages 中有很多插件的限制，所以有些不重要（SEO）的功能就直接用 JS 去实现了  
   
-> **tip**  
->  
+> [!tip]    
 > 最主要是 ruby 的依赖问题搞得心累，装上个插件就各种崩…  
   
 #### 分页  
