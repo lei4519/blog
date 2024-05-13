@@ -1,24 +1,18 @@
 ---  
-created: 2024-04-23
+created: 2024-04-23T13:13  
 tags:  
   - Linux  
-  - TODO  
   - Hyprland  
   - HowTo  
-draft: "true"  
-issue: 75
+issue: "75"  
 share: "true"  
-title: Arch Linux 系统配置篇
-description: Arch Linux 系统配置篇
-permalink: "75"
 ---  
   
-书接上回 [Arch Linux 系统安装篇](./74)  
+书接上回 [Arch Linux 系统安装篇](../74/Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E7%AF%87.md)  
   
 进入系统之后需要对新系统进行设置  
   
-> **TIP**  
->  
+> [!TIP]    
 > 里面有些软件是 wayland 下的，如果是其他的窗口系统需要寻找对应的安装配置  
   
 ## 必要系统设置  
@@ -27,9 +21,8 @@ permalink: "75"
   
 ### 联网  
   
-> **TIP**  
->  
-> 如果有网线跳过这一步    
+> [!TIP]    
+> 如果有网线跳过这一步  
   
 [NetworkManager - ArchWiki](https://wiki.archlinux.org/title/NetworkManager)  
   
@@ -41,10 +34,9 @@ permalink: "75"
   
 还可以安装 [networkmanager-dmenu: Control NetworkManager via dmenu](https://github.com/firecat53/networkmanager-dmenu) ，可以通过 `dmenu` 或 `rofi` 管理 `NetworkManager`  
   
-> **TIP**  
->  
+> [!TIP]    
 > 如果你是用 iwd 管理网络，可以安装    
-> [iwgtk: Lightweight wireless networking GUI (front-end for iwd)](https://github.com/J-Lentz/iwgtk)    
+> [iwgtk: Lightweight wireless networking GUI (front-end for iwd)](https://github.com/J-Lentz/iwgtk)  
   
 ### 蓝牙  
   
@@ -90,8 +82,7 @@ pair MAC_address
   
 > 这位同学你也不想辛辛苦苦装好的系统又被玩崩了吧～  
   
-> **IMPORTANT**  
->  
+> [!IMPORTANT]    
 > 升级前备份! 备份! 备份!  
   
 建议安装    
@@ -145,14 +136,15 @@ yay -S rofi
   
 ### Hyprland 配置  
   
-[Arch Linux 系统安装篇](./74) 里已经选了 `hyprland`，所以这里基本的配置应该已经完成了  
+[Arch Linux 系统安装篇](../74/Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E7%AF%87.md) 里已经选了 `hyprland`，所以这里基本的配置应该已经完成了  
   
 我们直接进行配置的安装即可，可以在 [hyprland · GitHub Topics · GitHub](https://github.com/topics/hyprland) 中挑选自己喜欢的配置，我选择的方案和配置参考 [dotfiles#hyprland](https://github.com/lei4519/dotfiles#hyprland)  
   
-> **TIP**  
->  
+> [!TIP]    
 > 热门的配置方案中，会把相关的系统配置、软件都安装好    
 > 建议再进行其他配置之前，先把 hyprland 配置安装好，这样就可以省去一些工作  
+  
+基本上安装完这个之后，系统就已经完全可用了  
   
 ### 按键映射  
   
@@ -166,8 +158,7 @@ yay -S rofi
   
 ##### 查找键盘设备  
   
-> **TIP**  
->  
+> [!TIP]    
 > 后面涉及到键盘配置的都需要先找到自己的设备号  
   
 先安装 `pacman -S evtest` 用来查看按键的 `scancode`，安装好后，执行 `sudo evtest`  
@@ -193,8 +184,7 @@ cat /sys/class/input/event$/device/modalias
   
 在 `/etc/udev/hwdb.d/` 中创建一个 `90-remap-keyboard.hwdb` 的文件  
   
-> **TIP**  
->  
+> [!TIP]    
 > 如果你想所有的键盘都交换，而不只是这一个键盘，可以写 `evdev:input:b000*`，而不具体指定到具体的设备上  
   
 ```txt  
@@ -220,15 +210,16 @@ udevadm trigger
   
 #### 程序映射  
   
-  我喜欢把 `ctrl` 单击映射为 `esc` 按键，而与其他键组合时仍然是 `ctrl` 键，参考 [Vim ESC 键的解决方案](./54)，这种功能就必须使用程序来实现了  
+我喜欢把 `ctrl` 单击映射为 `esc` 按键，而与其他键组合时仍然是 `ctrl` 键，参考 [Vim ESC 键的解决方案](../54/Vim%20ESC%20%E9%94%AE%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.md)，这种功能就必须使用程序来实现了  
   
- - [ ] todo    
 最终选用了 `kanata`，因为我对 `rust` 比较熟。也可以看看 [kmonad](https://github.com/kmonad/kmonad?tab=readme-ov-file)  
   
 ##### `kanata`  
   
 - [GitHub -kanata](https://github.com/jtroo/kanata)  
 - [Kanata simulator](https://jtroo.github.io/)  
+  
+具体配置和使用参考 [dotfiles](../62/dotfiles.md)  
   
 ##### `evremap`  
   
@@ -245,7 +236,7 @@ yay -S evremap
   
 ###### 配置 `evremap`  
   
- `copy` <https://github.com/wez/evremap/blob/master/pixelbookgo.toml> 内容至自己本地，命名为 `evremap.toml`，记住存放的路径，后面要用  
+`copy` <https://github.com/wez/evremap/blob/master/pixelbookgo.toml> 内容至自己本地，命名为 `evremap.toml`，记住存放的路径，后面要用  
   
 修改 `evremap.toml` ，参考 [GitHub - evremap](https://github.com/wez/evremap) 进行个人配置，主要是 `device_name` 要配置对，不然会报错无法启动  
   
@@ -262,14 +253,14 @@ sudo evremap remap evremap.toml
 `udev`  
   
 参考  
+  
 - [udev - ArchWiki](https://wiki.archlinux.org/title/udev)  
 - [Issue #35 · wez/evremap · GitHub](https://github.com/wez/evremap/issues/35)  
 - [Create UDEV-Rule for Bluetooth-Headset / Newbie Corner / Arch Linux Forums](https://bbs.archlinux.org/viewtopic.php?id=270429)  
   
 这种方式可以在设备（蓝牙）触发相应事件时（自动连接后）执行命令  
   
-> **tip**  
->  
+> [!tip]    
 > 可以运行 `udevadm monitor` 后，把设备断开并重新链接，来查看具体的事件名称  
   
 查看设备信息，`$device_name` 就是上面 [查找键盘设备](Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md#查找键盘设备) 中的路径 `eg: /dev/input/event18`  
@@ -294,11 +285,10 @@ ACTION=="add", SUBSYSTEM=="input", ATTRS{id/product}=="0220", ATTRS{is/vendor}==
   
 根据自己的设备情况把匹配条件写好  
   
-> **IMPORTANT**  
->  
+> [!IMPORTANT]    
 > 注意，这里的 `evremap.toml` 路径不能放到自己的家目录，不然会无法正常启动  
 >  
-> 😭 我卡在这里好久    
+> 😭 我卡在这里好久  
 >  
 > 放在根目录最省事，也可以软连接到根目录 `ln -s /home/lay/dotfiles/linux/evremap.toml /evremap.toml`  
   
@@ -310,8 +300,7 @@ ACTION=="add", SUBSYSTEM=="input", ATTRS{id/product}=="0220", ATTRS{is/vendor}==
   
 也是 `evremap Readme` 中推荐的方式，但是！  
   
-> **IMPORTANT**  
->  
+> [!IMPORTANT]    
 > 如果设备在开机的时候没有挂载的话（比如蓝牙还没有连上），通过这种方式 evremap 会启动失败，还需要手动重启  
   
 所以这种方法对于蓝牙键盘来说完全不能用，因为系统没启动前蓝牙肯定没有连上啊，但如果你是有线键盘，这种还是比较省事  
@@ -340,20 +329,22 @@ TUI、shell、输入法、nvim、terminal 等安装和配置，可以参考链�
   
 我平时喜欢用终端，所以比较钟意 TUI  
   
-> [awesome-tuis: List of projects that provide terminal user interfaces](https://github.com/rothgar/awesome-tuis)  
+> 可以参考 [awesome-tuis: List of projects that provide terminal user interfaces](https://github.com/rothgar/awesome-tuis)  
   
-- [sysz: An fzf terminal UI for systemctl](https://github.com/joehillen/sysz?tab=readme-ov-file)    
+- [sysz: An fzf terminal UI for systemctl](https://github.com/joehillen/sysz?tab=readme-ov-file)  
 - [xdg-ninja: A shell script which checks your $HOME for unwanted files and directories.](https://github.com/b3nj5m1n/xdg-ninja)  
+  
+> 完善的 dots 配置应该会自动配置好睡眠和休眠  
   
 睡眠和休眠 [Power management/Suspend and hibernate - ArchWiki](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Tips_and_Tricks)  
   
 ### 中文字体设置  
   
-> **TIP**  
->  
+> [!TIP]    
 > 建议先安装 [Hyprland 配置](Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md#Hyprland%20配置) ，如果你选择的配置没有自动帮你配置字体，再进行如下操作  
   
 参考：  
+  
 - [Localization/Chinese - ArchWiki](https://wiki.archlinux.org/title/Localization/Chinese#Fonts)  
 - [Font configuration/Chinese - ArchWiki](https://wiki.archlinux.org/title/Font_configuration/Chinese)  
   
@@ -535,11 +526,8 @@ nvim ~/.config/fontconfig/fonts.conf
   
 ---  
   
-<https://blog.kaaass.net/archives/1748>  
+## Ref  
   
-[config/INSTALL.txt at main · HeaoYe/config · GitHub](https://github.com/HeaoYe/config/blob/main/INSTALL.txt)  
-  
-您应该检查您当前使用的是 X11 还是 Wayland。该命令 echo $XDG_SESSION_TYPE 打印所使用的会话类型作为响应。  
-  
-[pacman 常用命令-昨夜星辰](https://hustlei.github.io/2018/11/msys2-pacman.html)    
-[Site Unreachable](https://wiki.hyprland.org/Configuring/Binds/)  
+- [Btrfs：认识、从 Ext4 迁移与快照方案](https://blog.kaaass.net/archives/1748)  
+- [config/INSTALL.txt at main · HeaoYe/config · GitHub](https://github.com/HeaoYe/config/blob/main/INSTALL.txt)  
+- [pacman 常用命令-昨夜星辰](https://hustlei.github.io/2018/11/msys2-pacman.html)    
