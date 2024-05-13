@@ -3,11 +3,8 @@ tags:
   - Git  
   - Explanation  
 share: "true"  
-issue: 40
-created: 2020-09-14
-title: Git Book 笔记
-description: Git Book 笔记
-permalink: "40"
+issue: "40"  
+created: 2020-09-14T20:20  
 ---  
   
 1. Git & Svn 差异点，理解 Git 工作模式  
