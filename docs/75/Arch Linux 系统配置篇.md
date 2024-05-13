@@ -2,10 +2,8 @@
 created: 2024-04-23
 tags:  
   - Linux  
-  - TODO  
   - Hyprland  
   - HowTo  
-draft: "true"  
 issue: 75
 share: "true"  
 title: Arch Linux 系统配置篇
@@ -29,7 +27,7 @@ permalink: "75"
   
 > **TIP**  
 >  
-> 如果有网线跳过这一步    
+> 如果有网线跳过这一步  
   
 [NetworkManager - ArchWiki](https://wiki.archlinux.org/title/NetworkManager)  
   
@@ -44,7 +42,7 @@ permalink: "75"
 > **TIP**  
 >  
 > 如果你是用 iwd 管理网络，可以安装    
-> [iwgtk: Lightweight wireless networking GUI (front-end for iwd)](https://github.com/J-Lentz/iwgtk)    
+> [iwgtk: Lightweight wireless networking GUI (front-end for iwd)](https://github.com/J-Lentz/iwgtk)  
   
 ### 蓝牙  
   
@@ -154,6 +152,8 @@ yay -S rofi
 > 热门的配置方案中，会把相关的系统配置、软件都安装好    
 > 建议再进行其他配置之前，先把 hyprland 配置安装好，这样就可以省去一些工作  
   
+基本上安装完这个之后，系统就已经完全可用了  
+  
 ### 按键映射  
   
 #### 底层映射  
@@ -220,15 +220,16 @@ udevadm trigger
   
 #### 程序映射  
   
-  我喜欢把 `ctrl` 单击映射为 `esc` 按键，而与其他键组合时仍然是 `ctrl` 键，参考 [Vim ESC 键的解决方案](./54)，这种功能就必须使用程序来实现了  
+我喜欢把 `ctrl` 单击映射为 `esc` 按键，而与其他键组合时仍然是 `ctrl` 键，参考 [Vim ESC 键的解决方案](./54)，这种功能就必须使用程序来实现了  
   
- - [ ] todo    
 最终选用了 `kanata`，因为我对 `rust` 比较熟。也可以看看 [kmonad](https://github.com/kmonad/kmonad?tab=readme-ov-file)  
   
 ##### `kanata`  
   
 - [GitHub -kanata](https://github.com/jtroo/kanata)  
 - [Kanata simulator](https://jtroo.github.io/)  
+  
+具体配置和使用参考 [dotfiles](./62)  
   
 ##### `evremap`  
   
@@ -245,7 +246,7 @@ yay -S evremap
   
 ###### 配置 `evremap`  
   
- `copy` <https://github.com/wez/evremap/blob/master/pixelbookgo.toml> 内容至自己本地，命名为 `evremap.toml`，记住存放的路径，后面要用  
+`copy` <https://github.com/wez/evremap/blob/master/pixelbookgo.toml> 内容至自己本地，命名为 `evremap.toml`，记住存放的路径，后面要用  
   
 修改 `evremap.toml` ，参考 [GitHub - evremap](https://github.com/wez/evremap) 进行个人配置，主要是 `device_name` 要配置对，不然会报错无法启动  
   
@@ -262,6 +263,7 @@ sudo evremap remap evremap.toml
 `udev`  
   
 参考  
+  
 - [udev - ArchWiki](https://wiki.archlinux.org/title/udev)  
 - [Issue #35 · wez/evremap · GitHub](https://github.com/wez/evremap/issues/35)  
 - [Create UDEV-Rule for Bluetooth-Headset / Newbie Corner / Arch Linux Forums](https://bbs.archlinux.org/viewtopic.php?id=270429)  
@@ -298,7 +300,7 @@ ACTION=="add", SUBSYSTEM=="input", ATTRS{id/product}=="0220", ATTRS{is/vendor}==
 >  
 > 注意，这里的 `evremap.toml` 路径不能放到自己的家目录，不然会无法正常启动  
 >  
-> 😭 我卡在这里好久    
+> 😭 我卡在这里好久  
 >  
 > 放在根目录最省事，也可以软连接到根目录 `ln -s /home/lay/dotfiles/linux/evremap.toml /evremap.toml`  
   
@@ -340,10 +342,12 @@ TUI、shell、输入法、nvim、terminal 等安装和配置，可以参考链�
   
 我平时喜欢用终端，所以比较钟意 TUI  
   
-> [awesome-tuis: List of projects that provide terminal user interfaces](https://github.com/rothgar/awesome-tuis)  
+> 可以参考 [awesome-tuis: List of projects that provide terminal user interfaces](https://github.com/rothgar/awesome-tuis)  
   
-- [sysz: An fzf terminal UI for systemctl](https://github.com/joehillen/sysz?tab=readme-ov-file)    
+- [sysz: An fzf terminal UI for systemctl](https://github.com/joehillen/sysz?tab=readme-ov-file)  
 - [xdg-ninja: A shell script which checks your $HOME for unwanted files and directories.](https://github.com/b3nj5m1n/xdg-ninja)  
+  
+> 完善的 dots 配置应该会自动配置好睡眠和休眠  
   
 睡眠和休眠 [Power management/Suspend and hibernate - ArchWiki](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Tips_and_Tricks)  
   
@@ -354,6 +358,7 @@ TUI、shell、输入法、nvim、terminal 等安装和配置，可以参考链�
 > 建议先安装 [Hyprland 配置](Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md#Hyprland%20配置) ，如果你选择的配置没有自动帮你配置字体，再进行如下操作  
   
 参考：  
+  
 - [Localization/Chinese - ArchWiki](https://wiki.archlinux.org/title/Localization/Chinese#Fonts)  
 - [Font configuration/Chinese - ArchWiki](https://wiki.archlinux.org/title/Font_configuration/Chinese)  
   
@@ -535,11 +540,8 @@ nvim ~/.config/fontconfig/fonts.conf
   
 ---  
   
-<https://blog.kaaass.net/archives/1748>  
+## Ref  
   
-[config/INSTALL.txt at main · HeaoYe/config · GitHub](https://github.com/HeaoYe/config/blob/main/INSTALL.txt)  
-  
-您应该检查您当前使用的是 X11 还是 Wayland。该命令 echo $XDG_SESSION_TYPE 打印所使用的会话类型作为响应。  
-  
-[pacman 常用命令-昨夜星辰](https://hustlei.github.io/2018/11/msys2-pacman.html)    
-[Site Unreachable](https://wiki.hyprland.org/Configuring/Binds/)  
+- [Btrfs：认识、从 Ext4 迁移与快照方案](https://blog.kaaass.net/archives/1748)  
+- [config/INSTALL.txt at main · HeaoYe/config · GitHub](https://github.com/HeaoYe/config/blob/main/INSTALL.txt)  
+- [pacman 常用命令-昨夜星辰](https://hustlei.github.io/2018/11/msys2-pacman.html)    
