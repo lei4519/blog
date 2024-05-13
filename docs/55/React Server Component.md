@@ -6,11 +6,8 @@ tags:
 aliases:  
   - 服务端组件  
 share: "true"  
-issue: 55
-created: 2024-01-03
-title: React Server Component
-description: React Server Component
-permalink: "55"
+issue: "55"  
+created: 2024-01-03T20:24  
 ---  
   
 [React Server Component - RFC](https://github.com/reactjs/rfcs/blob/main/text/0188-server-components.md)  ｜[suspense-in-react-18](https://github.com/reactjs/rfcs/blob/main/text/0213-suspense-in-react-18.md)  
@@ -67,11 +64,11 @@ Tips：
   
 一个使用 `resolveModelToJSON` 将组件渲染为可序列化传输的数据返回，由客户端的 `JS` 负责解析渲染  
   
-![RSCvsSSR.excalidraw](https://raw.githubusercontent.com/lei4519/blog/main/docs/Excalidraw/RSCvsSSR.svg)  
+![RSCvsSSR.excalidraw](../Excalidraw/RSCvsSSR.svg)  
   
 ### 整体流程  
   
-![RSC.excalidraw](https://raw.githubusercontent.com/lei4519/blog/main/docs/Excalidraw/RSC.svg)  
+![RSC.excalidraw](../Excalidraw/RSC.svg)  
   
 首次页面加载时可以选择 SSR 模式，这与现在的 React SSR 没有什么差别，所以就直接讲 RSC 的流程了  
   
