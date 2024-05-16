@@ -1,9 +1,12 @@
 ---  
 tags:  
   - JavaScript  
-issue: "57"  
-created: 2024-01-03T20:24  
+issue: 57
+created: 2024-01-03
 share: "true"  
+title: JS Engine 的差异和优化
+description: JS Engine 的差异和优化
+permalink: "57"
 ---  
   
 ## 整体流程  
@@ -203,7 +206,8 @@ object.y = 6;
   
 每个 `Shape` 只需要知道它引入的新属性，并通过链表进行链接，当进行属性查找时会从底部向上查找（这是一个问题，见下）  
   
-> [!Warning]    
+> **Warning**  
+>  
 > 所以添加属性的顺序会影响形状。例如 `{ x: 4, y: 5 }` 会产生与 `{ y: 5, x: 4 }` 不同的形状  
   
 如果无法创建转换链，我们必须进行分支，最终会得到一个 _transition tree_ （转换树）  
@@ -258,7 +262,8 @@ point.z = 6;
   
 当函数再次运行时，会比较当前传入的 `Shape` 和之前的 `Shape`，如果它们是一致的，就可以直接使用缓存的 `offset` 读取值，省去查找的过程  
   
-> [!NOTE]    
+> **NOTE**  
+>  
 > 所以固定的 `Shape` 是会提高运行效率的，尽量在对象初始化的时候就将所有字段添加完整，避免后续的动态添加和删除（可以置为 null or undefined）  
   
 ![image.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images20240516110302.png)  
@@ -279,7 +284,8 @@ point.z = 6;
   
 即使只有一个数组元素具有非默认属性，整个 `Elements` 就会进入这种缓慢低效的模式  
   
-> [!IMPORTANT]    
+> **IMPORTANT**  
+>  
 > 所以不要！不要！不要去修改数据索引的默认属性  
   
 ![image.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images20240516112508.png)  
@@ -402,14 +408,16 @@ V8 为此专门处理原型的 `Shape` ，每个原型都有一个独特的 `Sha
   
 ![image.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images20240516154829.png)  
   
-> [!IMPORTANT]    
+> **IMPORTANT**  
+>  
 > 需要注意的是，当我们更改原型时，会将其之下所有原型的 `ValidityCell` 失效需要注意的是，当我们更改原型时，会将其之下所有原型的 `ValidityCell` 失效  
   
 以 DOM 元素示例，`Object.prototype` 的任何更改，不仅会使 `Object.prototype` 本身的内联缓存失效，还会使以下任何原型失效，包括 `EventTarget.prototype` 、 `Node.prototype` 、 `Element.prototype` 等等  
   
 ![image.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images20240516154846.png)  
   
-> [!IMPORTANT]    
+> **IMPORTANT**  
+>  
 > 在运行代码时修改 `Object.prototype` 意味着性能会被抛到九霄云外，不要这样做！  
   
 ---  
