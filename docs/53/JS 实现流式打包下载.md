@@ -3,11 +3,8 @@ tags:
   - JavaScript  
   - HowTo  
 share: "true"  
-issue: 53
-created: 2021-11-25
-title: JS 实现流式打包下载
-description: JS 实现流式打包下载
-permalink: "53"
+issue: "53"  
+created: 2021-11-25T20:12  
 ---  
   
 浏览器中的流式操作可以节省内存，扩大 `JS` 的应用边界，比如我们可以在浏览器里进行视频剪辑，而不用担心视频文件将内存撑爆。  
