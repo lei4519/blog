@@ -3,11 +3,8 @@ tags:
   - FE  
   - Explanation  
 share: "true"  
-issue: 66
-created: 2024-03-25
-title: 大前端？终端？Omni-FrontEnd？
-description: 大前端？终端？Omni-FrontEnd？
-permalink: "66"
+issue: "66"  
+created: 2024-03-25T20:28  
 ---  
   
 咬文嚼字  
@@ -68,7 +65,7 @@ permalink: "66"
   
 并且由于里面存在「前端」的字眼，所以大概率还是会局限在固有标签里  
   
-> 把 [终端的异步状态管理](./59) 这篇文章的「终端」换为「大前端」，我觉得就不能很好的表达其意思了  
+> 把 [终端的异步状态管理](../59/%E7%BB%88%E7%AB%AF%E7%9A%84%E5%BC%82%E6%AD%A5%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86.md) 这篇文章的「终端」换为「大前端」，我觉得就不能很好的表达其意思了  
   
 ## 终端？  
   
