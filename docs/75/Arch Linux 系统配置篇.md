@@ -1,22 +1,18 @@
 ---  
-created: 2024-04-23
+created: 2024-04-23T13:13  
 tags:  
   - Linux  
   - Hyprland  
   - HowTo  
-issue: 75
+issue: "75"  
 share: "true"  
-title: Arch Linux 系统配置篇
-description: Arch Linux 系统配置篇
-permalink: "75"
 ---  
   
-书接上回 [Arch Linux 系统安装篇](./74)  
+书接上回 [Arch Linux 系统安装篇](../74/Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E7%AF%87.md)  
   
 进入系统之后需要对新系统进行设置  
   
-> **TIP**  
->  
+> [!TIP]    
 > 里面有些软件是 wayland 下的，如果是其他的窗口系统需要寻找对应的安装配置  
   
 ## 必要系统设置  
@@ -25,8 +21,7 @@ permalink: "75"
   
 ### 联网  
   
-> **TIP**  
->  
+> [!TIP]    
 > 如果有网线跳过这一步  
   
 [NetworkManager - ArchWiki](https://wiki.archlinux.org/title/NetworkManager)  
@@ -39,8 +34,7 @@ permalink: "75"
   
 还可以安装 [networkmanager-dmenu: Control NetworkManager via dmenu](https://github.com/firecat53/networkmanager-dmenu) ，可以通过 `dmenu` 或 `rofi` 管理 `NetworkManager`  
   
-> **TIP**  
->  
+> [!TIP]    
 > 如果你是用 iwd 管理网络，可以安装    
 > [iwgtk: Lightweight wireless networking GUI (front-end for iwd)](https://github.com/J-Lentz/iwgtk)  
   
@@ -88,15 +82,14 @@ pair MAC_address
   
 > 这位同学你也不想辛辛苦苦装好的系统又被玩崩了吧～  
   
-> **IMPORTANT**  
->  
+> [!IMPORTANT]    
 > 升级前备份! 备份! 备份!  
   
-建议安装    
-[informant: An Arch Linux News reader and pacman hook](https://github.com/bradford-smith94/informant)    
+建议安装 [informant: An Arch Linux News reader and pacman hook](https://github.com/bradford-smith94/informant)    
+  
 这是一个 pacman hook，可以保证你在升级系统前必须先阅读 Arch Linux 的新闻，否则就会中断升级动作  
   
-升级之后 [检查孤立包和丢弃的包](https://wiki.archlinux.org/title/System_maintenance#Check_for_orphans_and_dropped_packages)  
+升级之后 [检查孤立包和丢弃的包](https://wiki.archlinux.org/title/System_maintenance#Check_for_orphans_and_dropped_packages)，命令在下面 [[ > [Pacman](https <//wiki.archlinux.org/title/Pacman>) 速览](.md#Pacman)](Arch%2520Linux%2520%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md##%5BPacman%5D(https%2520%3C//wiki.archlinux.org/title/Pacman%3E)%2520%E9%80%9F%E8%A7%88)  
   
 ### [Timeshift](https://github.com/linuxmint/timeshift)  
   
@@ -118,11 +111,67 @@ sudo -E timeshift-launcher
 >  
 > 通过每小时运行一次并在到期时创建快照，Timeshift 可确保不会错过备份。  
   
-### 代理  
-  
-[GitHub - Sitoi/SystemdClash: Clash 以 systemd 服务的方式开机自启](https://github.com/Sitoi/SystemdClash)  
-  
 ## 其他系统设置  
+  
+### Pacman 速览  
+  
+> [pacman](https://wiki.archlinux.org/title/Pacman)  
+  
+```sh  
+# 安装  
+pacman -S package_name  
+# 删除，保留依赖项  
+pacman -R package_name  
+# 删除，不保留依赖项（推荐）  
+pacman -Rs package_name  
+  
+# 升级包/系统  
+pacman -Syu  
+  
+# 查询  
+# queries the local package database with the `-Q` flags  
+pacman -Qs package_name  
+# the sync database with the `-S` flag  
+pacman -Ss package_name  
+# files database with the `-F` flag  
+pacman -F string  
+  
+# 列出所有显示安装的包  
+pacman -Qqe  
+  
+# query package information  
+pacman -Si package_name  
+pacman -Qi package_name  
+  
+# 列出不再需要作为依赖项（孤立项）的所有包  
+pacman -Qdt  
+  
+# 列出所有显式安装且不需要作为依赖项的包：  
+pacman -Qet  
+  
+```  
+  
+#### 系统升级后的清理动作  
+  
+```sh  
+# 列出不再需要作为依赖项（孤立项）的所有包  
+pacman -Qdt  
+# 对于递归删除孤立包及其配置文件  
+pacman -Qdtq | pacman -Rns -  
+# 如果某些包不希望被当作孤立包，可以改为显示安装  
+pacman -D --asexplicit package  
+# 找到所有损坏的软链接  
+find / -xtype l -print  
+```  
+  
+#### 清理包缓存  
+  
+> [pacman - ArchWiki](https://wiki.archlinux.org/title/Pacman#Cleaning_the_package_cache)  
+  
+```sh  
+sudo systemctl enable paccache.timer  
+sudo systemctl start paccache.timer  
+```  
   
 ### [yay](https://github.com/Jguer/yay)  
   
@@ -143,12 +192,11 @@ yay -S rofi
   
 ### Hyprland 配置  
   
-[Arch Linux 系统安装篇](./74) 里已经选了 `hyprland`，所以这里基本的配置应该已经完成了  
+[Arch Linux 系统安装篇](../74/Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E7%AF%87.md) 里已经选了 `hyprland`，所以这里基本的配置应该已经完成了  
   
 我们直接进行配置的安装即可，可以在 [hyprland · GitHub Topics · GitHub](https://github.com/topics/hyprland) 中挑选自己喜欢的配置，我选择的方案和配置参考 [dotfiles#hyprland](https://github.com/lei4519/dotfiles#hyprland)  
   
-> **TIP**  
->  
+> [!TIP]    
 > 热门的配置方案中，会把相关的系统配置、软件都安装好    
 > 建议再进行其他配置之前，先把 hyprland 配置安装好，这样就可以省去一些工作  
   
@@ -166,8 +214,7 @@ yay -S rofi
   
 ##### 查找键盘设备  
   
-> **TIP**  
->  
+> [!TIP]    
 > 后面涉及到键盘配置的都需要先找到自己的设备号  
   
 先安装 `pacman -S evtest` 用来查看按键的 `scancode`，安装好后，执行 `sudo evtest`  
@@ -193,8 +240,7 @@ cat /sys/class/input/event$/device/modalias
   
 在 `/etc/udev/hwdb.d/` 中创建一个 `90-remap-keyboard.hwdb` 的文件  
   
-> **TIP**  
->  
+> [!TIP]    
 > 如果你想所有的键盘都交换，而不只是这一个键盘，可以写 `evdev:input:b000*`，而不具体指定到具体的设备上  
   
 ```txt  
@@ -220,7 +266,7 @@ udevadm trigger
   
 #### 程序映射  
   
-我喜欢把 `ctrl` 单击映射为 `esc` 按键，而与其他键组合时仍然是 `ctrl` 键，参考 [Vim ESC 键的解决方案](./54)，这种功能就必须使用程序来实现了  
+我喜欢把 `ctrl` 单击映射为 `esc` 按键，而与其他键组合时仍然是 `ctrl` 键，参考 [Vim ESC 键的解决方案](../54/Vim%20ESC%20%E9%94%AE%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.md)，这种功能就必须使用程序来实现了  
   
 最终选用了 `kanata`，因为我对 `rust` 比较熟。也可以看看 [kmonad](https://github.com/kmonad/kmonad?tab=readme-ov-file)  
   
@@ -229,12 +275,16 @@ udevadm trigger
 - [GitHub -kanata](https://github.com/jtroo/kanata)  
 - [Kanata simulator](https://jtroo.github.io/)  
   
-具体配置和使用参考 [dotfiles](./62)  
+具体配置和使用参考 [dotfiles](../62/dotfiles.md)  
+  
+---  
+  
+> [!TIP]    
+> 以下内容仅为参考使用  
   
 ##### `evremap`  
   
-参考 [Input remap u    
-tilities - ArchWiki](https://wiki.archlinux.org/title/Input_remap_utilities)  
+参考 [Input remap utilities - ArchWiki](https://wiki.archlinux.org/title/Input_remap_utilities)  
   
 > 这种方案的问题是，一旦换了键盘或者连接方式，就要重新修改配置文件  
   
@@ -270,8 +320,7 @@ sudo evremap remap evremap.toml
   
 这种方式可以在设备（蓝牙）触发相应事件时（自动连接后）执行命令  
   
-> **tip**  
->  
+> [!tip]    
 > 可以运行 `udevadm monitor` 后，把设备断开并重新链接，来查看具体的事件名称  
   
 查看设备信息，`$device_name` 就是上面 [查找键盘设备](Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md#查找键盘设备) 中的路径 `eg: /dev/input/event18`  
@@ -296,8 +345,7 @@ ACTION=="add", SUBSYSTEM=="input", ATTRS{id/product}=="0220", ATTRS{is/vendor}==
   
 根据自己的设备情况把匹配条件写好  
   
-> **IMPORTANT**  
->  
+> [!IMPORTANT]    
 > 注意，这里的 `evremap.toml` 路径不能放到自己的家目录，不然会无法正常启动  
 >  
 > 😭 我卡在这里好久  
@@ -308,12 +356,11 @@ ACTION=="add", SUBSYSTEM=="input", ATTRS{id/product}=="0220", ATTRS{is/vendor}==
   
 ---  
   
-`systemd`  
+[systemd](https://wiki.archlinux.org/title/Systemd)  
   
 也是 `evremap Readme` 中推荐的方式，但是！  
   
-> **IMPORTANT**  
->  
+> [!IMPORTANT]    
 > 如果设备在开机的时候没有挂载的话（比如蓝牙还没有连上），通过这种方式 evremap 会启动失败，还需要手动重启  
   
 所以这种方法对于蓝牙键盘来说完全不能用，因为系统没启动前蓝牙肯定没有连上啊，但如果你是有线键盘，这种还是比较省事  
@@ -321,7 +368,7 @@ ACTION=="add", SUBSYSTEM=="input", ATTRS{id/product}=="0220", ATTRS{is/vendor}==
 使用如下命令创建 `systemd service`  
   
 ```sh  
-sudo systemctl edit --full --force evremap.service  
+sudo nvim /etc/systemd/system/evremap.service  
 ```  
   
 把 <https://github.com/wez/evremap/blob/master/evremap.service> 中的内容写入，并把 `evremap.toml` 的绝对路径替换成你自己的本地路径  
@@ -334,27 +381,42 @@ sudo systemctl enable evremap.service
 sudo systemctl start evremap.service  
 ```  
   
-### [dotfiles](https://github.com/lei4519/dotfiles)  
+### Dotfiles  
   
-TUI、shell、输入法、nvim、terminal 等安装和配置，可以参考链接的 README，这里不再赘述  
+TUI、shell、输入法、nvim、terminal 等安装和配置，可以参考 [GitHub - lei4519/dotfiles: vim、linux、mac 配置](https://github.com/lei4519/dotfiles)，这里不再赘述  
   
 ### 有用的软件  
   
 我平时喜欢用终端，所以比较钟意 TUI  
   
-> 可以参考 [awesome-tuis: List of projects that provide terminal user interfaces](https://github.com/rothgar/awesome-tuis)  
+> [awesome-tuis](https://github.com/rothgar/awesome-tuis)    
+> [awesome-shell](https://github.com/alebcay/awesome-shell)    
+> [awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins)    
+> [awesome-cli-apps](https://github.com/agarrharr/awesome-cli-apps)  
   
 - [sysz: An fzf terminal UI for systemctl](https://github.com/joehillen/sysz?tab=readme-ov-file)  
 - [xdg-ninja: A shell script which checks your $HOME for unwanted files and directories.](https://github.com/b3nj5m1n/xdg-ninja)  
+- [sahib/rmlint: Extremely fast tool to remove duplicates and other lint from your filesystem](https://github.com/sahib/rmlint)  
+- [yadm: Yet Another Dotfiles Manager](https://github.com/TheLocehiliosan/yadm)  
+  
+#### 固态硬盘清理  
+  
+> [Solid state drive - ArchWiki](https://wiki.archlinux.org/title/Solid_state_drive)  
+  
+```sh  
+sudo systemctl enable fstrim.timer  
+sudo systemctl start fstrim.timer  
+```  
+  
+### 睡眠和休眠  
   
 > 完善的 dots 配置应该会自动配置好睡眠和休眠  
   
-睡眠和休眠 [Power management/Suspend and hibernate - ArchWiki](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Tips_and_Tricks)  
+[Power management/Suspend and hibernate - ArchWiki](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Tips_and_Tricks)  
   
 ### 中文字体设置  
   
-> **TIP**  
->  
+> [!TIP]    
 > 建议先安装 [Hyprland 配置](Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md#Hyprland%20配置) ，如果你选择的配置没有自动帮你配置字体，再进行如下操作  
   
 参考：  
