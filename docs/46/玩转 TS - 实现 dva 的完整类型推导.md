@@ -4,11 +4,8 @@ tags:
   - TypeScript  
   - HowTo  
 share: "true"  
-issue: 46
-created: 2021-06-08
-title: 玩转 TS - 实现 dva 的完整类型推导
-description: 玩转 TS - 实现 dva 的完整类型推导
-permalink: "46"
+issue: "46"  
+created: 2021-06-08T20:12  
 ---  
   
 ## 前言  
