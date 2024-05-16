@@ -4,11 +4,8 @@ tags:
   - Tutorials  
   - FE  
 share: "true"  
-issue: 36
-created: 2020-12-19
-title: 使用Electron + Vue3 + Ts 实现定时提醒休息软件
-description: 使用Electron + Vue3 + Ts 实现定时提醒休息软件
-permalink: "36"
+issue: "36"  
+created: 2020-12-19T20:16  
 ---  
   
 ## 前言  
