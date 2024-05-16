@@ -3,9 +3,12 @@ tags:
   - Vim  
   - Rime  
   - IME  
-created: 2024-05-13T15:09:00  
+created: 2024-05-13
 share: "true"  
-issue: "85"  
+issue: 85
+title: 完善 Rime Vim Mode：支持 Linux & 自动切换回中文模式
+description: 完善 Rime Vim Mode：支持 Linux & 自动切换回中文模式
+permalink: "85"
 ---  
   
 ## TL;DR  
