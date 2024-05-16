@@ -103,7 +103,7 @@ fn gen_word_cloud(doc_meta_data: &Value) {
         height: 400,
     };
 
-    let exclude_tags = ["Explanation", "HowTo", "Tutorials", "Reference"];
+    let exclude_tags = ["FE", "Explanation", "HowTo", "Tutorials", "Reference"];
 
     exclude_tags.iter().for_each(|tag| {
         text = text.replace(tag, "");
