@@ -92,11 +92,11 @@ pair MAC_address
 >  
 > 升级前备份! 备份! 备份!  
   
-建议安装    
-[informant: An Arch Linux News reader and pacman hook](https://github.com/bradford-smith94/informant)    
+建议安装 [informant: An Arch Linux News reader and pacman hook](https://github.com/bradford-smith94/informant)    
+  
 这是一个 pacman hook，可以保证你在升级系统前必须先阅读 Arch Linux 的新闻，否则就会中断升级动作  
   
-升级之后 [检查孤立包和丢弃的包](https://wiki.archlinux.org/title/System_maintenance#Check_for_orphans_and_dropped_packages)  
+升级之后 [检查孤立包和丢弃的包](https://wiki.archlinux.org/title/System_maintenance#Check_for_orphans_and_dropped_packages)，命令在下面 [[ > [Pacman](https <//wiki.archlinux.org/title/Pacman>) 速览](.md#Pacman)](Arch%2520Linux%2520%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md##%5BPacman%5D(https%2520%3C//wiki.archlinux.org/title/Pacman%3E)%2520%E9%80%9F%E8%A7%88)  
   
 ### [Timeshift](https://github.com/linuxmint/timeshift)  
   
@@ -118,11 +118,67 @@ sudo -E timeshift-launcher
 >  
 > 通过每小时运行一次并在到期时创建快照，Timeshift 可确保不会错过备份。  
   
-### 代理  
-  
-[GitHub - Sitoi/SystemdClash: Clash 以 systemd 服务的方式开机自启](https://github.com/Sitoi/SystemdClash)  
-  
 ## 其他系统设置  
+  
+### Pacman 速览  
+  
+> [pacman](https://wiki.archlinux.org/title/Pacman)  
+  
+```sh  
+# 安装  
+pacman -S package_name  
+# 删除，保留依赖项  
+pacman -R package_name  
+# 删除，不保留依赖项（推荐）  
+pacman -Rs package_name  
+  
+# 升级包/系统  
+pacman -Syu  
+  
+# 查询  
+# queries the local package database with the `-Q` flags  
+pacman -Qs package_name  
+# the sync database with the `-S` flag  
+pacman -Ss package_name  
+# files database with the `-F` flag  
+pacman -F string  
+  
+# 列出所有显示安装的包  
+pacman -Qqe  
+  
+# query package information  
+pacman -Si package_name  
+pacman -Qi package_name  
+  
+# 列出不再需要作为依赖项（孤立项）的所有包  
+pacman -Qdt  
+  
+# 列出所有显式安装且不需要作为依赖项的包：  
+pacman -Qet  
+  
+```  
+  
+#### 系统升级后的清理动作  
+  
+```sh  
+# 列出不再需要作为依赖项（孤立项）的所有包  
+pacman -Qdt  
+# 对于递归删除孤立包及其配置文件  
+pacman -Qdtq | pacman -Rns -  
+# 如果某些包不希望被当作孤立包，可以改为显示安装  
+pacman -D --asexplicit package  
+# 找到所有损坏的软链接  
+find / -xtype l -print  
+```  
+  
+#### 清理包缓存  
+  
+> [pacman - ArchWiki](https://wiki.archlinux.org/title/Pacman#Cleaning_the_package_cache)  
+  
+```sh  
+sudo systemctl enable paccache.timer  
+sudo systemctl start paccache.timer  
+```  
   
 ### [yay](https://github.com/Jguer/yay)  
   
@@ -231,10 +287,15 @@ udevadm trigger
   
 具体配置和使用参考 [dotfiles](./62)  
   
+---  
+  
+> **TIP**  
+>  
+> 以下内容仅为参考使用  
+  
 ##### `evremap`  
   
-参考 [Input remap u    
-tilities - ArchWiki](https://wiki.archlinux.org/title/Input_remap_utilities)  
+参考 [Input remap utilities - ArchWiki](https://wiki.archlinux.org/title/Input_remap_utilities)  
   
 > 这种方案的问题是，一旦换了键盘或者连接方式，就要重新修改配置文件  
   
@@ -308,7 +369,7 @@ ACTION=="add", SUBSYSTEM=="input", ATTRS{id/product}=="0220", ATTRS{is/vendor}==
   
 ---  
   
-`systemd`  
+[systemd](https://wiki.archlinux.org/title/Systemd)  
   
 也是 `evremap Readme` 中推荐的方式，但是！  
   
@@ -321,7 +382,7 @@ ACTION=="add", SUBSYSTEM=="input", ATTRS{id/product}=="0220", ATTRS{is/vendor}==
 使用如下命令创建 `systemd service`  
   
 ```sh  
-sudo systemctl edit --full --force evremap.service  
+sudo nvim /etc/systemd/system/evremap.service  
 ```  
   
 把 <https://github.com/wez/evremap/blob/master/evremap.service> 中的内容写入，并把 `evremap.toml` 的绝对路径替换成你自己的本地路径  
@@ -334,22 +395,38 @@ sudo systemctl enable evremap.service
 sudo systemctl start evremap.service  
 ```  
   
-### [dotfiles](https://github.com/lei4519/dotfiles)  
+### Dotfiles  
   
-TUI、shell、输入法、nvim、terminal 等安装和配置，可以参考链接的 README，这里不再赘述  
+TUI、shell、输入法、nvim、terminal 等安装和配置，可以参考 [GitHub - lei4519/dotfiles: vim、linux、mac 配置](https://github.com/lei4519/dotfiles)，这里不再赘述  
   
 ### 有用的软件  
   
 我平时喜欢用终端，所以比较钟意 TUI  
   
-> 可以参考 [awesome-tuis: List of projects that provide terminal user interfaces](https://github.com/rothgar/awesome-tuis)  
+> [awesome-tuis](https://github.com/rothgar/awesome-tuis)    
+> [awesome-shell](https://github.com/alebcay/awesome-shell)    
+> [awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins)    
+> [awesome-cli-apps](https://github.com/agarrharr/awesome-cli-apps)  
   
 - [sysz: An fzf terminal UI for systemctl](https://github.com/joehillen/sysz?tab=readme-ov-file)  
 - [xdg-ninja: A shell script which checks your $HOME for unwanted files and directories.](https://github.com/b3nj5m1n/xdg-ninja)  
+- [sahib/rmlint: Extremely fast tool to remove duplicates and other lint from your filesystem](https://github.com/sahib/rmlint)  
+- [yadm: Yet Another Dotfiles Manager](https://github.com/TheLocehiliosan/yadm)  
+  
+#### 固态硬盘清理  
+  
+> [Solid state drive - ArchWiki](https://wiki.archlinux.org/title/Solid_state_drive)  
+  
+```sh  
+sudo systemctl enable fstrim.timer  
+sudo systemctl start fstrim.timer  
+```  
+  
+### 睡眠和休眠  
   
 > 完善的 dots 配置应该会自动配置好睡眠和休眠  
   
-睡眠和休眠 [Power management/Suspend and hibernate - ArchWiki](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Tips_and_Tricks)  
+[Power management/Suspend and hibernate - ArchWiki](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Tips_and_Tricks)  
   
 ### 中文字体设置  
   

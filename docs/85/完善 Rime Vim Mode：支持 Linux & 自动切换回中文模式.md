@@ -103,3 +103,8 @@ patch:
 	- 如果此时处于中文模式，就自动切换到英文模式，并记录中文状态  
 - 如果处于 `normal mode`，并且按下了 `i/a/o/c` 等会进入插入模式的按键  
 	- 如果之前是中文状态，就自动切换回中文状态  
+  
+## Ref  
+  
+- [请问linux 下支持“针对特定程序使用英文模式”功能吗？ · Issue #40 · fcitx/fcitx5-rime · GitHub](https://github.com/fcitx/fcitx5-rime/issues/40)  
+- [请问 fcitx5-rime 有没有切换中英文的命令 · Issue #30 · fcitx/fcitx5-rime · GitHub](https://github.com/fcitx/fcitx5-rime/issues/30)  
