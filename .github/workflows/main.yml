@@ -56,7 +56,6 @@ jobs:
 
       - name: commit change
         run: |
-          # 重置转换的文档内容，防止提交到仓库中引发后续的 diff
           git checkout -- docs
           git config --global user.email "lei4519@126.com"
           git config --global user.name "lei4519"
