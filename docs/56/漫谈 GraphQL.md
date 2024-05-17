@@ -4,11 +4,9 @@ tags:
   - FE  
   - Explanation  
 share: "true"  
-issue: 56
-created: 2023-10-27
-title: 漫谈 GraphQL
-description: 漫谈 GraphQL
-permalink: "56"
+issue: "56"  
+created: 2023-10-27T20:12  
+updated: 2024-05-12T12:36  
 ---  
   
 本篇文章不会去过多的讨论技术细节，只是从核心概念上去说明 GraphQL 解决了什么问题，是如何怎么做到的  
