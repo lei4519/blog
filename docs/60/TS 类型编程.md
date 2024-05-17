@@ -4,11 +4,9 @@ tags:
   - FE  
   - Explanation  
 share: "true"  
-issue: 60
-created: 2023-02-03
-title: TS 类型编程
-description: TS 类型编程
-permalink: "60"
+issue: "60"  
+created: 2023-02-03T20:20  
+updated: 2024-05-12T12:36  
 ---  
   
 现如今 TS 已经完全走进了前端社区，纵观流行的前端框架/库，都有 TS 类型支持，不少框架/库更是对于源码是使用 TypeScript 开发，完美支持 TypeScript 类型提示当作一大亮点去宣传。  
@@ -465,7 +463,7 @@ type StrArrOrNumArr = ToArray<string | number> // string[] | number[] 而非是 
   
 TS 中参数位置是逆变的，返回值是协变的  
   
-![逆变协变.excalidraw](https://raw.githubusercontent.com/lei4519/blog/main/docs/Excalidraw/%E9%80%86%E5%8F%98%E5%8D%8F%E5%8F%98.svg)  
+![逆变协变.excalidraw](../Excalidraw/%E9%80%86%E5%8F%98%E5%8D%8F%E5%8F%98.svg)  
   
 ![Kanban--2024-04-14_16.41.24-6.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images/Kanban--2024-04-14_16.41.24-6.png)  
   
