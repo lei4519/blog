@@ -141,7 +141,14 @@ async fn main() -> anyhow::Result<()> {
     // 收集所有内容，后面统一提交修改
     let mut contents: Vec<(String, u64, Vec<String>, String, String, String)> = vec![];
 
-    for path in get_change_files()? {
+    let change_files = get_change_files()?;
+
+    if change_files.is_empty() {
+        println!("No files changed, exit!");
+        return Ok(());
+    }
+
+    for path in change_files {
         println!("convert file: {:#?}", path);
 
         let content = fs::read_to_string(&path)?;
