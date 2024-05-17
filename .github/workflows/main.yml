@@ -42,7 +42,7 @@ jobs:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: cargo run
+        run: cargo run -r
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -57,7 +57,7 @@ jobs:
       - name: commit change
         run: |
           # 重置转换的文档内容，防止提交到仓库中引发后续的 diff
-          git restore docs/
+          git checkout -- docs
           git config --global user.email "lei4519@126.com"
           git config --global user.name "lei4519"
           git add .
