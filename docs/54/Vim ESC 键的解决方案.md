@@ -3,11 +3,9 @@ tags:
   - Vim  
   - HowTo  
 share: "true"  
-issue: 54
-created: 2024-03-25
-title: Vim ESC 键的解决方案
-description: Vim ESC 键的解决方案
-permalink: "54"
+issue: "54"  
+created: 2024-03-25T20:12  
+updated: 2024-05-12T12:36  
 ---  
   
 `esc` 键的便利性直接决定了 vim 的使用体验，多数的解决方案是将 `caps lock` 映射为 `esc`，或者使用 `jj` / `jk` 等方案  
@@ -60,7 +58,7 @@ permalink: "54"
   
 ## Linux  
   
-参考 [Arch Linux 系统配置篇 > 按键映射](./75)，或者使用 [xcape](https://github.com/alols/xcape)  
+参考 [Arch Linux 系统配置篇 > 按键映射](../75/Arch%20Linux%20%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE%E7%AF%87.md)，或者使用 [xcape](https://github.com/alols/xcape)  
   
 ## Windows  
   

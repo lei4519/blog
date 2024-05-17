@@ -1,14 +1,15 @@
 ---  
 tags:  
   - JavaScript  
+  - JS-Engine  
   - Explanation  
-issue: 57
-created: 2024-01-03
+issue: "57"  
+created: 2024-01-03T20:24  
 share: "true"  
-title: JS Engine 的差异和优化
-description: JS Engine 的差异和优化
-permalink: "57"
+updated: 2024-05-17T16:47  
 ---  
+  
+原文：[JavaScript engine fundamentals: Shapes and Inline Caches · Mathias Bynens](https://mathiasbynens.be/notes/shapes-ics)  
   
 ## 整体流程  
   
@@ -30,7 +31,7 @@ JavaScript 引擎解析 `source code` 并将其转换为 AST（抽象语法树�
   
 ![Kanban--2024-04-14_16.41.19-5.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images/Kanban--2024-04-14_16.41.19-5.png)  
   
-早期的 V8 只有一个解释器 Ignition 和一个 优化编译器 TurboFan（21 年加入了 Sparkplug 编译器）  
+早期的 V8 只有一个解释器 Ignition 和一个 优化编译器 TurboFan（21 年加入了 Sparkplug 编译器，23 年引入了 Maglev 优化编译器，在 Sparkplug 和 TurboFan 之间）  
   
 而 SpiderMonkey（在 Firefox 和 SpiderNode 中使用的 Mozilla JavaScript 引擎）拥有两个优化编译器  
   
@@ -58,6 +59,8 @@ JSC（JavaScriptCore）是苹果公司在 Safari 和 React Native 中使用的 J
 - interpret（解释器）生成字节码的速度很快，但字节码的执行速度相对较慢  
 - compiler（编译器）生成代码需要更长的时间，但它提供了更好的运行时性能  
 - optimizing compiler（优化编译器）需要最长的时间来生成机器代码，但该代码可以非常高效地运行  
+  
+![image.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images20240516165503.png)  
   
 启动延迟和执行速度之间的权衡是 JavaScript 引擎选择在两者之间添加优化层的原因  
   
@@ -207,8 +210,7 @@ object.y = 6;
   
 每个 `Shape` 只需要知道它引入的新属性，并通过链表进行链接，当进行属性查找时会从底部向上查找（这是一个问题，见下）  
   
-> **Warning**  
->  
+> [!Warning]    
 > 所以添加属性的顺序会影响形状。例如 `{ x: 4, y: 5 }` 会产生与 `{ y: 5, x: 4 }` 不同的形状  
   
 如果无法创建转换链，我们必须进行分支，最终会得到一个 _transition tree_ （转换树）  
@@ -263,8 +265,7 @@ point.z = 6;
   
 当函数再次运行时，会比较当前传入的 `Shape` 和之前的 `Shape`，如果它们是一致的，就可以直接使用缓存的 `offset` 读取值，省去查找的过程  
   
-> **NOTE**  
->  
+> [!NOTE]    
 > 所以固定的 `Shape` 是会提高运行效率的，尽量在对象初始化的时候就将所有字段添加完整，避免后续的动态添加和删除（可以置为 null or undefined）  
   
 ![image.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images20240516110302.png)  
@@ -285,8 +286,7 @@ point.z = 6;
   
 即使只有一个数组元素具有非默认属性，整个 `Elements` 就会进入这种缓慢低效的模式  
   
-> **IMPORTANT**  
->  
+> [!IMPORTANT]    
 > 所以不要！不要！不要去修改数据索引的默认属性  
   
 ![image.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images20240516112508.png)  
@@ -409,16 +409,14 @@ V8 为此专门处理原型的 `Shape` ，每个原型都有一个独特的 `Sha
   
 ![image.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images20240516154829.png)  
   
-> **IMPORTANT**  
->  
+> [!IMPORTANT]    
 > 需要注意的是，当我们更改原型时，会将其之下所有原型的 `ValidityCell` 失效需要注意的是，当我们更改原型时，会将其之下所有原型的 `ValidityCell` 失效  
   
 以 DOM 元素示例，`Object.prototype` 的任何更改，不仅会使 `Object.prototype` 本身的内联缓存失效，还会使以下任何原型失效，包括 `EventTarget.prototype` 、 `Node.prototype` 、 `Element.prototype` 等等  
   
 ![image.png](https://raw.githubusercontent.com/lei4519/picture-bed/main/images20240516154846.png)  
   
-> **IMPORTANT**  
->  
+> [!IMPORTANT]    
 > 在运行代码时修改 `Object.prototype` 意味着性能会被抛到九霄云外，不要这样做！  
   
 ---  
@@ -478,7 +476,3 @@ delete Object.prototype.foo;
 虽然原型只是对象，但它们被 JavaScript 引擎特殊对待，以优化原型上方法查找的性能。  
   
 尽量不要修改原型，如果必须要这么做，请在所有代码开始之前，这样至少不会在代码运行时使引擎中的所有优化失效  
-  
-## 参考资料  
-  
-- [JavaScript engine fundamentals: Shapes and Inline Caches · Mathias Bynens](https://mathiasbynens.be/notes/shapes-ics)  

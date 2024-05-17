@@ -4,16 +4,15 @@ tags:
   - Obsidian  
   - HowTo  
 description: 利用 obsidian 发布文章到 github issue、jekyll blog、知乎等  
-created: 2024-04-16
-issue: 77
+created: 2024-04-16T20:00  
+issue: "77"  
 share: "true"  
-title: Obsidian Blog 工作流
-permalink: "77"
+updated: 2024-05-17T16:52  
 ---  
   
 ## 前言  
   
-在 [卡片笔记法](./73) 中提到我是如何开始、进行个人知识管理，与自己对话  
+在 [卡片笔记法](../73/%E5%8D%A1%E7%89%87%E7%AC%94%E8%AE%B0%E6%B3%95.md) 中提到我是如何开始、进行个人知识管理，与自己对话  
   
 其中的知识体（永久笔记）是可以分享出来，所以就有了这篇文章，记录下自己是如何使用 Obsidian 来方便的将文章进行发布、分享  
   
@@ -39,8 +38,7 @@ github actions 内容处理完成，进行发布动作（issue/Blog/知乎/公�
   
 ## 插件配置  
   
-> **tip**  
->  
+> [!tip]    
 > 踩坑：publisher 的链接转换必须是 `[[]]` 风格的才行    
 > 所以要先关闭 ob 本身的链接格式转换，避免自转换成 `[]()` 格式  
   
@@ -84,21 +82,19 @@ Github 仓库配置根据教程来就行，不赘述
   
 ## Workflow  
   
-文章写完通过 `obsidian-github-publisher ` 发布，其会创建 MR，触发 `github actions`，流程如下  
+文章写完通过 `obsidian-github-publisher ` 发布，其会创建 、自动合并 PR（需要配置）  
   
-> [Using secrets in GitHub Actions - GitHub Docs](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions)  
+触发 `github actions` 后，流程如下  
   
-### Pull Request  
+### Action  
   
-PR 阶段会对内容做全部处理并提交处理后的内容，然后合并到主分支，触发主分支的 github pages 构建流程  
-  
-> 之所以在 PR 中就全部处理并提交，是希望少提交一些变更  
+代码合并之后会触发主分支的 github action 构建流程  
   
 综上所述在发布文章时一定会先获得并填入一个 issue id，所以如果内链的地址没有 issue id，说明这篇文章还没有准备好发布  
   
-此时就校验失败，阻断 MR Workflow 就好  
+此时就校验失败，阻断 Workflow 就好  
   
-首先通过 pull request API 找出本次提交中变更的文件列表，筛选出文章路径后，依次进行处理  
+首先通过 git diff 找出本次提交中变更的文件列表，筛选出文章路径后，依次进行处理  
   
 #### 文章内容处理  
   
@@ -148,22 +144,15 @@ issue 不需要 metadata，所以直接丢弃掉即可
   
 同样再通过 metadata 生成 Github 首页数据（README.md），将跳转链接指向 issue 中  
   
-#### 提交变更并合并 MR  
-  
-利用 `github actions script` 自动提交变更到 PR 中，并自动合并 PR  
-  
 此时 Github issue 上的工作就已经全部完成了  
   
-### Merged Main Branch  
-  
-配置好 Github Pages 后，合并到主分支后就会自动开始部署 Blog 了  
+之后通过 job 开始部署 Jekyll Blog 就完成了所有部分  
   
 ### Jekyll 补充  
   
 由于我不熟悉 ruby 的语法，以及 github-pages 中有很多插件的限制，所以有些不重要（SEO）的功能就直接用 JS 去实现了  
   
-> **tip**  
->  
+> [!tip]    
 > 最主要是 ruby 的依赖问题搞得心累，装上个插件就各种崩…  
   
 #### 分页  
