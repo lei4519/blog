@@ -4,11 +4,9 @@ tags:
   - Tutorials  
   - FE  
 share: "true"  
-issue: 42
-created: 2020-12-18
-title: 给原生小程序安排上Composition API
-description: 给原生小程序安排上Composition API
-permalink: "42"
+issue: "42"  
+created: 2020-12-18T20:16  
+updated: 2024-05-12T12:36  
 ---  
   
 > 通过对逻辑层的封装，让原生小程序使用 Vue3 的 Composotion API  
