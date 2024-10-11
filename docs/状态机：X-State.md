@@ -8,8 +8,8 @@ tags:
   - FE
   - Explanation
 created: 2024-07-30T07:30
-updated: 2024-10-11T20:14
-share: "true"
+share: true
+updated: 2024-10-11T20:27
 ---
   
 虽然主题是状态机，但主要是聊对于 **长期迭代变化** 的业务，最佳实践是什么？  
@@ -261,12 +261,13 @@ Redux 官方风格指南「强烈推荐篇」中提到：将 Reducer 视为状�
 ![Pasted image 20240927173059](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020240927173059.png)  
   
 所以要想实现代码到状态图的转换，首先就要在语法上做约束/约定，比如：  
+  
 - 将状态放在 `states` 字段中  
-	- 渲染节点  
+  - 渲染节点  
 - 将事件转换放在 `on` 字段中  
-	- 渲染线  
+  - 渲染线  
 - 状态转换必须通过 `target` 字段完成  
-	- 连线  
+  - 连线  
 - 等等...  
   
 ![Pasted image 20241011104833](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020241011104833.png)  
@@ -285,11 +286,9 @@ X-State 带来的是
   
 1. 符合 [W3C 标准、语义化](https://www.w3.org/TR/scxml/) 的状态机模型  
 2. 完备的 TS 类型推导  
-3. 配套工具：代码 <-> 状态图；图和代码的双向生成  
-	1. [可视化编辑器](https://stately.ai/editor)    
-![Pasted image 20240927180618](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020240927180618.png)  
-	2. [VSCode 插件](https://marketplace.visualstudio.com/items?itemName=statelyai.stately-vscode)    
-![Pasted image 20241011135522](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020241011135522.png)  
+3. 配套工具：代码 <-> 状态图；图和代码的双向生成 1. [可视化编辑器](https://stately.ai/editor)    
+   ![Pasted image 20240927180618](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020240927180618.png) 2. [VSCode 插件](https://marketplace.visualstudio.com/items?itemName=statelyai.stately-vscode)    
+   ![Pasted image 20241011135522](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020241011135522.png)  
   
 技术方案阶段不是在写文档，而是在画图。图画完，最核心、最容易出错的逻辑代码也已经写（生成）完了  
   
@@ -298,25 +297,25 @@ X-State 带来的是
 还用上面订单的例子，我们把它写全  
   
 ```ts  
-import { assign, fromPromise, setup } from 'xstate'  
+import { assign, fromPromise, setup } from "xstate";  
   
 const orderMachine = setup({  
   types: {  
     context: {} as {  
-      agreementAccepted: boolean  
+      agreementAccepted: boolean;  
     },  
     events: {} as  
       | {  
-          type: 'AGREE'  
+          type: "AGREE";  
         }  
       | {  
-          type: 'ACCEPT'  
+          type: "ACCEPT";  
         }  
       | {  
-          type: 'REFUSE'  
+          type: "REFUSE";  
         }  
       | {  
-          type: 'EXPIRED'  
+          type: "EXPIRED";  
         },  
   },  
   actions: {  
@@ -327,40 +326,40 @@ const orderMachine = setup({
   },  
   actors: {  
     requestBackend: fromPromise(async () => {  
-      const response = await fetch('https://api.example.com/order/accept', {  
-        method: 'POST',  
+      const response = await fetch("https://api.example.com/order/accept", {  
+        method: "POST",  
         headers: {  
-          'Content-Type': 'application/json',  
+          "Content-Type": "application/json",  
         },  
-      })  
-      const data = await response.json()  
-      return data  
+      });  
+      const data = await response.json();  
+      return data;  
     }),  
   },  
 }).createMachine({  
   context: {  
     agreementAccepted: false,  
   },  
-  id: 'Order',  
-  initial: 'pending',  
-  description: '订单状态机',  
+  id: "Order",  
+  initial: "pending",  
+  description: "订单状态机",  
   states: {  
     pending: {  
       on: {  
         AGREE: {  
-          description: '同意协议',  
-          target: '.areeement',  
-          actions: { type: 'acceptAgreement' },  
+          description: "同意协议",  
+          target: ".agreement",  
+          actions: { type: "acceptAgreement" },  
         },  
-        REFUSE: { target: 'refuse' },  
-        EXPIRED: { target: 'expired' },  
+        REFUSE: { target: "refuse" },  
+        EXPIRED: { target: "expired" },  
       },  
       states: {  
-        areeement: {  
+        agreement: {  
           on: {  
             ACCEPT: {  
-              description: '接受订单',  
-              target: 'accepting',  
+              description: "接受订单",  
+              target: "accepting",  
             },  
           },  
         },  
@@ -368,54 +367,53 @@ const orderMachine = setup({
     },  
     accepting: {  
       invoke: {  
-        src: 'requestBackend',  
-        onDone: { target: 'accepted', actions: emit('acceptSuccess') },  
-        onError: { target: 'pending' },  
+        src: "requestBackend",  
+        onDone: { target: "accepted", actions: emit("acceptSuccess") },  
+        onError: { target: "pending" },  
       },  
     },  
     accepted: {  
-	  // entry: ['notifyUser'],  
+      // entry: ['notifyUser'],  
       // exit: ['notifyUser'],  
-      type: 'final',  
+      type: "final",  
     },  
     refuse: {  
-      type: 'final',  
+      type: "final",  
     },  
     expired: {  
-      type: 'final',  
+      type: "final",  
     },  
   },  
-})  
-  
+});  
 ```  
   
 - `types` 纯 TS 类型代码，帮助类型推断  
 - `actions` 瞬时发生的动作，同步运行的逻辑，多数情况用来改变上下文状态使用  
-	- 调用时机是：事件触发时、进入状态时、离开状态时  
-	- 操作符（函数）：  
-		- `assign`：改变 context 状态  
-	    - `emit`：触发事件  
-	    - `log`：打印日志  
+  - 调用时机是：事件触发时、进入状态时、离开状态时  
+  - 操作符（函数）：  
+    - `assign`：改变 context 状态  
+      - `emit`：触发事件  
+      - `log`：打印日志  
 - `actors`，[概念](https://stately.ai/docs/actors)  
-	- 异步运行的逻辑，一般就是用来调用后端接口  
-		- `fromPromise`  
-		- `fromTransition`: Redux reducer  
-		- `fromObservable`: 对接 RxJs  
-		- `fromEventObservable`: 对接 RxJs  
+  - 异步运行的逻辑，一般就是用来调用后端接口  
+    - `fromPromise`  
+    - `fromTransition`: Redux reducer  
+    - `fromObservable`: 对接 RxJs  
+    - `fromEventObservable`: 对接 RxJs  
   
 视图中的使用  
   
 ```tsx  
-import { useMachine } from '@xstate/react'  
+import { useMachine } from "@xstate/react";  
   
 export function Order() {  
-  const [state, send, actor] = useMachine(orderMachine)  
+  const [state, send, actor] = useMachine(orderMachine);  
   
-  useActorOn(actor, 'acceptSuccess', () => console.log('接单成功！'))  
+  useActorOn(actor, "acceptSuccess", () => console.log("接单成功！"));  
   
   useTimeout(() => {  
-    send({ type: 'EXPIRED' })  
-  }, 1000)  
+    send({ type: "EXPIRED" });  
+  }, 1000);  
   
   return (  
     <div>  
@@ -423,29 +421,28 @@ export function Order() {
         <input  
           type="checkbox"  
           checked={state.context.agreementAccepted}  
-          onChange={() => send({ type: 'AGREE' })}  
+          onChange={() => send({ type: "AGREE" })}  
         />  
         同意协议  
       </label>  
   
-      {state.matches('accepting') && <div>loading...</div>}  
+      {state.matches("accepting") && <div>loading...</div>}  
   
       <button  
-        disabled={!state.can({ type: 'ACCEPT' })}  
-        onClick={() => send({ type: 'ACCEPT' })}  
+        disabled={!state.can({ type: "ACCEPT" })}  
+        onClick={() => send({ type: "ACCEPT" })}  
       >  
         接受  
       </button>  
       <button  
-        disabled={!state.can({ type: 'REFUSE' })}  
-        onClick={() => send({ type: 'REFUSE' })}  
+        disabled={!state.can({ type: "REFUSE" })}  
+        onClick={() => send({ type: "REFUSE" })}  
       >  
         拒绝  
       </button>  
     </div>  
-  )  
+  );  
 }  
-  
 ```  
   
 - `send` 等同 `dispatch`  
@@ -457,27 +454,27 @@ export function Order() {
 ```ts  
 export function useActorOn<  
   T extends Actor<AnyActorLogic>,  
-  TLogic extends T['logic'],  
-  TType extends EmittedFrom<TLogic>['type'] | '*',  
+  TLogic extends T["logic"],  
+  TType extends EmittedFrom<TLogic>["type"] | "*",  
 >(  
   actor: T,  
   type: TType,  
   handler: (  
     emitted: EmittedFrom<TLogic> &  
-      (TType extends '*'  
+      (TType extends "*"  
         ? {}  
         : {  
-            type: TType  
+            type: TType;  
           }),  
   ) => void,  
 ) {  
-  const fn = useHandler(handler)  
+  const fn = useHandler(handler);  
   
   useEffect(() => {  
-    const sub = actor.on(type, fn)  
+    const sub = actor.on(type, fn);  
   
-    return () => sub.unsubscribe()  
-  }, [type, actor, fn])  
+    return () => sub.unsubscribe();  
+  }, [type, actor, fn]);  
 }  
 ```  
   
@@ -492,14 +489,14 @@ export function useActorOn<
 ## 额外收益  
   
 - 团队视角  
-	- Code Review 精力主要聚焦状态机逻辑  
-		- AI 辅助 Review  
+  - Code Review 精力主要聚焦状态机逻辑  
+    - AI 辅助 Review  
 - 逻辑复用，跨平台  
-	- 单纯的 JS，任何可以运行 JS 的地方  
+  - 单纯的 JS，任何可以运行 JS 的地方  
 - 个人视角  
-	- 复杂度不会因为无视就消失，强制关注创建过程，提前发现逻辑漏洞  
+  - 复杂度不会因为无视就消失，强制关注创建过程，提前发现逻辑漏洞  
 - AI 赋能  
-	- 越强的约束，越多的规则，对 AI 越友好  
+  - 越强的约束，越多的规则，对 AI 越友好  
   
 AI 逻辑代码生成：    
 ![Pasted image 20241011143122](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020241011143122.png)  
@@ -514,14 +511,16 @@ AI 逻辑解读：
 ### 命名  
   
 区分开常规代码命名（驼峰），方便快速分辨状态、事件  
+  
 - 状态：`create_task`  
 - 事件：`LOAD_DATA`  
   
 ![Pasted image 20241011154811](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020241011154811.png)    
 避免 `onChange/loading/onSuccess` 这类太过通用的命名，建议在前面搭配上状态，以作命名空间  
+  
 - 事件响应机制，从当前节点开始向上递归查找，一旦命中后就不会再向上冒泡  
-	- 如果使用 `state.can({type: 'ON_CHANGE'})` 判断逻辑，就可能会有隐藏的 BUG 产生  
-	- ![Pasted image 20241011154304](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020241011154304.png)  
+  - 如果使用 `state.can({type: 'ON_CHANGE'})` 判断逻辑，就可能会有隐藏的 BUG 产生  
+  - ![Pasted image 20241011154304](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020241011154304.png)  
 - 保持文本检索友好  
   
 ### 搜索场景  
@@ -534,44 +533,44 @@ AI 逻辑解读：
 /**  
  * 统一加入错误处理逻辑  
  * */  
-const inspect: ActorOptions<any>['inspect'] = {  
+const inspect: ActorOptions<any>["inspect"] = {  
   next: (e) => {  
-    browserInspect.next?.(e)  
+    browserInspect.next?.(e);  
     if (isDev) {  
-      if (new URLSearchParams(window.location.search).get('m_log') !== null) {  
-        console.log(e)  
+      if (new URLSearchParams(window.location.search).get("m_log") !== null) {  
+        console.log(e);  
       }  
     }  
-    if (e.type === '@xstate.event') {  
+    if (e.type === "@xstate.event") {  
       // actor promise.reject  
-      if (e.event.type === 'xstate.promise.reject') {  
+      if (e.event.type === "xstate.promise.reject") {  
         // 所有通过 @cheese/libs/request 的请求都会有 message  
         // 所以这里只处理有 message 的情况  
         // 自定义的 actor promise 如果没有 message，不会被处理  
-        const errMessage = e.event.data.message  
+        const errMessage = e.event.data.message;  
         if (errMessage) {  
-          onErrorMessage({ message: errMessage })  
+          onErrorMessage({ message: errMessage });  
         }  
       }  
     }  
   },  
   error: browserInspect.error,  
   complete: browserInspect.complete,  
-}  
+};  
   
 // 加入通用的逻辑  
 export const useMachine: typeof oUseMachine = (machine, options) => {  
   const m = oUseMachine(machine, {  
     inspect,  
     ...options,  
-  })  
+  });  
   
   if (isDev) {  
-    ;(window as any).__machine__ = m  
+    (window as any).__machine__ = m;  
   }  
   
-  return m  
-}  
+  return m;  
+};  
 ```  
   
 ### 图生成时的技术噪音  
@@ -594,6 +593,6 @@ export const useMachine: typeof oUseMachine = (machine, options) => {
   
 ## 扩展  
   
-  - [你不需要状态机库](https://dev.to/davidkpiano/you-don-t-need-a-library-for-state-machines-k7h)  
-  - [Redux 模式](https://dev.to/davidkpiano/redux-is-half-of-a-pattern-1-2-1hd7)  
-  - [状态模式](https://refactoringguru.cn/design-patterns/state)  
+- [你不需要状态机库](https://dev.to/davidkpiano/you-don-t-need-a-library-for-state-machines-k7h)  
+- [Redux 模式](https://dev.to/davidkpiano/redux-is-half-of-a-pattern-1-2-1hd7)  
+- [状态模式](https://refactoringguru.cn/design-patterns/state)  
