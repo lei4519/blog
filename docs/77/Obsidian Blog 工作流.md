@@ -1,14 +1,14 @@
----  
-tags:  
-  - Blog  
-  - Obsidian  
-  - HowTo  
-description: 利用 obsidian 发布文章到 github issue、jekyll blog、知乎等  
-created: 2024-04-16T20:00  
-issue: "77"  
-share: "true"  
-updated: 2024-05-17T16:52  
----  
+---
+tags:
+  - Blog
+  - Obsidian
+  - HowTo
+description: 利用 obsidian 发布文章到 github issue、jekyll blog、知乎等
+created: 2024-04-16T20:00
+issue: "77"
+share: "true"
+updated: 2024-05-17T16:52
+---
   
 ## 前言  
   
