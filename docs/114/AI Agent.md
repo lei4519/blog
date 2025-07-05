@@ -1,12 +1,12 @@
 ---
 id: AI Agent
-aliases: 
+aliases: []
 tags:
   - LLM
   - AI
   - Explanation
 created: 2025-02-10T18:39:00
-updated: 2025-07-05T12:53
+updated: 2025-07-05T13:30
 share: "true"
 issue: "114"
 ---
@@ -122,4 +122,4 @@ Agent 的发展强依赖模型自身的能力
   
 ## REF  
   
-- https://www.anthropic.com/engineering/building-effective-agents  
+- <https://www.anthropic.com/engineering/building-effective-agents>  
