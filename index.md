@@ -1,13 +1,14 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2024-10-12 02:18:15"/>
+    <img src="https://badgen.net/badge/last-commit/2025-07-05 04:39:17"/>
 </p>
 
 <img src="assets/wordcloud.png" title="词云" alt="词云">
 
 - [状态机：X-State](./100) -- 2024-07-30
 - [状态机：X-State](./102) -- 2024-07-30
+- [状态机：X-State](./108) -- 2024-07-30
 - [完善 Rime Vim Mode：支持 Linux & 自动切换回中文模式](./85) -- 2024-05-13
 - [加速 Obsidian 启动](./91) -- 2024-05-01
 - [Arch Linux 系统配置篇](./75) -- 2024-04-23
