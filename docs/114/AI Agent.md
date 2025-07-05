@@ -1,12 +1,11 @@
 ---
 id: AI Agent
-aliases: []
+aliases: 
 tags:
   - LLM
-  - AI
   - Explanation
 created: 2025-02-10T18:39:00
-updated: 2025-07-05T13:30
+updated: 2025-07-05T14:44
 share: "true"
 issue: "114"
 ---
