@@ -25,8 +25,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.ref }}
+          # repository: ${{ github.event.pull_request.head.repo.full_name }}
+          # ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
       - name: Get changed files
@@ -57,6 +57,7 @@ jobs:
       #   uses: actions/upload-pages-artifact@v3
 
       - name: commit change
+        # git checkout -- docs     还原工作区中 docs 目录的所有更改
         run: |
           git checkout -- docs
           git config --global user.email "lei4519@126.com"
@@ -65,7 +66,9 @@ jobs:
           git commit -m "Update Content from Github Action"
 
       - name: push change
-        run: git push
+        run: |
+          git pull --rebase
+          git push
 
   # Deployment job
   # deploy:
