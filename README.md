@@ -1,14 +1,20 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2025-07-05 05:32:06"/>
+    <img src="https://badgen.net/badge/last-commit/2025-07-05 06:16:43"/>
 </p>
 
 <img src="assets/wordcloud.png" title="词云" alt="词云">
 
 - [LLM - RAG](https://github.com/lei4519/blog/issues/112) -- 2025-03-17
-- [状态机：X-State](https://github.com/lei4519/blog/issues/100) -- 2024-07-30
-- [状态机：X-State](https://github.com/lei4519/blog/issues/102) -- 2024-07-30
+- [LLM - Quantization](https://github.com/lei4519/blog/issues/116) -- 2025-03-17
+- [LLM - Knowledge Base](https://github.com/lei4519/blog/issues/115) -- 2025-03-06
+- [LLM Base](https://github.com/lei4519/blog/issues/111) -- 2025-02-21
+- [LLM - Tool Use](https://github.com/lei4519/blog/issues/113) -- 2025-02-10
+- [AI Agent](https://github.com/lei4519/blog/issues/114) -- 2025-02-10
+- [Understand LLM](https://github.com/lei4519/blog/issues/110) -- 2025-01-11
+- [AI Code](https://github.com/lei4519/blog/issues/118) -- 2025-01-11
+- [Cline System Prompt](https://github.com/lei4519/blog/issues/117) -- 2025-01-07
 - [状态机：X-State](https://github.com/lei4519/blog/issues/108) -- 2024-07-30
 - [完善 Rime Vim Mode：支持 Linux & 自动切换回中文模式](https://github.com/lei4519/blog/issues/85) -- 2024-05-13
 - [加速 Obsidian 启动](https://github.com/lei4519/blog/issues/91) -- 2024-05-01
