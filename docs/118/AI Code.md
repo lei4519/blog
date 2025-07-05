@@ -1,12 +1,11 @@
 ---
 id: ai-coder
-aliases: []
+aliases: 
 tags:
   - LLM
-  - AI
   - HowTo
 created: 2025-01-11T23:25
-updated: 2025-07-05T13:30
+updated: 2025-07-05T14:44
 share: "true"
 issue: "118"
 ---

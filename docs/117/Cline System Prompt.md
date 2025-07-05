@@ -1,9 +1,8 @@
 ---
 created: 2025-01-07T18:37:00
-updated: 2025-07-05T13:30
+updated: 2025-07-05T14:44
 tags:
   - LLM
-  - AI
   - Explanation
 share: "true"
 issue: "117"
