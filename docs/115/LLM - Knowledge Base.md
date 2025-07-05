@@ -4,10 +4,9 @@ aliases:
   - 知识库
 tags:
   - LLM
-  - AI
   - Explanation
 created: 2025-03-06T11:19:00
-updated: 2025-07-05T13:30
+updated: 2025-07-05T14:44
 share: "true"
 issue: "115"
 ---
