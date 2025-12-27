@@ -63,7 +63,7 @@ jobs:
           git config --global user.email "lei4519@126.com"
           git config --global user.name "lei4519"
           git add .
-          git commit -m "Update Content from Github Action"
+          git commit -m "[AUTO] Update Content from Github Action"
 
       - name: push change
         run: |
