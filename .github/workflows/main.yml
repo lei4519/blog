@@ -53,7 +53,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           corepack enable
-          yarn install
+          yarn install --immutable
           GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} yarn run process
           yarn run build
 

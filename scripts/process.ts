@@ -84,18 +84,18 @@ import Link from "next/link"
   <img src="https://badgen.net/badge/last-commit/${timestamp}" />
 </div>
 
+<Image
+  src="https://github.com/lei4519/blog/raw/main/assets/wordcloud.png"
+  title="词云"
+  alt="词云"
+  width="1536"
+  height="769"
+/>
 
 <ul>
 
 `;
 
-  // <Image
-  //   src="https://github.com/lei4519/blog/raw/main/assets/wordcloud.png"
-  //   title="词云"
-  //   alt="词云"
-  //   width="1920"
-  //   height="400"
-  // />
 
   // Issue README (Markdown format)
   let issueReadme = `
@@ -104,9 +104,9 @@ import Link from "next/link"
     <img src="https://badgen.net/badge/last-commit/${timestamp}"/>
 </p>
 
-`;
+<img src="assets/wordcloud.png" title="词云" alt="词云">
 
-  // <img src="assets/wordcloud.png" title="词云" alt="词云">
+`;
 
   for (const [issue, title, created, _tags] of list) {
     blogReadme += `<li className="flex justify-between"><Link href="./docs/${issue}">${title}</Link><time className="text-sm font-mono text-gray-500">${created}</time></li>\n`;
@@ -118,97 +118,45 @@ import Link from "next/link"
   return [blogReadme, issueReadme];
 }
 
-// async function genWordCloud(docMetaData: MetaDataMap): Promise<void> {
-//   let text = '';
+async function genWordCloud(docMetaData: MetaDataMap): Promise<void> {
+  let text = '';
 
-//   for (const meta of Object.values(docMetaData)) {
-//     if (meta.tags) {
-//       const tags = meta.tags.replace(/,/g, ' ');
-//       text += ' ' + tags;
-//     }
-//   }
+  for (const meta of Object.values(docMetaData)) {
+    if (meta.tags) {
+      const tags = meta.tags.replace(/,/g, ' ');
+      text += ' ' + tags;
+    }
+  }
 
-//   const excludeTags = [
-//     'FE',
-//     'Explanation',
-//     'HowTo',
-//     'Tutorials',
-//     'Reference',
-//     'TODO'
-//   ];
+  const excludeTags = [
+    'FE',
+    'Explanation',
+    'HowTo',
+    'Tutorials',
+    'Reference',
+    'TODO'
+  ];
 
-//   for (const tag of excludeTags) {
-//     text = text.replace(new RegExp(tag, 'g'), '');
-//   }
+  for (const tag of excludeTags) {
+    text = text.replace(new RegExp(tag, 'g'), '');
+  }
 
-//   // Generate word cloud using d3-cloud
-//   return new Promise((resolve, reject) => {
-//     const width = 1920;
-//     const height = 400;
+  // Generate word cloud using d3-cloud
+  // Split text into words and count frequency
+  const words = text.split(/\s+/).filter(w => w.length > 0);
+  const wordCount = new Map<string, number>();
 
-//     // Split text into words and count frequency
-//     const words = text.split(/\s+/).filter(w => w.length > 0);
-//     const wordCount = new Map<string, number>();
+  for (const word of words) {
+    wordCount.set(word, (wordCount.get(word) || 0) + 1);
+  }
 
-//     for (const word of words) {
-//       wordCount.set(word, (wordCount.get(word) || 0) + 1);
-//     }
+  const wordData = Array.from(wordCount.entries())
+    .map(([text, size]) => ({ text, size: size * 10 }))
+    .sort((a, b) => b.size - a.size)
+    .slice(0, 100); // Limit to top 100 words
 
-//     const wordData = Array.from(wordCount.entries())
-//       .map(([text, size]) => ({ text, size: size * 10 }))
-//       .sort((a, b) => b.size - a.size)
-//       .slice(0, 100); // Limit to top 100 words
-
-//     if (wordData.length === 0) {
-//       // No words to render
-//       resolve();
-//       return;
-//     }
-
-//     const layout = d3Cloud()
-//       .size([width, height])
-//       .words(wordData)
-//       .padding(5)
-//       .rotate(() => 0)
-//       .font('Impact')
-//       .fontSize((d: any) => d.size)
-//       .random(() => 0.5) // Seed for reproducibility
-//       .on('end', (words: any[]) => {
-//         try {
-//           // Create canvas and draw words
-//           const canvas = createCanvas(width, height);
-//           const ctx = canvas.getContext('2d');
-
-//           // White background
-//           ctx.fillStyle = 'white';
-//           ctx.fillRect(0, 0, width, height);
-
-//           // Draw words
-//           ctx.translate(width / 2, height / 2);
-//           for (const word of words) {
-//             ctx.save();
-//             ctx.translate(word.x || 0, word.y || 0);
-//             ctx.rotate((word.rotate || 0) * Math.PI / 180);
-//             ctx.textAlign = 'center';
-//             ctx.fillStyle = '#' + Math.floor(Math.random() * 16777215).toString(16);
-//             ctx.font = `${word.size}px ${word.font || 'Impact'}`;
-//             ctx.fillText(word.text || '', 0, 0);
-//             ctx.restore();
-//           }
-
-//           // Save to file
-//           const buffer = canvas.toBuffer('image/png');
-//           fs.writeFile('./assets/wordcloud.png', buffer)
-//             .then(() => resolve())
-//             .catch(reject);
-//         } catch (error) {
-//           reject(error);
-//         }
-//       });
-
-//     layout.start();
-//   });
-// }
+  console.log("wordData", wordData);
+}
 
 async function main(): Promise<void> {
   console.log('Token:', process.env.GITHUB_TOKEN ? "has token" : "no token");
