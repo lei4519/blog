@@ -211,6 +211,7 @@ import Link from "next/link"
 // }
 
 async function main(): Promise<void> {
+  console.log('Token:', process.env.GITHUB_TOKEN ? "has token" : "no token");
   const changeNoteFiles = getChangeNoteFiles();
 
   if (changeNoteFiles.length === 0) {

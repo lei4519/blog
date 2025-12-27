@@ -54,7 +54,7 @@ jobs:
         run: |
           corepack enable
           yarn install
-          yarn run process
+          GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} yarn run process
           yarn run build
 
       - name: Setup Pages
