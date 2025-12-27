@@ -1,7 +1,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2025-12-27 16:06:15"/>
+    <img src="https://badgen.net/badge/last-commit/2025-12-27 16:20:36"/>
 </p>
 
 - [前端性能优化](https://github.com/lei4519/blog/issues/126) -- 2025-07-13
