@@ -20,10 +20,14 @@ concurrency:
 
 jobs:
   # Build job
-  build:
+  build_and_deploy:
+    environment:
+    name: github-pages
+    # url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           # repository: ${{ github.event.pull_request.head.repo.full_name }}
           # ref: ${{ github.event.pull_request.head.ref }}
@@ -37,29 +41,37 @@ jobs:
           quotepath: "false"
           separator: "\n"
 
-      - name: convert content
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Build docs site
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_and_modified_files }}
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: cargo run -r
+        run: |
+          corepack enable
+          yarn install
+          yarn run process
+          yarn run build
 
-      # - name: Setup Pages
-      #   uses: actions/configure-pages@v5
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-      # - name: Build with Jekyll
-      #   uses: actions/jekyll-build-pages@v1
-      #   with:
-      #     source: ./
-      #     destination: ./_site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: './out'
 
-      # - name: Upload artifact
-      #   uses: actions/upload-pages-artifact@v3
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       - name: commit change
-        # git checkout -- docs     还原工作区中 docs 目录的所有更改
         run: |
-          git checkout -- docs
           git config --global user.email "lei4519@126.com"
           git config --global user.name "lei4519"
           git add .
@@ -69,15 +81,3 @@ jobs:
         run: |
           git pull --rebase
           git push
-
-  # Deployment job
-  # deploy:
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   steps:
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4

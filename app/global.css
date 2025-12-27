@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+body {
+	text-autospace: normal;
+}
+
+a {
+	word-wrap: break-word;
+}
+
+blockquote.alert-box {
+  margin-left: 0;
+  margin-right: 0;
+  border-left: 3px solid;
+  border-color: var(--color);
+  color: var(--color);
+  quotes: none;
+
+  .alert-title {
+    font-weight: 700;
+    font-style: normal;
+  }
+  &.note {
+    --color: var(--color-fd-idea);
+  }
+  &.tip {
+    --color: deepskyblue;
+    --color: var(--color-fd-info);
+  }
+  &.important {
+    --color: chartreuse;
+    --color: var(--color-fd-success);
+  }
+  &.warning {
+    --color: darkorange;
+    --color: var(--color-fd-warning);
+  }
+  &.caution {
+    --color: crimson;
+    --color: var(--color-fd-error);
+  }
+}

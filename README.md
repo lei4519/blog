@@ -1,10 +1,8 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2025-07-13 12:56:42"/>
+    <img src="https://badgen.net/badge/last-commit/2025-12-27 16:06:15"/>
 </p>
-
-<img src="assets/wordcloud.png" title="词云" alt="词云">
 
 - [前端性能优化](https://github.com/lei4519/blog/issues/126) -- 2025-07-13
 - [LLM - RAG](https://github.com/lei4519/blog/issues/112) -- 2025-03-17
