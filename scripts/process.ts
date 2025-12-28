@@ -85,11 +85,11 @@ import Link from "next/link"
 </div>
 
 <Image
-  src="https://github.com/lei4519/blog/raw/main/assets/wordcloud.png"
+  src="https://github.com/lei4519/blog/raw/main/assets/wordcloud.webp"
   title="词云"
   alt="词云"
   width="1536"
-  height="769"
+  height="512"
 />
 
 <ul>
@@ -104,7 +104,7 @@ import Link from "next/link"
     <img src="https://badgen.net/badge/last-commit/${timestamp}"/>
 </p>
 
-<img src="assets/wordcloud.png" title="词云" alt="词云">
+<img src="assets/wordcloud.webp" title="词云" alt="词云">
 
 `;
 

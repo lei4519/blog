@@ -4,7 +4,7 @@
     <img src="https://badgen.net/badge/last-commit/2025-12-28 01:11:20"/>
 </p>
 
-<img src="assets/wordcloud.png" title="词云" alt="词云">
+<img src="assets/wordcloud.webp" title="词云" alt="词云">
 
 - [Nextjs Image 响应式图片](https://github.com/lei4519/blog/issues/129) -- 2025-12-25
 - [前端性能优化](https://github.com/lei4519/blog/issues/126) -- 2025-07-13
