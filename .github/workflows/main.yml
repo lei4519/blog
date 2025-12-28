@@ -70,14 +70,24 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: commit change
+      - name: Check for changes
+        id: check-changes
+        run: |
+          git add .
+          if git diff --cached --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes to commit"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+          fi
+
+      - name: commit and push change
+        if: steps.check-changes.outputs.has_changes == 'true'
         run: |
           git config --global user.email "lei4519@126.com"
           git config --global user.name "lei4519"
-          git add .
           git commit -m "[AUTO] Update Content from Github Action"
-
-      - name: push change
-        run: |
           git pull --rebase
           git push
+
