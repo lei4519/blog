@@ -462,5 +462,23 @@
     "issue": "129",
     "title": "Nextjs Image 响应式图片",
     "description": "Nextjs Image 响应式图片"
+  },
+  "131": {
+    "tags": "LLM,Think",
+    "created": "2025-07-18",
+    "updated": "2025-07-27T23:56",
+    "share": "\"true\"",
+    "issue": "131",
+    "title": "AI 发展带来的影响",
+    "description": "AI 发展带来的影响"
+  },
+  "132": {
+    "created": "2024-07-23",
+    "updated": "2025-08-16T23:56",
+    "tags": "FullStack,Explanation,Authorization",
+    "share": "\"true\"",
+    "issue": "132",
+    "title": "Authorization - Session、(JWT) Token",
+    "description": "Authorization - Session、(JWT) Token"
   }
 }

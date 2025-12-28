@@ -1,12 +1,13 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2025-12-28 01:11:20"/>
+    <img src="https://badgen.net/badge/last-commit/2025-12-28 05:46:23"/>
 </p>
 
 <img src="assets/wordcloud.webp" title="词云" alt="词云">
 
 - [Nextjs Image 响应式图片](https://github.com/lei4519/blog/issues/129) -- 2025-12-25
+- [AI 发展带来的影响](https://github.com/lei4519/blog/issues/131) -- 2025-07-18
 - [前端性能优化](https://github.com/lei4519/blog/issues/126) -- 2025-07-13
 - [LLM - RAG](https://github.com/lei4519/blog/issues/112) -- 2025-03-17
 - [LLM - Quantization](https://github.com/lei4519/blog/issues/116) -- 2025-03-17
@@ -18,6 +19,7 @@
 - [AI Code](https://github.com/lei4519/blog/issues/118) -- 2025-01-11
 - [Cline System Prompt](https://github.com/lei4519/blog/issues/117) -- 2025-01-07
 - [状态机：X-State](https://github.com/lei4519/blog/issues/108) -- 2024-07-30
+- [Authorization - Session、(JWT) Token](https://github.com/lei4519/blog/issues/132) -- 2024-07-23
 - [完善 Rime Vim Mode：支持 Linux & 自动切换回中文模式](https://github.com/lei4519/blog/issues/85) -- 2024-05-13
 - [加速 Obsidian 启动](https://github.com/lei4519/blog/issues/91) -- 2024-05-01
 - [Arch Linux 系统配置篇](https://github.com/lei4519/blog/issues/75) -- 2024-04-23
