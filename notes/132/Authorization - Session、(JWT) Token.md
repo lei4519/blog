@@ -1,0 +1,165 @@
+---
+created: 2024-07-23T11:23
+updated: 2025-08-16T23:56
+tags:
+  - FullStack
+  - Explanation
+  - Authorization
+share: "true"
+issue: "132"
+---
+
+最近想要了解 supabase 的登录相关内容，刚好把之前所了解的知识梳理一下做个记录
+
+## Authorization
+
+我们需要一些麻烦的手段（密码、验证码、2FA...）来证明 “我是我”
+
+为了减少麻烦的次数（没人会想跳转一次网页就登录一次），在验证通过后，需要一个 “东西”，它可以代替（密码、验证码、2FA）去证明 “你是你”
+
+且从安全角度，这个 “东西” 应该是不可（极难）伪造的
+
+为了更好沟通，下面就将这个 “东西” 称作 “**凭证**” 吧
+
+### 流程
+
+当用户输入账号密码登录成功的时候，由服务端生成凭证并交给客户端，客户端在后续的请求中，将凭证发送给服务端进行身份验证和识别
+
+这里有几件核心的事情：生成凭证 -> 交给客户端 -> 发送给服务端 -> 服务端验证
+
+### 生成凭证
+
+如果只是为了识别不同的用户，那只要每个用户的凭证是唯一的就可以了
+- 比如：用户的邮箱/手机号、自增的数字、时间戳 + 随机数、UUID 等等
+
+但身份认证还有一个重要的方向是安全：凭证应该是不可（极难）伪造的（不能冒充别人）
+
+显然诸如邮箱、自增数字、时间戳之类的都是无法达到这个目的的
+
+UUID 是可以的，并且为了进一步的安全完全可以在 UUID 的基础上再去添加如邮箱、随机数等加密手段
+
+除此之外的任何安全加密手段，只要能达到：凭证唯一且不可伪造，就可以拿来作为凭证
+
+### 交给客户端
+
+> 这里有个隐含的逻辑是客户端拿到后，需要存起来以供后续使用
+
+#### Cookie
+
+> [!Important]  
+> Cookie 只是一种存储机制，它只是用来存 “凭证” 的，它 **不是 “凭证”** ！  
+> Cookie 应该与 Local Storage、IndexDB 进行比较和讨论，它们才是一类的事物
+
+Cookie 是一种浏览器的存储机制，特点是
+
+- 可以使用 HTTP Response Header 进行设置（由服务端控制）
+- 在浏览器请求匹配域名时，会自动把 Cookie 给添加进 Request Header Cookie
+
+Cookie 的好处是，客户端可以完全不关心这些事情，服务端自己写代码和逻辑就好了
+
+服务端只和浏览器沟通（代码），不需要和客户端沟通
+
+#### Client
+
+和客户端协商具体的方案，具体细节不重要，可以拿到凭证并存起来就好
+
+比如：登录接口中将凭证作为响应返回，客户端存在 localStorage 中
+
+### 发送给服务端
+
+如果使用的是 Cookie，那浏览器会搞定
+- Cookie 的场景限制：跨域、[CSRF](https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/CSRF) 攻击、非浏览器场景等
+
+如果是其他方案，则按具体方案执行，常见的如将凭证放在 Request Header Authorization 中
+
+### 服务端验证
+
+服务端验证大体分为两类：存储验证、凭证自验证
+
+#### 存储验证（Session）
+
+存储验证是指，在生成凭证时，将凭证存起来（数据库）
+
+验证时只需要查询下凭证是否存在，是否过期就可以了
+
+**优势是**：
+
+完全可控，如果想实现
+- 强制用户退出，常见于
+	- 只允许 N 台设备登录
+	- 用户修改密码、密码泄露后防损
+- 限制用户登录 （黑名单、违规操作）
+
+这些只需要操作数据库就可以了
+
+**缺点是**：
+
+- 数据库压力大，处理速度慢，每个请求、每次验证都需要去查询
+	- 可以接入 Redis 缓解，但添加 Redis 同样会增加成本和复杂度
+
+#### 凭证自验证（JWT/Token）
+
+自验证是指，凭证本身就可以验证其有效性，不需要额外的存储
+
+常见的就是签名，使用密钥对数据（用户名、过期时间等）进行加密，将加密结果作为凭证的一部分进行拼接下发
+
+```
+{email:"xxx",expire:"xxx"}-ES256({email:"xxx",expire:"xxx"})
+```
+
+当收到凭证时，只需要分割出数据，并对数据再次签名，就可以知道数据是否被伪造过
+
+只要数据没有被伪造，我们就可以信任数据中的内容（用户名、过期时间等）
+
+> [!TIP]  
+> JWT 在此基础上又添加了元信息，用来提供加密算法名称等额外数据
+
+**优点是**：
+- 验证速度快，只需加密操作，不需要外部系统的参与
+- 只要有密钥，任何服务都可以独自验证（分布式）
+- 对于客户端：不需要发送请求就可以拿到用户的基本信息
+
+**缺点是**：
+- 已经发出的凭证，无法主动收回
+- 对于客户端：如果用户信息中的内容变了，看到的依然是旧的
+	- 不建议存放会变的数据，只存用户邮箱、ID 等
+	- 另一种方式是数据变了之后，重新换一个新的 Token（RefreshToken，见下面）
+
+##### 最佳实践
+
+鉴于 Token 无法收回的特性，往往会伴随 [RefreshToken](https://supabase.com/docs/guides/auth/sessions#what-is-refresh-token-reuse-detection-and-what-does-it-protect-from) 的配合使用，同时生成 AccessToken 和 RefreshToken 下发给客户端
+- RefreshToken 是存储验证的，会存储在数据库中，所以它不需要用 JWT 之类的方案，只要是不可伪造的唯一值即可
+
+AccessToken 会设置一个较短的过期时间（比如 60min），当过期时可以使用 RefreshToken 来换取新的 AccessToken 和 RefreshToken
+- 每个 RefreshToken 只能使用一次，用完就作废了
+- AccessToken 的过期时间，应该根据服务器的压力（RefreshToken 请求）和安全性进行综合考虑，太长了有安全问题，太短了服务器压力增加（如果短到一定程度，就等同于存储验证了，Token 的自验证优势也就没了，还增加了一堆复杂度）
+
+当我们需要实现诸如：强制退出登录、黑名单等逻辑时，删除数据库中的 RefreshToken 即可，**这不是实时的**，只有当 AccessToken 过期尝试用 RefreshToken 时才会真正起作用
+
+## Supabase
+
+Q: 那 Supabase 用的是什么呢？  
+A: 全用了
+
+是的，Supabase 用了 JWT，所以会有 AccessToken 和 RefreshToken
+
+同时 Supabase 将 AccessToken 和 RefreshToken 都存储在了数据库中
+
+然后为我们提供了以下方法：
+
+- [getClaims](https://supabase.com/docs/reference/javascript/auth-getclaims)
+	- 直接从 Token 中获取用户信息，不发送请求。**推荐优先使用此**方法，而不是使用 `getUser`
+	- 必须使用 非对称 JWT 签名密钥才起作用，否则还是会调用 `getUser` 从服务器获取信息
+- [getUser](https://supabase.com/docs/reference/javascript/auth-getuser)
+	- 始终会为每个 JWT 向身份验证服务器发送请求
+
+也即是说同时为我们提供了两种方案，可以自行决定使用哪种
+
+对于为什么要使用 JWT 代替 Session，可以查看 Supabase 的 [FAQ](https://supabase.com/docs/guides/auth/sessions#what-are-the-benefits-of-using-access-and-refresh-tokens-instead-of-traditional-sessions)
+
+关于实时性，Supabase [认为](https://supabase.com/docs/guides/auth/sessions#how-to-ensure-an-access-token-jwt-cannot-be-used-after-a-user-signs-out) **大多数应用程序很少需要如此严格的安全保证**
+
+## REF
+
+- [Auth \| Supabase Docs](https://supabase.com/docs/guides/auth)
+- [Stop using JWT for sessions](http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/)
