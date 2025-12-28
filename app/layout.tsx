@@ -2,6 +2,7 @@ import { RootProvider } from 'fumadocs-ui/provider/next';
 import './global.css';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
+import SearchDialog from '@/components/search';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,7 +27,7 @@ gtag('config', 'G-F1R706JR1D');`}
       <body className="flex flex-col min-h-screen">
         <RootProvider
           search={{
-            enabled: false
+            SearchDialog,
           }}
         >{children}</RootProvider>
       </body>

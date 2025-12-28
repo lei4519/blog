@@ -1083,6 +1083,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@orama/stopwords@npm:^3.1.18":
+  version: 3.1.18
+  resolution: "@orama/stopwords@npm:3.1.18"
+  checksum: 10c0/aa51ab5f60c14bcd6ca82574317b2e8822ad1cc70fcef28113e11ee91feb2f26f314c6d9b5179d41e4a122498a450a2e6c98f733831fb897c9d08b2fae46a739
+  languageName: node
+  linkType: hard
+
 "@orama/tokenizers@npm:^3.1.18":
   version: 3.1.18
   resolution: "@orama/tokenizers@npm:3.1.18"
@@ -2527,6 +2534,7 @@ __metadata:
     "@dotenvx/dotenvx": "npm:^1.51.2"
     "@octokit/rest": "npm:^20.0.2"
     "@orama/orama": "npm:^3.1.18"
+    "@orama/stopwords": "npm:^3.1.18"
     "@orama/tokenizers": "npm:^3.1.18"
     "@tailwindcss/postcss": "npm:^4.1.18"
     "@types/mdx": "npm:^2.0.13"
