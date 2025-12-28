@@ -27,11 +27,11 @@ LLM 本质就是一个 Token 生成器，根据**概率**来产出下一个 Toke
 
 数据集示例：[Fine Web](https://huggingface.co/datasets/HuggingFaceFW/fineweb)，50TB（~ 15 万亿 token）
 
-- 数据源：
+- 数据源：  
 	-  2013 ~ 2024 年间由 CommonCrawl Foundation 爬取的网页
-- 数据清洗：
-	- 提取主体内容（过滤菜单栏、），过滤 HTML 标记、CSS 等
-    - 过滤：语言、恶意网站、个人信息等
+- 数据清洗：  
+	- 提取主体内容（过滤菜单栏、），过滤 HTML 标记、CSS 等  
+    - 过滤：语言、恶意网站、个人信息等  
     - 去重
 
 这一步的结果是得到一个所有内容拼接在一起的巨大文档
@@ -178,7 +178,7 @@ Token 的原理决定了某些事情是 LLM 天然不擅长的
 
 数组中每一个 `number` 相当于一个维度的空间坐标，用于表示 Token 的各种语义信息
 
-| ![300](../attachments/c3dfdcbfe866c0cc6979a316cbacdd81986d2f60855e950b94f90b4ebef4431559363a8af9d838f8f92cf33ddb372d6b9c5217c8f831f3251e01248f2fb1be15.png) | ![300](../attachments/Pasted%20image%2020250315192928.png) |
+| ![300](../attachments/Pasted%20image%2020250315192851.png) | ![300](../attachments/Pasted%20image%2020250315192928.png) |
 | ----------------------------------------------------- | ----------------------------------------------------- |
 
 通过训练，Embedding 会将相似意义的词映射到相近的向量位置
@@ -263,7 +263,7 @@ King 这个 Token 的坐标会根据上下文 Token 的计算，在空间中移�
 
 > [Transformer Explainer: LLM Transformer Model Visually Explained](https://poloclub.github.io/transformer-explainer/)
 
-拖动滑块，观察概率分布的变化
+拖动滑块，观察概率分布的变化  
 ![Pasted image 20250316140310|500](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020250316140310.png)
 
 ---
@@ -329,7 +329,7 @@ Base Model 只懂得根据输入预测下一个 Token，**是不会对话的**
 所以解压缩的方法就是输入一段前缀 Token（提示词），让模型进行续写
 
 比如把 wiki 词条的开头输入模型，模型就可以向后续写
-- **有损**压缩：在某个时刻，输出一定会偏离原文
+- **有损**压缩：在某个时刻，输出一定会偏离原文  
 ![](https://raw.githubusercontent.com/lei4519/picture-bed/main/images/20250309185042657.png)
 
 翻译：给出多个示例后，放入真正想要翻译的英文
@@ -344,11 +344,11 @@ Base Model 只懂得根据输入预测下一个 Token，**是不会对话的**
 ## Post Training
 
 Base Model 只会续写，如果你直接向它提出问题，它可能会续写出更多问题
-- 字体偏灰色的是 LLM 输出的内容
+- 字体偏灰色的是 LLM 输出的内容  
 ![Pasted image 20250316223641](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020250316223641.png)
 
 但我们可以通过示例的方式，让模型模仿问答的行为
-- 先给出几个问答示例，最后提出真正的问题
+- 先给出几个问答示例，最后提出真正的问题  
 ![Pasted image 20250316223556](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020250316223556.png)
 
 注意：此时的模型**并不懂的如何停下**，它在回答完问题之后，继续模仿人类进行提问了
@@ -420,7 +420,7 @@ LLM 并没有真正的去记忆中搜寻所有关于北京景点的信息，然�
 
 #### Who Are You
 
-user：你是谁？
+user：你是谁？  
 deepseek：我是 GPT-4
 
 模型不知道自己是谁，这类问题都是硬编码进去的（微调/系统提示词）
@@ -428,7 +428,7 @@ deepseek：我是 GPT-4
 
 ### RL
 
-RL/RLHF
+RL/RLHF  
 强化学习/基于人类反馈的强化学习
 
 发展适合 AI 的回答/思考风格
@@ -437,7 +437,7 @@ RL/RLHF
 
 > 如果让 LLM 在一两个 token 中得出结论，那这有限的计算资源肯定不如让 LLM 在产生几百给 token 之后的计算资源，更多的计算资源产生正确答案的概率肯定更大
 
-先推理/规划，再给出结论
+先推理/规划，再给出结论  
 
 > 预训练相当于读课本上的知识，SFT 相当于看课本上的例题解答过程，RL 相当于做课后那种只有最后答案但要自己写演算过程的题
 
@@ -511,7 +511,7 @@ LLM 需要
 
 一般来说，微调更适合去训练行为模式（问答行为/代码补全/思维链）
 
-而对于知识性的信息，不管是从成本角度，还是回答的真实性、实时性考虑，都会更偏向第二种方式
+而对于知识性的信息，不管是从成本角度，还是回答的真实性、实时性考虑，都会更偏向第二种方式  
 
 
 ## [LLM - RAG](../112/LLM%20-%20RAG.md)
@@ -531,8 +531,8 @@ LLM 需要
 
 ---
 
-使用 excel 跑 GPT-2 👇
+使用 excel 跑 GPT-2 👇  
 [spreadsheets-are-all-you-need](https://github.com/ianand/spreadsheets-are-all-you-need/tree/v0.7.0)
 
 ![Pasted image 20250316220938](https://raw.githubusercontent.com/lei4519/picture-bed/main/imagesPasted%20image%2020250316220938.png)
-
+ 

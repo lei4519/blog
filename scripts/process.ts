@@ -239,7 +239,7 @@ async function main(): Promise<void> {
 
 
   const githubToken = process.env.GITHUB_TOKEN;
-  console.warn('cannot found GITHUB_TOKEN, update issue will be skipped')
+  !githubToken && console.warn('cannot found GITHUB_TOKEN, update issue will be skipped')
   // Initialize Octokit
   const octokit = githubToken ? new Octokit({
     auth: githubToken

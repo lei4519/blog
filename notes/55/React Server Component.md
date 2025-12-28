@@ -65,11 +65,11 @@ Tips：
 
 一个使用 `resolveModelToJSON` 将组件渲染为可序列化传输的数据返回，由客户端的 `JS` 负责解析渲染
 
-![RSCvsSSR.excalidraw](../Excalidraw/4b1bd6fd5d0ac906c7cccb2f17188965b119d4e4bcacdd31e7fbc0a3f15201939cd19c698e19bc602282a2ee8eb22f2f57a8559ac1169856159b95e796be5683.svg)
+![RSCvsSSR.excalidraw](../Excalidraw/RSCvsSSR.svg)
 
 ### 整体流程
 
-![RSC.excalidraw](../Excalidraw/4795ecc933a7fb8ad784ebbff8476572d8e9cdb27f3543b96112d4842a62a982c9d04a941ce462da54165a5ccd15fe96d5a5b143dad0e4e59e7c7cfc33b50b59.svg)
+![RSC.excalidraw](../Excalidraw/RSC.svg)
 
 首次页面加载时可以选择 SSR 模式，这与现在的 React SSR 没有什么差别，所以就直接讲 RSC 的流程了
 
