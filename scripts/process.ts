@@ -109,7 +109,7 @@ import Link from "next/link"
 `;
 
   for (const [issue, title, created, _tags] of list) {
-    blogReadme += `<li className="flex justify-between"><Link href="./docs/${issue}">${title}</Link><time className="text-sm font-mono text-gray-500">${created}</time></li>\n`;
+    blogReadme += `<li className="flex justify-between gap-2"><Link href="./docs/${issue}">${title}</Link><time className="text-sm flex-none font-mono text-gray-500">${created}</time></li>\n`;
     issueReadme += `- [${title}](https://github.com/lei4519/blog/issues/${issue}) -- ${created}\n`;
   }
 
