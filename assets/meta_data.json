@@ -454,5 +454,13 @@
     "issue": "126",
     "title": "前端性能优化",
     "description": "前端性能优化"
+  },
+  "129": {
+    "tags": "NextJS_Image,FE",
+    "created": "2025-12-25",
+    "share": "\"true\"",
+    "issue": "129",
+    "title": "Nextjs Image 响应式图片",
+    "description": "Nextjs Image 响应式图片"
   }
 }
