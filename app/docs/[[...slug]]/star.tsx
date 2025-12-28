@@ -8,11 +8,11 @@ export default function GitHubStar() {
 	const githubUrl = 'https://github.com/lei4519/blog'; // 请替换为你的 GitHub 仓库地址
 
 	return (
-		<div className="rounded-lg border-t border-fd-border bg-linear-to-br from-fd-background via-fd-background to-fd-muted/20 px-6 pb-6 pt-16 mt-8">
+		<div className="rounded-lg border-t border-fd-border bg-linear-to-br from-fd-background via-fd-background to-fd-muted/20 px-4 pb-6 pt-16 mt-8">
 			<div className="flex flex-col items-center gap-4 text-center">
 				{/* 标题 */}
-				<div className="flex items-center gap-2">
-					<Star className="h-5 w-5 text-yellow-500 fill-yellow-500" />
+				<div className="flex gap-2">
+					<Star className="h-5 flex-none w-5 mt-[3px] text-yellow-500 fill-yellow-500" />
 					<h3 className="text-lg font-semibold text-fd-foreground">
 						觉得有帮助？给个 Star 支持一下吧！
 					</h3>
