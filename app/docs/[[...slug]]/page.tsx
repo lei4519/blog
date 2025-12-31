@@ -40,7 +40,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
           <DocsDescription className='mb-0'>{page.data.description}</DocsDescription>
         )
       }
-      <div className='text-fd-muted-foreground mb-4 flex items-center gap-2 justify-between'>
+      <div className='text-fd-muted-foreground mb-4 flex items-center gap-2 justify-between flex-wrap'>
         <DocsTags tags={page.data.tags || []} />
         <time className='font-mono'>{page.data.created?.toLocaleDateString()}</time>
       </div>
