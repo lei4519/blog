@@ -1,7 +1,7 @@
 
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/2025-12-31 03:13:14"/>
+    <img src="https://badgen.net/badge/last-commit/2026-01-08 13:27:26"/>
 </p>
 
 <img src="assets/wordcloud.webp" title="词云" alt="词云">
