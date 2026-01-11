@@ -3,6 +3,7 @@ tags:
   - React
   - FE
   - Explanation
+  - NextJS
 aliases:
   - 服务端组件
 share: "true"
