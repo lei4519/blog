@@ -456,12 +456,15 @@
     "description": "前端性能优化"
   },
   "129": {
-    "tags": "NextJS_Image,FE",
+    "tags": [
+      "NextJS_Image",
+      "FE"
+    ],
     "created": "2025-12-25",
-    "share": "\"true\"",
-    "issue": "129",
-    "title": "Nextjs Image 响应式图片",
-    "description": "Nextjs Image 响应式图片"
+    "share": "true",
+    "issue": 129,
+    "description": "如何在 NextJS 中让浏览器根据屏幕宽度请求合适尺寸的图片",
+    "title": "Nextjs Image 响应式图片"
   },
   "131": {
     "tags": "LLM,Think",
