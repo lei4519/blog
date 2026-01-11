@@ -484,10 +484,16 @@
   "134": {
     "created": "2025-08-30",
     "updated": "2025-09-03T18:20",
-    "tags": "NextJS_Link,FE",
-    "share": "\"true\"",
-    "issue": "134",
-    "title": "NextJS Slow navigation between pages",
-    "description": "NextJS Slow navigation between pages"
+    "tags": [
+      "NextJS",
+      "FE"
+    ],
+    "share": "true",
+    "issue": 134,
+    "description": "NextJS 页面间导航缓慢分析与改善思路",
+    "aliases": [
+      "NextJS Slow navigation between pages"
+    ],
+    "title": "NextJS Slow navigation between pages"
   }
 }
