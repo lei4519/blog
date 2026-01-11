@@ -72,11 +72,33 @@ export async function generateMetadata(
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
+  const siteUrl = 'https://lei4519.github.io/blog';
+  const pageUrl = `${siteUrl}${page.url}`;
+  const imageUrl = getPageImage(page).url;
+
   return {
     title: page.data.title,
     description: page.data.description,
+    keywords: page.data.tags,
     openGraph: {
-      images: getPageImage(page).url,
+      title: page.data.title,
+      description: page.data.description,
+      url: pageUrl,
+      type: 'article',
+      images: [
+        {
+          url: imageUrl,
+          alt: page.data.title,
+        },
+      ],
+      publishedTime: page.data.created?.toISOString(),
+    },
+    alternates: {
+      canonical: pageUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
