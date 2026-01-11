@@ -5,6 +5,7 @@ tags:
 created: 2025-12-25T13:11
 share: "true"
 issue: "129"
+description: 如何在 NextJS 中让浏览器根据屏幕宽度请求合适尺寸的图片
 ---
 
 ## HTML Img 标签
