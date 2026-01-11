@@ -1,4 +1,6 @@
-type MetaData = Record<string, string>;
+import matter from "gray-matter";
+
+type MetaData = Record<string, unknown>;
 
 interface ConvertResult {
   metaData: MetaData;
@@ -8,21 +10,44 @@ interface ConvertResult {
 
 // Convert markdown content for both blog and issue formats
 export function convert(title: string, content: string): ConvertResult {
-  // Separate content for blog and issue - pre-allocate capacity
   let blogContent = "";
   let issueContent = "";
 
-  const metaData: MetaData = {};
+  const trimmedContent = content.trim();
 
-  // Process file curLine() by curLine()
-  const lines = content.trim().split("\n");
+  // 使用 gray-matter 解析 frontmatter
+  const parsed = matter(trimmedContent);
+  const frontmatter = parsed.data;
 
-  let row = 0;
+  // 生成 blog frontmatter
+  // 添加默认 title 和 description
+  if (!frontmatter.title) {
+    frontmatter.title = title;
+  }
+  if (!frontmatter.description) {
+    frontmatter.description = title;
+  }
 
-  const build = (props: {
-    blog?: string;
-    issue?: string;
-  } | string) => {
+  if (frontmatter.issue) {
+    frontmatter.issue = Number(frontmatter.issue);
+  }
+
+  // 为 issue content 添加时间戳
+  if (frontmatter.created) {
+    const formatted = String(frontmatter.created).substring(0, 10);
+    frontmatter.created = formatted;
+    issueContent += `<p align="right"><time>${frontmatter.created}</time></p>\n`;
+  }
+
+  // 辅助函数：构建 blog 和 issue 内容
+  const build = (
+    props:
+      | {
+          blog?: string;
+          issue?: string;
+        }
+      | string,
+  ) => {
     if (typeof props === "string") {
       blogContent += props + "\n";
       issueContent += props + "\n";
@@ -34,154 +59,37 @@ export function convert(title: string, content: string): ConvertResult {
         issueContent += props.issue + "\n";
       }
     }
-  }
+  };
 
-  const moveDown = () => {
-    row++;
-  }
+  build({
+    blog: matter.stringify("", frontmatter).trim() + "\n",
+  });
 
-  const buildAndMoveDown = (props: Parameters<typeof build>[0]) => {
-    build(props)
-    moveDown();
-  }
+  // 处理正文内容
+  const lines = parsed.content.split("\n");
 
-  const isEnd = () => row >= lines.length;
-  const nextLine = () => lines[row + 1];
-  const curLine = () => lines[row];
-
-  while (!isEnd()) {
-
-
-    // Empty lines pass through
-    if (curLine().trim() === "") {
-      buildAndMoveDown(curLine());
+  for (const line of lines) {
+    // 空行直接传递
+    if (line.trim() === "") {
+      build(line);
       continue;
     }
 
-    // metadata block
-    if (row === 0 && curLine().trim() === "---") {
-      // Handle meta block delimiters (---)
-      // Only first non-empty curLine() can start meta block
-      buildAndMoveDown({
-        blog: curLine(), // --- start
-      })
-
-      // find until end or ---
-      while (!isEnd() && curLine().trim() !== "---") {
-      // Inside meta block - parse key-value pairs
-        const parts = curLine().split(":");
-        let key = parts[0]?.trim() || "";
-        let val = parts.slice(1).join(":").trim();
-
-        // ensure val is not empty
-        if (!val) {
-          // list
-          if (nextLine().trim().startsWith('-')) {
-            buildAndMoveDown({
-              blog: curLine(), // tags:
-            });
-
-            const v = []
-
-            while (curLine().trim().startsWith('-')) {
-              const item = curLine().trim().slice(1).trim()
-
-              buildAndMoveDown({
-                blog: curLine(),
-              });
-
-              v.push(item);
-            }
-
-            val = v.join(",");
-          } else {
-            moveDown();
-
-            while (!isEnd() && !curLine().trim()) {
-              moveDown();
-            }
-
-            // wrap
-            if (!curLine().includes(':')) {
-              val = curLine().trim();
-              buildAndMoveDown({
-                blog: `${key}: "${val}"`,
-              })
-              metaData[key] = val;
-              continue;
-            }
-          }
-        } else if (key == "created") {
-          // Format created date (strip time portion)
-          val = val.substring(0, 10);
-          buildAndMoveDown({
-            blog: `${key}: ${val}`,
-          });
-        } else if (key === "issue") {
-          // Remove quotes from issue number
-          val = val.replace(/"/g, "");
-          buildAndMoveDown({
-            blog: `${key}: ${val}`,
-          });
-        } else {
-          buildAndMoveDown({
-            blog: curLine(),
-          });
-        }
-
-        metaData[key] = val;
-      }
-
-      if (isEnd()) {
-        throw new Error(
-          `[Convert Error] Meta block not found in File: ${title}`,
-        );
-      }
-
-      // Add default meta data for blog if missing
-      const addMetas: Array<[string, string]> = [
-        ["title", title],
-        ["description", title],
-      ];
-
-      for (const [k, v] of addMetas) {
-        if (!metaData[k]) {
-          build({
-            blog: `${k}: ${v}`,
-          });
-
-          metaData[k] = v;
-        }
-      }
-
-      if (metaData.created) {
-      // For issue content, add creation time
-        build({
-          issue: `<p align="right"><time>${metaData.created}</time></p>`,
-        });
-      }
-
-      buildAndMoveDown({
-        blog: curLine()
-      }); // --- end token
-
-      continue;
-    }
-    // Regex patterns - defined at module level like Rust's Lazy<Regex>
+    // Regex patterns
     const BLOCK_QUOTE_REG = /^(>\s+\[!)([^\]]+)\]/;
     // Handle block quotes like > [!TIP]
-    const blockQuoteMatch = BLOCK_QUOTE_REG.exec(curLine());
+    const blockQuoteMatch = BLOCK_QUOTE_REG.exec(line);
     if (blockQuoteMatch) {
       const tag = blockQuoteMatch[2].trim();
 
-      buildAndMoveDown({
+      build({
         blog: `> **${tag}**  \n>  `,
-        issue: `${blockQuoteMatch[1]}${tag}${curLine().substring(blockQuoteMatch[1].length + blockQuoteMatch[2].length)}`
-      })
+        issue: `${blockQuoteMatch[1]}${tag}${line.substring(blockQuoteMatch[1].length + blockQuoteMatch[2].length)}`,
+      });
       continue;
     }
 
-    // Handle links - process all links in the curLine()
+    // Handle links - process all links in the line
     let linePrevIdx = 0;
     let blogLine = "";
     let issueLine = "";
@@ -193,21 +101,20 @@ export function convert(title: string, content: string): ConvertResult {
     const IMG_REG = /\.(jpg|png|svg|jpeg|webp)$/;
 
     // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-    while ((linkMatch = LINK_REG.exec(curLine())) !== null) {
+    while ((linkMatch = LINK_REG.exec(line)) !== null) {
       const link = linkMatch[1];
 
       if (link.startsWith("../")) {
         const wholeMatchStart = linkMatch.index;
         const wholeMatchEnd = wholeMatchStart + linkMatch[0].length;
         const linkStart = wholeMatchStart + 2; // position after ](
-        const linkEnd = linkStart + link.length;
 
         const isMd = link.endsWith(".md");
         const isImg = IMG_REG.test(link);
 
         if (isMd || isImg) {
           // Add prefix before the link
-          const prefix = curLine().substring(linePrevIdx, linkStart);
+          const prefix = line.substring(linePrevIdx, linkStart);
           blogLine += prefix;
           issueLine += prefix;
         }
@@ -248,19 +155,19 @@ export function convert(title: string, content: string): ConvertResult {
       }
     }
 
-    // Add remaining part of the curLine()
-    const remain = curLine().substring(linePrevIdx);
+    // Add remaining part of the line
+    const remain = line.substring(linePrevIdx);
     blogLine += remain;
     issueLine += remain;
 
-    buildAndMoveDown({
+    build({
       blog: blogLine,
-      issue: issueLine
+      issue: issueLine,
     });
   }
 
   return {
-    metaData,
+    metaData: frontmatter,
     issueContent,
     blogContent,
   };

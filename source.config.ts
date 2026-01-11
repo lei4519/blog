@@ -11,7 +11,7 @@ import { remarkDirectiveAdmonition } from 'fumadocs-core/mdx-plugins';
 const customSchema = {
   issue: z.number().optional(),
   tags: z.array(z.string()).optional(),
-  created: z.date().optional(),
+  created: z.coerce.date().optional(),
   updated: z.string().optional(),
 };
 

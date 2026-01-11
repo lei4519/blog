@@ -40,7 +40,7 @@ export default function HomePage() {
                 {page.data.title}
               </Link>
               <time className="text-sm text-fd-muted-foreground font-mono flex-none">
-                {page.data.created?.toLocaleDateString("zh-CN")}
+                {page.data.created?.toLocaleDateString()}
               </time>
             </li>
           ))}
