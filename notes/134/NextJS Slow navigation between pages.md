@@ -2,48 +2,83 @@
 created: 2025-08-30T17:11
 updated: 2025-09-03T18:20
 tags:
-  - NextJS_Link
+  - NextJS
   - FE
 share: "true"
 issue: "134"
+description: NextJS 页面间导航缓慢分析与改善思路
+aliases:
+  - NextJS Slow navigation between pages
 ---
 
-## 流程
+NextJS 应用在弱网环境中（地铁之类的），点击跳转链接后会有明显的等待时间，在这期间页面 **没有任何变化**，会让人很疑惑
 
-每次跳转都会发一个 ?rsc=hash
-1. 进行服务端组件的执行
-2. 流式的传输 RSC data
-3. 遇到客户端组件会触发 JS 资源的下载
-4. 最终页面渲染
+## TL;DR
 
-## 问题
+### 一阶段：添加视觉反馈
 
-1. 预加载失效？上述步骤只有 JS 资源能被缓存
-2. rsc （client route cache）默认不会缓存，需要配置 staleTime（非 vercel 是否生效？）
-    - 即使生效，缓存时间问题？比如登陆状态变化后缓存了之前的状态？
+给页面跳转加上一个进度条展示，给予用户即使的视觉反馈
+- 体验优化：对于快速响应的页面（0.3s 以内）不展示进度条
 
-## 核心
+### 二阶段：开启动态页面的预加载
 
-异步加载（服务端执行）真实存在，等待时间不可避免（弱网、VPN 节点等）
-- vercel edge render 可以缓解
+提前缓存页面资源，弱网（甚至断网）仍然可以秒跳
+- 注意：面临缓存状态的问题（后端数据变更、登录态变更等），做好缓存更新
 
-web 时代，等待是可以接受的，重点是要立即提供视觉反馈
+### 三阶段：优化动态 API
 
-## 方案
+最小粒度的使用动态 API，仅在使用数据的组件中调用，并将组件拆分后，配合 Suspend 进行流式响应
 
-- Suspend：包裹一个 loading 提前返回
-    - 问题：
-        - 每个页面都要加
-        - 还是要经过 rsc 的过程，如果 rsc 本身很慢（弱网），loading 可能都无法返回
-- loading.js
-    - 问题：同上，loading.js 本质就是自动包了 Suspend
-- 直接通过 <a /> 来跳转，使用浏览器的加载效果
-    - ？
-- 客户端即时渲染
-    - onNavigate+useLinkStatus+useOptimistic
-    - 需要封装一下 Link 组件
+## 原因分析
 
-## 预加载测试
+简单说：  
+一旦在服务端组件中使用了 [动态 API](https://nextjs.org/docs/app/getting-started/partial-prerendering#dynamic-rendering)(eg. `cookie()`)，页面就会变为动态渲染，此时的交互流程如下：
+
+每次 `<Link />` 跳转都会发一个 `?rsc=hash` 请求
+1. 请求到服务端后，运行服务端代码
+2. 流式的传输 [React Server Component](../55/React%20Server%20Component.md) data
+3. 客户端接收响应渲染页面
+
+具体细节为
+
+## [Caching In NextJS](https://nextjs.org/docs/app/guides/caching#full-route-cache)
+
+![f1e3f2e6eda73b746142326724e0442878d48655a863df4750d86a05f8113aac7309618ab4165fdbeccd3f9d5b709ef424ca958cc2ea24cb5f1c08af53add730](../attachments/f1e3f2e6eda73b746142326724e0442878d48655a863df4750d86a05f8113aac7309618ab4165fdbeccd3f9d5b709ef424ca958cc2ea24cb5f1c08af53add730.png)
+
+两种缓存：客户端缓存 & 服务端缓存
+
+- 客户端：浏览器内存（单用户）
+- 服务端：服务器（多用户）
+
+两种页面：静态页面 & 动态页面
+
+- 静态：路径中没有动态参数 `/blog/[slug]` & 没有使用 [动态 API](https://nextjs.org/docs/app/getting-started/partial-prerendering#dynamic-rendering)
+- 动态：!静态
+
+默认缓存情况：
+
+| -    | 客户端缓存   | 服务端缓存 | 预加载                  |
+| ---- | ------- | ----- | -------------------- |
+| 静态页面 | ✅（5min） | ✅     | ✅                    |
+| 动态页面 | ❌       | ❌     | ❌（only `loading.js`） |
+
+动态页面最多只能在客户端中进行缓存，无法在服务端中进行缓存
+
+这是合理的，访问了动态 API 的大多数场景就是在区别用户 (cookie\header)，也就是要根据不同用户的状态选择不同的逻辑，所以必须每次请求都要重新回到服务端执行相关的逻辑
+
+否则一个用户登录后，后面所有用户访问的都是这个用户的页面（逻辑），那就出问题了
+
+## 预加载
+
+对于动态页面的预加载行为：
+- 预加载只会加载 `loading.js` ([Guides: Prefetching](https://nextjs.org/docs/app/guides/prefetching#prefetching-static-vs-dynamic-routes))
+- 如果没有 `loading.js` 或 `Suspend`，页面会被阻塞直到服务端完全响应才会跳转
+
+且，默认情况下，动态渲染没有任何缓存，当再次单击链接时，依然会重复上述过程
+
+![c9cb0f7c73629511f8c7578ee8ec6c4f2b3bb00503232380422b85c496f4a8cf2baaeaaf7ded9f3e78dfd684a2a458fc7411b6f602806ffa235545bbe90b00e0](../attachments/c9cb0f7c73629511f8c7578ee8ec6c4f2b3bb00503232380422b85c496f4a8cf2baaeaaf7ded9f3e78dfd684a2a458fc7411b6f602806ffa235545bbe90b00e0.png)
+
+### 预加载测试
 
 ```tsx
 // home
@@ -75,71 +110,19 @@ export default async function Page() {
 - 生产环境也需要等 3s 才能进入页面
 	- 如果存在 loading.ts 或者 Suspend，可以秒看到 loading 中的内容
 
-具体原因见：[Getting Started: Partial Prerendering \| Next.js](https://nextjs.org/docs/app/getting-started/partial-prerendering#dynamic-rendering)
+## 改善方法
 
-简单说：一旦使用了动态的 API，整个渲染就会变成动态渲染，这种情况下只会预加载 `loading.js`，如果没有 `loading.js` 就会等待整个页面完全响应之后才会进入页面
-
-![c9cb0f7c73629511f8c7578ee8ec6c4f2b3bb00503232380422b85c496f4a8cf2baaeaaf7ded9f3e78dfd684a2a458fc7411b6f602806ffa235545bbe90b00e0](../attachments/c9cb0f7c73629511f8c7578ee8ec6c4f2b3bb00503232380422b85c496f4a8cf2baaeaaf7ded9f3e78dfd684a2a458fc7411b6f602806ffa235545bbe90b00e0.png)
-
-> [Guides: Prefetching \| Next.js](https://nextjs.org/docs/app/guides/prefetching#prefetching-static-vs-dynamic-routes)
-
----
-
-可以通过显示配置 `prefetch=true` 来强制预取动态渲染页面  
-这个会使动态页面使用静态页面的缓存配置（默认 5 分钟）  
-<https://nextjs.org/docs/app/api-reference/config/next-config-js/staleTimes>
-
-![9a7cbcbc901f5b35129b4b2f8b6bc625b84c1a882990c91a860e4056b91f2671c92e18044e524814bdc41385c478d59edebdb2a8427b71984844f2ba9e8bf9bb](../attachments/9a7cbcbc901f5b35129b4b2f8b6bc625b84c1a882990c91a860e4056b91f2671c92e18044e524814bdc41385c478d59edebdb2a8427b71984844f2ba9e8bf9bb.png)
-
-## 原因
-
-一旦在服务端组件中使用了 [动态 API](https://nextjs.org/docs/app/getting-started/partial-prerendering#dynamic-rendering)，页面就会变为动态渲染
-
-- 此时预加载只会加载 `loading.js` ([Guides: Prefetching](https://nextjs.org/docs/app/guides/prefetching#prefetching-static-vs-dynamic-routes))
-    
-- 如果没有 `loading.js` 或 `Suspend`，页面会被阻塞直到服务端完全响应才会跳转
-
-且，默认动态渲染没有任何缓存，当再次单击链接时，依然会重复上述过程
-
-## [Caching In NextJS](https://nextjs.org/docs/app/guides/caching#full-route-cache)
-
-![f1e3f2e6eda73b746142326724e0442878d48655a863df4750d86a05f8113aac7309618ab4165fdbeccd3f9d5b709ef424ca958cc2ea24cb5f1c08af53add730](../attachments/f1e3f2e6eda73b746142326724e0442878d48655a863df4750d86a05f8113aac7309618ab4165fdbeccd3f9d5b709ef424ca958cc2ea24cb5f1c08af53add730.png)
-
-两种缓存：客户端缓存 & 服务端缓存
-
-- 客户端：浏览器内存（单用户）
-    
-- 服务端：服务器（多用户）
-
-两种页面：静态页面 & 动态页面
-
-- 静态：路径中没有动态参数 `3d-models/[id]` & 没有使用 [动态 API](https://nextjs.org/docs/app/getting-started/partial-prerendering#dynamic-rendering)
-    
-- 动态：!静态
-
-默认缓存情况：
-
-|-|客户端缓存|服务端缓存|预加载|
-|---|---|---|---|
-|静态页面|✅（5min）|✅|✅|
-|动态页面|❌|❌|❌（only `loading.js`）|
-
-动态页面最多只能在客户端中进行缓存，无法在服务端中进行缓存
-
-- 这是合理的，不然一个用户登录后，后面所有用户访问的都是这个用户的页面了
-
-## 调整动态页面缓存的方法
+> [!TIP]  
+> NextJS v16 有了 cacheComponent 功能，可以允许一个页面同时具备动态和静态的行为  
+> 但核心没有变化，只是将影响范围从页面缩小到了组件、函数的级别，所以下面的内容依然有效
 
 ### 缓存配置
 
 > [next-config/staleTimes](https://nextjs.org/docs/app/api-reference/config/next-config-js/staleTimes)
 
 配置 **客户端缓存中** 动态渲染的缓存时间 `staleTime.dynamic`
-
 - 可以改善短时间内反复访问页面的速度
-    
 - 但并不能改善首次点击时的加载速度（没有预加载）
-    
 - 需要考虑缓存问题，比如用户退出？改名？
 
 ### 预加载
@@ -147,173 +130,63 @@ export default async function Page() {
 在 `Link` 中显示配置 `prefetch=true` 来强制预取动态渲染页面（v15.4.0 默认值变成了 auto）
 
 这同时会使动态页面使用静态页面的缓存配置（默认 5 分钟）
-
 - 可以同时解决首次点击和再次点击的加载速度
-    
 - 同上，缓存问题
 
-### Loading
+### Suspend
 
-给动态页面加入 `loading.js` 或 `Suspend`
-
+给动态页面加入 `loading.js` 或 `Suspend`，这会使页面流式传输，让静态的部分提前返回
 - `loading.js` 可以在 app 目录中加一个，所有动态路由都可以共享
-    
-- 但需要设计一下样式，或者一个全局居中的 loading？
 
 ### 客户端状态更新
 
 客户端渲染加载状态
-
 - 封装一下 Link 组件：onNavigate+useLinkStatus+useOptimistic
-    
+	- 或者使用 `instrumentation-client.ts` 触发事件，配合一个组件接受事件做渲染
+
+```ts
+export const onRouterTransitionStart = (
+  url: string,
+  navigationType: "push" | "replace" | "traverse"
+) => {
+  window?.dispatchEvent?.(
+    new CustomEvent("router-transition-start", {
+      detail: {
+        url,
+        navigationType,
+      },
+    })
+  );
+};
+```
+
 - 在页面顶部展示一个进度条
+	- [react-transition-progress](https://github.com/vercel/react-transition-progress)
+	- [Next JS navigation feels slow? Make it snappy again](https://linh.nguyen.be/articles/snappy-navigation-nextjs-app-router/)
+	- [Global progress in nextjs​​](https://buildui.com/posts/global-progress-in-nextjs)
 
-## 客户端缓存的清理方法
-
-- 浏览器页面刷新
-    
-    - `location.reload()` / `location.href = "/"`
-        
-- NextJS 客户端 API
-    
-    - [router.refresh](https://nextjs.org/docs/app/api-reference/functions/use-router)
-        
-- Server Action API
-    
-    - [`cookies.set`](https://nextjs.org/docs/app/api-reference/functions/cookies#setting-a-cookie) or [`cookies.delete`](https://nextjs.org/docs/app/api-reference/functions/cookies#deleting-cookies)
-        
-    - [`revalidatePath`](https://nextjs.org/docs/app/api-reference/functions/revalidatePath)
-
-## 解决方案
+### 整体思路
 
 1. 可以无脑加上客户端状态更新做兜底
-    
 2. 强制开启预加载，但需要注意缓存问题
-    
-3. 针对不同的页面，自行设计 loading.js
-    
+3. 针对不同的页面，自行设计 loading.js/ Suspend
 4. 如果有通用的全局 loading 页面，也可以兜底加上
-
----
-
-在弱网环境中（地铁之类的），点击跳转链接后会有明显的等待时间，在这期间页面**没有任何变化**，会让人很疑惑
-
-## 一阶段：添加视觉反馈 ✅
-
-可以给页面跳转加上一个进度条展示，给予用户即使的视觉反馈，如下所示
-
-- 体验优化：对于快速响应的页面（0.3s 以内）不展示进度条
-
-## 二阶段：开启动态页面的预加载 ⏳
-
-提前缓存页面资源，弱网（甚至断网）仍然可以秒跳
-
-- 面临缓存状态的问题（后端数据变更、登录态变更等），需要详细验证后再开启
-
----
-
-以下为技术原因分析 👇🏻
-
-## 原因分析
-
-一旦在服务端组件中使用了 [动态 API](https://nextjs.org/docs/app/getting-started/partial-prerendering#dynamic-rendering)，页面就会变为动态渲染
-
-- 此时预加载只会加载 `loading.js` ([Guides: Prefetching](https://nextjs.org/docs/app/guides/prefetching#prefetching-static-vs-dynamic-routes))
-    
-- 如果没有 `loading.js` 或 `Suspend`，页面会被阻塞直到服务端完全响应才会跳转
-
-且，默认动态渲染没有任何缓存，当再次单击链接时，依然会重复上述过程
-
-## [Caching In NextJS](https://nextjs.org/docs/app/guides/caching#full-route-cache)
-
-![f1e3f2e6eda73b746142326724e0442878d48655a863df4750d86a05f8113aac7309618ab4165fdbeccd3f9d5b709ef424ca958cc2ea24cb5f1c08af53add730](../attachments/f1e3f2e6eda73b746142326724e0442878d48655a863df4750d86a05f8113aac7309618ab4165fdbeccd3f9d5b709ef424ca958cc2ea24cb5f1c08af53add730.png)
-
-两种缓存：客户端缓存 & 服务端缓存
-
-- 客户端：浏览器内存（单用户）
-    
-- 服务端：服务器（多用户）
-
-两种页面：静态页面 & 动态页面
-
-- 静态：路径中没有动态参数 `3d-models/[id]` & 没有使用 [动态 API](https://nextjs.org/docs/app/getting-started/partial-prerendering#dynamic-rendering)
-    
-- 动态：!静态
-
-默认缓存情况：
-
-|-|客户端缓存|服务端缓存|预加载|
-|---|---|---|---|
-|静态页面|✅（5min）|✅|✅|
-|动态页面|❌|❌|❌（only `loading.js`）|
-
-动态页面最多只能在客户端中进行缓存，无法在服务端中进行缓存
-
-- 这是合理的，不然一个用户登录后，后面所有用户访问的都是这个用户的页面了
-
-## 调整动态页面缓存的方法
-
-### 缓存配置
-
-> [next-config/staleTimes](https://nextjs.org/docs/app/api-reference/config/next-config-js/staleTimes)
-
-配置 **客户端缓存中** 动态渲染的缓存时间 `staleTime.dynamic`
-
-- 可以改善短时间内反复访问页面的速度
-    
-- 但并不能改善首次点击时的加载速度（没有预加载）
-    
-- 需要考虑缓存问题，比如用户退出？改名？
-
-### 预加载
-
-在 `Link` 中显示配置 `prefetch=true` 来强制预取动态渲染页面（v15.4.0 默认值变成了 auto）
-
-这同时会使动态页面使用静态页面的缓存配置（默认 5 分钟）
-
-- 可以同时解决首次点击和再次点击的加载速度
-    
-- 同上，缓存问题
-
-### Loading
-
-给动态页面加入 `loading.js` 或 `Suspend`
-
-- `loading.js` 可以在 app 目录中加一个，所有动态路由都可以共享
-    
-- 但需要设计一下样式，或者一个全局居中的 loading？
-
-### 客户端状态更新
-
-客户端渲染加载状态
-- 封装一下 Link 组件：onNavigate+useLinkStatus+useOptimistic
-- 在页面顶部展示一个进度条
-- [react-transition-progress](https://github.com/vercel/react-transition-progress)
-- [Next JS navigation feels slow? Make it snappy again](https://linh.nguyen.be/articles/snappy-navigation-nextjs-app-router/)
-- [Global progress in nextjs​​](https://buildui.com/posts/global-progress-in-nextjs)
 
 ## 客户端缓存的清理方法
 
 - 浏览器页面刷新
-    
     - `location.reload()` / `location.href = "/"`
-        
 - NextJS 客户端 API
-    
     - [router.refresh](https://nextjs.org/docs/app/api-reference/functions/use-router)
-        
 - Server Action API
-    
     - [`cookies.set`](https://nextjs.org/docs/app/api-reference/functions/cookies#setting-a-cookie) or [`cookies.delete`](https://nextjs.org/docs/app/api-reference/functions/cookies#deleting-cookies)
-        
     - [`revalidatePath`](https://nextjs.org/docs/app/api-reference/functions/revalidatePath)
 
-## 动态渲染可能的缓存问题
+## 动态渲染的缓存问题
 
 ### 登录状态
 
 目前退出登录时，会执行 `location.href = "/"` 刷新页面，这会使浏览器缓存失效，所以不会有问题
-
 - 以防万一（后续重构代码），最好还是在这些地方加入 `router.refresh()`
 
 ### 后端数据
@@ -323,7 +196,6 @@ export default async function Page() {
 #### CSR
 
 每次都会在客户端请求数据，动态渲染缓存不会引入任何新的问题（因为根本没有缓存什么有意义的东西）
-
 - 抛开 NextJS，单纯使用 RQ/SWC 也会面临缓存问题，常规做法是在 **mutate 之后都会重新 refetch/revalidate** 来使缓存失效
 
 #### RQ/SWC SSR
@@ -382,7 +254,5 @@ export const mutateData = async () => {
 ```
 
 后端数据缓存在 RSC Payload 中，需要在数据变更后
-
 1. 首选在 Server Action 中执行 [`revalidatePath`](https://nextjs.org/docs/app/api-reference/functions/revalidatePath)
-    
 2. 在浏览器中执行 `router.refresh()`，但是这会使所有客户端缓存都失效
