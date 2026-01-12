@@ -1,16 +1,18 @@
-import { createMDX } from 'fumadocs-mdx/next';
+import { createMDX } from "fumadocs-mdx/next";
 
 const withMDX = createMDX();
+
+const isDev = process.env.NODE_ENV === "development";
 
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-  output: 'export',
+  output: "export",
   // trailingSlash: true,
   // skipTrailingSlashRedirect: true,
   images: { unoptimized: true },
-  basePath: "/blog",
-  assetPrefix: "/blog"
+  basePath: isDev ? "" : "/blog",
+  assetPrefix: isDev ? "" : "/blog",
 };
 
 export default withMDX(config);

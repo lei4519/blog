@@ -13,13 +13,14 @@ import { createRelativeLink } from 'fumadocs-ui/mdx';
 import Script from 'next/script';
 import CommentsScript from './script';
 import GitHubStar from './star';
+import { TagLink } from './tag-link';
 
 function DocsTags(props: { tags: string[] }) {
   if (props.tags.length === 0) return null;
   return <ul className="flex gap-2 ">
     {props.tags.map((tag) => (
       <li key={tag}>
-        #{tag}
+        <TagLink tag={tag} />
       </li>
     ))}
   </ul>;
