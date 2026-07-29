@@ -16,7 +16,7 @@
     "start": "next start",
     "process": "npx tsx scripts/process.ts",
     "local": "npx dotenvx run -f .env.local -- npx tsx scripts/process.ts",
-    "serve": "npx serve@latest out",
+    "serve": "tsx scripts/serve.ts",
     "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
     "postinstall": "fumadocs-mdx",
     "convert": "tsx scripts/main.ts",
@@ -34,24 +34,28 @@
     "fumadocs-ui": "16.4.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.561.0",
-    "next": "16.2.3",
+    "next": "^16.2.12",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "zod": "^4.2.1"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.51.2",
-    "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/mdx": "^2.0.13",
     "@types/node": "^24.10.2",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "postcss": "^8.5.6",
-    "serve": "^14.2.5",
-    "tailwindcss": "^4.1.18",
-    "tsx": "^4.19.2",
+    "postcss": "^8.5.25",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.1",
     "typescript": "^5.9.3",
-    "vitest": "^1.6.0"
+    "vitest": "^4.1.10"
+  },
+  "resolutions": {
+    "esbuild": "0.28.1",
+    "postcss": "8.5.25",
+    "sharp": "0.35.0"
   },
   "packageManager": "yarn@4.12.0"
 }
