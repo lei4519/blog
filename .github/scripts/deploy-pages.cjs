@@ -8,6 +8,29 @@ module.exports = async function deployPages({ github, context, core }) {
 
   const { repos } = github.rest
   const repo = context.repo
+  // Upload completion can precede visibility to the Actions and Pages services.
+  const readyDeadline = Date.now() + 120_000
+  for (;;) {
+    const { data } = await github.rest.actions.listWorkflowRunArtifacts({
+      ...repo, run_id: context.runId, name: 'github-pages',
+    })
+    const artifact = data.artifacts.find(item => item.id === artifactId)
+    if (artifact && !artifact.expired && artifact.size_in_bytes > 0) {
+      try {
+        await github.rest.actions.downloadArtifact({
+          ...repo, artifact_id: artifactId, archive_format: 'zip',
+          headers: { range: 'bytes=0-0' },
+        })
+        break
+      } catch (error) {
+        if (error.status !== 404 && error.status < 500) throw error
+      }
+    }
+    if (Date.now() >= readyDeadline) throw new Error(`Uploaded artifact ${artifactId} is not readable`)
+    core.info(`Waiting for uploaded artifact ${artifactId} to become readable`)
+    await delay(5_000)
+  }
+
   const oidcToken = await core.getIDToken()
   core.info(`Deploying artifact ${artifactId} for ${context.sha}`)
   let deployment
