@@ -26,7 +26,7 @@ module.exports = async function deployPages({ github, context, core }) {
 
   const deploymentId = deployment.id || deployment.status_url?.split('/').pop() || context.sha
   const target = { ...repo, pages_deployment_id: deploymentId }
-  const cancel = () => repos.cancelPagesDeployment(target).catch(error => {
+  const cancel = () => github.request('POST /repos/{owner}/{repo}/pages/deployments/{pages_deployment_id}/cancel', target).catch(error => {
     core.warning(`Could not cancel Pages deployment: ${error.message}`)
   })
   const onCancel = () => { void cancel().finally(() => process.exit(1)) }
@@ -38,7 +38,7 @@ module.exports = async function deployPages({ github, context, core }) {
       await delay(5_000)
       let status
       try {
-        const response = await repos.getPagesDeployment(target)
+        const response = await github.request('GET /repos/{owner}/{repo}/pages/deployments/{pages_deployment_id}', target)
         status = response.data.status
       } catch (error) {
         if (error.status === 404 || error.status === 429 || error.status >= 500) continue
