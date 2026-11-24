@@ -34,10 +34,10 @@
     "fumadocs-ui": "16.4.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.561.0",
-    "next": "^16.2.12",
+    "next": "^16.4.5",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "zod": "^4.2.1"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.51.2",
@@ -55,7 +55,7 @@
   "resolutions": {
     "esbuild": "0.28.1",
     "postcss": "8.5.25",
-    "sharp": "0.35.0"
+    "sharp": "0.35.5"
   },
   "packageManager": "yarn@4.12.0"
 }

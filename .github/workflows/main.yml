@@ -61,6 +61,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        id: upload
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
@@ -68,7 +69,12 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/github-script@v8
+        env:
+          PAGES_ARTIFACT_ID: ${{ steps.upload.outputs.artifact_id }}
+        with:
+          script: |
+            await require('./.github/scripts/deploy-pages.cjs')({ github, context, core })
 
       - name: Check for changes
         id: check-changes

@@ -29,7 +29,7 @@ interface ContentItem {
 
 function getChangeNoteFiles(): string[] {
   const content = process.env.CHANGED_FILES;
-  if (!content) {
+  if (content === undefined) {
     throw new Error("cannot found CHANGED_FILES");
   }
 
@@ -62,9 +62,7 @@ function getReadmeContent(docMetaData: MetaDataMap): [string, string] {
     return dateB.getTime() - dateA.getTime();
   });
 
-  // Get current timestamp
-  const now = new Date();
-  const timestamp = now.toISOString().replace("T", " ").substring(0, 19);
+  const lastCommitBadge = "https://img.shields.io/github/last-commit/lei4519/blog/main";
 
   // Blog README (MDX format)
   let blogReadme = `---
@@ -76,7 +74,7 @@ import Link from "next/link"
 
 <div className="flex justify-center gap-4">
   <img src="https://badgen.net/github/issues/lei4519/blog" />
-  <img src="https://badgen.net/badge/last-commit/${timestamp}" />
+  <img src="${lastCommitBadge}" />
 </div>
 
 <Image
@@ -95,7 +93,7 @@ import Link from "next/link"
   let issueReadme = `
 <p align='center'>
     <img src="https://badgen.net/github/issues/lei4519/blog"/>
-    <img src="https://badgen.net/badge/last-commit/${timestamp}"/>
+    <img src="${lastCommitBadge}"/>
 </p>
 
 <img src="assets/wordcloud.webp" title="词云" alt="词云">
